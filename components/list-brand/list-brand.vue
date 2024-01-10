@@ -1,0 +1,273 @@
+<template>
+	<view class="uni-indexed">
+		<!-- <view v-if="touchmoveIndex>0" class='index-static'>{{scrollViewId}}</view> -->
+		<scroll-view  :style="{ height: winHeight + 'px' }" class="uni-indexed__list"
+		 scroll-y >
+			<block v-for="(list, idx) in dataList" :key="idx">
+				<view class="index-list-item" >
+					<view class="uni-list">
+						
+							<view class="uni-list-item__container" @click="onClick(idx)">
+								<view class="uni-list-item__content">{{ list.fullName }}</view>
+							</view>
+						
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+		<!-- <view :class="touchmove ? 'active' : ''"
+		       class="uni-indexed__menu"
+			   @touchstart.stop="touchStart"
+			   @touchmove.stop="touchMove"
+			   @touchend.stop="touchEnd">
+			<view v-for="(list, key) in dataList" :key="key" :class="touchmoveIndex == key ? 'active' : ''" class="uni-indexed__menu-item">{{ list.letter == 'TOP' ? '#' : list.letter }}</view>
+		</view>
+		<view v-if="touchmove" class="uni-indexed--alert">{{dataList[touchmoveIndex].letter }}</view> -->
+	</view>
+</template>
+<script>
+	export default {
+		name: 'indexList',
+		props: {
+			dataList: {
+				type: Array,
+				default () {
+					return [];
+				}
+			}
+		},
+		data() {
+			return {
+				lists: [],
+				touchmove: false,
+				touchmoveIndex: 0,
+				itemHeight: 0,
+				winHeight: 0,
+				letterList: [],
+				baseH: 18,
+				letterH: 0,
+				itemH: 0,
+				scrollIndex: []
+			};
+		},
+		computed: {
+			// scrollViewId() {
+			// 	return this.dataList[this.touchmoveIndex].letter
+			// }
+		},
+		created() {
+			let winHeight = uni.getSystemInfoSync().windowHeight;
+			this.winHeight = winHeight;
+		},
+		// #ifndef H5
+		onReady() {
+			//this.calcScrollH()
+		},
+		// #endif
+		// #ifdef H5
+		mounted() {
+			//this.calcScrollH()
+		},
+		// #endif
+		methods: {
+			async calcScrollH() {
+				var domH = 0;
+				var query = uni.createSelectorQuery().in(this)
+				query.select('.uni-indexed__list-title').boundingClientRect()
+				query.select('.uni-list-item').boundingClientRect()
+				query.exec(res => {
+					this.letterH = res[0].height
+					this.itemH = res[1].height
+					this.dataList.forEach((item, index) => {
+						var indexObj = {}
+						indexObj[item.letter] = item.data.length
+						domH += this.letterH + this.itemH * (item.data.length)
+						indexObj.domH = domH
+						this.scrollIndex.push(indexObj)
+					})
+				})
+			},
+			
+			onClick(idx) {
+				//let letter = this.dataList[idx].letter
+				let data = this.dataList[idx]
+				// uni.showToast({
+				// 	title: letter+'-'+data,
+				// 	icon: 'none'
+				// })
+				this.$emit('click', {
+					//letter: letter,
+					data: data
+				})
+			}
+			
+		}
+	};
+</script>
+<style>
+	@charset "UTF-8";
+	.uni-list {
+		background-color: #fff;
+		position: relative;
+		width: 100%;
+		display: flex;
+		flex-direction: column
+	}
+	.uni-list::after {
+		position: absolute;
+		z-index: 10;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 1px;
+		content: '';
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		/* background-color: #c8c7cc */
+	}
+	.uni-list::before {
+		position: absolute;
+		z-index: 10;
+		right: 0;
+		top: 0;
+		left: 0;
+		height: 1px;
+		content: '';
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		/* background-color: #c8c7cc */
+	}
+	.uni-list-item {
+		font-size: 32upx;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-data: center
+	}
+	.uni-list-item__container {
+		padding: 40upx 30upx;
+		width: 100%;
+		box-sizing: border-box;
+		flex: 1;
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-data: center
+	}
+	.uni-list-item__container:after {
+		position: absolute;
+		z-index: 3;
+		right: 0;
+		bottom: 0;
+		left: 30upx;
+		height: 1px;
+		content: '';
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: #c8c7cc
+	}
+	.uni-list-item__content {
+		width: 90%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.uni-indexed {
+		display: flex;
+		flex-direction: row
+	}
+	.uni-indexed__list {
+		flex: 1;
+		height: 100vh
+	}
+	.uni-indexed__list-title,
+	.index-static {
+		padding: 10upx 24upx;
+		line-height: 1.5;
+		background-color: #f7f7f7;
+		font-size: 24upx
+	}
+	.uni-list-item--hover {
+		background: #eeeeee;
+	}
+	.index-static {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		top: var(--window-top);
+		z-index: 999;
+	}
+	.uni-indexed__menu {
+		overflow: hidden;
+		align-items: center;
+		position: fixed;
+		right: 5px;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 1000;
+	}
+	.uni-indexed__menu.active {
+		background-color: #eeeeee
+	}
+	.uni-indexed__menu.active .uni-indexed__menu-item {
+		color: #000000;
+	}
+	.uni-indexed__menu.active .uni-indexed__menu-item.active {
+		color: #ffffff;
+		background: #009D37;
+		border-radius: 50%;
+	}
+	.uni-indexed__menu-item {
+		color: #000000;
+		font-size: 10px;
+		font-weight: bold;
+		text-align: center;
+		display: block;
+		height: 18px;
+		width: 18px;
+		line-height: 18px;
+	}
+	.uni-indexed__menu-item.active {
+		color: #ffffff;
+		background: #009D37;
+		border-radius: 50%;
+	}
+	.uni-indexed--alert {
+		position: absolute;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 20;
+		width: 150upx;
+		height: 150upx;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 50%;
+		text-align: center;
+		font-size: 60upx;
+		color: #ffffff;
+		font-weight: normal;
+		background-color: rgba(0, 0, 0, .4);
+	}
+	.uni-list-img{
+		//display: flex;
+		
+	}
+	.uni-list-item-img{
+		display: inline-block;
+		width: 20%;
+		border: 1rpx solid #eee;
+		border-width: 0 2rpx 2rpx 0;
+		padding: 10rpx 0;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	.uni-list-item__content-img-text{
+		font-size: 30upx;
+	}
+
+</style>

@@ -1,0 +1,155 @@
+diff a/manifest.json b/manifest.json	(rejected hunks)
+@@ -1,78 +1,78 @@
+ {
+-    "name" : "易到大咖商城",
+-    "appid" : "__UNI__0553821",
+-    "description" : "",
+-    "versionName" : "1.0.0",
+-    "versionCode" : "100",
+-    "transformPx" : false,
+-    "app-plus" : {
+-        /* 5+App特有相关 */
+-        "usingComponents" : true,
+-        "splashscreen" : {
+-            "alwaysShowBeforeRender" : false,
+-            "waiting" : false,
+-            "autoclose" : false,
+-            "delay" : 0
+-        },
+-        "modules" : {},
+-        /* 模块配置 */
+-        "distribute" : {
+-            /* 应用发布信息 */
+-            "android" : {
+-                /* android打包配置 */
+-                "permissions" : [
+-                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+-                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+-                    "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+-                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+-                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+-                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+-                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+-                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+-                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+-                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+-                    "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+-                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+-                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+-                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+-                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+-                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+-                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+-                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+-                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+-                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+-                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+-                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+-                ]
+-            },
+-            "ios" : {},
+-            /* ios打包配置 */
+-            "sdkConfigs" : {}
+-        }
++  "name": "易到大咖",
++  "appid": "__UNI__82DB806",
++  "description": "",
++  "versionName": "1.0.0",
++  "versionCode": "100",
++  "transformPx": false,
++  "app-plus": {
++    /* 5+App特有相关 */
++    "usingComponents": true,
++    "splashscreen": {
++      "alwaysShowBeforeRender": true,
++      "waiting": true,
++      "autoclose": true,
++      "delay": 0
+     },
+-    /* SDK配置 */
+-    "quickapp" : {},
+-    /* 快应用特有相关 */
+-    "mp-weixin" : {
+-        /* 小程序特有相关 */
+-        "usingComponents" : true,
+-        "appid" : "wx9f6acd5467bf42cc",
+-        "setting" : {
+-            "urlCheck" : true,
+-            "postcss" : true
+-        },
+-        "permission" : {
+-            "scope.userLocation" : {
+-                "desc" : "您的位置信息将用于添加收货地址"
+-            }
+-        }
++    "modules": {},
++    /* 模块配置 */
++    "distribute": {
++      /* 应用发布信息 */
++      "android": {
++        /* android打包配置 */
++        "permissions": [
++          "<uses-feature android:name=\"android.hardware.camera\"/>",
++          "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
++          "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
++          "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
++          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
++          "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
++          "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
++          "<uses-permission android:name=\"android.permission.CAMERA\"/>",
++          "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
++          "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
++          "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
++          "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
++          "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
++          "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
++          "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
++          "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
++          "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
++          "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
++          "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
++          "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
++          "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
++          "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
++        ]
++      },
++      "ios": {},
++      /* ios打包配置 */
++      "sdkConfigs": {}
++    }
++  },
++  /* SDK配置 */
++  "quickapp": {},
++  /* 快应用特有相关 */
++  "mp-weixin": {
++    /* 小程序特有相关 */
++    "usingComponents": true,
++    "appid": "wx9f6acd5467bf42cc",
++    "setting": {
++      "urlCheck": true,
++      "postcss": true
+     },
+-    "h5" : {
+-        "title" : "易到大咖商城",
+-        "domain" : "",
+-        "router" : {
+-            "base" : "",
+-            "mode" : "history"
+-        }
++    "permission": {
++      "scope.userLocation": {
++        "desc": "您的位置信息将用于添加收货地址"
++      }
++    }
++  },
++  "h5": {
++    "title": "易到大咖商城",
++    "domain": "",
++    "router": {
++      "base": "",
++      "mode": "history"
+     }
+-}
++  }
++}
+\ No newline at end of file

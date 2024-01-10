@@ -1,0 +1,175 @@
+{
+    "name" : "易道大咖",
+    "appid" : "__UNI__EB48189",
+    "description" : "",
+    "versionName" : "V2.3.0",
+    "versionCode" : 111,
+    "transformPx" : false,
+    "app-plus" : {
+        /* android打包配置 */
+        "android" : {
+            "package" : "com.edows.stores"
+        },
+        /* 5+App特有相关 */
+        "compatible" : {
+            //uni-app兼容模式
+            "ignoreVersion" : true,
+            "runtimeVersion" : "", //字符串类型，兼容的uni-app运行环境版本号，多个版本使用,分割
+            "compilerVersion" : "" //字符串类型，兼容的编译器版本号
+        },
+        "usingComponents" : true,
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 0
+        },
+        "modules" : {
+            "Geolocation" : {},
+            "Barcode" : {},
+            "Payment" : {},
+            "Camera" : {}
+        },
+        /* 模块配置 */
+        "distribute" : {
+            /* 应用发布信息 */
+            "android" : {
+                /* android打包配置 */
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INSTALL_PACKAGES\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                ],
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ],
+                "targetSdkVersion" : 30
+            },
+            "ios" : {
+                "dSYMs" : false,
+                "privacyDescription" : {
+                    "NSPhotoLibraryUsageDescription" : "该应用需要读取你的相册，以便为你上传图片",
+                    "NSPhotoLibraryAddUsageDescription" : "该应用需要读取你的相册，以便为你上传图片",
+                    "NSCameraUsageDescription" : "该应用需要你的相机，以便为你上传图片"
+                }
+            },
+            /* ios打包配置 */
+            "sdkConfigs" : {
+                "ad" : {},
+                "geolocation" : {
+                    "system" : {
+                        "__platform__" : [ "ios", "android" ]
+                    }
+                },
+                "maps" : {},
+                "push" : {},
+                "oauth" : {},
+                "payment" : {
+                    "weixin" : {
+                        "__platform__" : [ "android" ],
+                        "appid" : "wx9f6acd5467bf42cc",
+                        "UniversalLinks" : "https://store.edows.cn/ulink/"
+                    }
+                }
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "unpackage/res/android/mipmap-hdpi/ic_launcher.png",
+                    "xhdpi" : "unpackage/res/android/mipmap-xhdpi/ic_launcher.png",
+                    "xxhdpi" : "unpackage/res/android/mipmap-xxhdpi/ic_launcher.png",
+                    "xxxhdpi" : "unpackage/res/android/mipmap-xxxhdpi/ic_launcher.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/android/mipmap-xxxhdpi/ic_launcher.png",
+                    "ipad" : {
+                        "app" : "unpackage/res/ios/AppIcon.appiconset/icon-38@2x.png",
+                        "app@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-76@2x.png",
+                        "notification" : "unpackage/res/ios/AppIcon.appiconset/icon-20@3x.png",
+                        "notification@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-20@3x.png",
+                        "proapp@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-83.5@2x.png",
+                        "settings" : "unpackage/res/ios/AppIcon.appiconset/icon-20@3x.png",
+                        "settings@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-29@3x.png",
+                        "spotlight" : "unpackage/res/ios/AppIcon.appiconset/icon-20@2x.png",
+                        "spotlight@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-40@2x.png"
+                    },
+                    "iphone" : {
+                        "app@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-60@2x.png",
+                        "app@3x" : "unpackage/res/ios/AppIcon.appiconset/icon-60@3x.png",
+                        "notification@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-20@2x.png",
+                        "notification@3x" : "unpackage/res/ios/AppIcon.appiconset/icon-20@3x.png",
+                        "settings@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-29@2x.png",
+                        "settings@3x" : "unpackage/res/ios/AppIcon.appiconset/icon-29@3x.png",
+                        "spotlight@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-40@2x.png",
+                        "spotlight@3x" : "unpackage/res/ios/AppIcon.appiconset/icon-40@3x.png"
+                    }
+                }
+            },
+            "splashscreen" : {
+                "useOriginalMsgbox" : false
+            }
+        }
+    },
+    /* SDK配置 */
+    "quickapp" : {},
+    /* 快应用特有相关 */
+    "mp-weixin" : {
+        /* 小程序特有相关 */
+        "usingComponents" : true,
+        "appid" : "wx53e1bc0e7443fb07",
+        "setting" : {
+            "urlCheck" : true,
+            "postcss" : true
+        },
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "您的位置信息将用于添加收货地址"
+            }
+        }
+    },
+    "h5" : {
+        "title" : "易到大咖商城",
+        "domain" : "",
+        "router" : {
+            "base" : "./",
+            "mode" : "history"
+        },
+        "sdkConfigs" : {
+            "maps" : {
+                "qqmap" : {
+                    "key" : ""
+                }
+            }
+        }
+    },
+    "mp-baidu" : {
+        "setting" : {
+            "urlCheck" : true
+        },
+        "unipush" : {
+            "enable" : false
+        }
+    }
+}
+/* 5+App特有相关 *///uni-app兼容模式
+//字符串类型，兼容的uni-app运行环境版本号，多个版本使用,分割
+//字符串类型，兼容的编译器版本号
+

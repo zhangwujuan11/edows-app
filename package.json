@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "axios": "^0.26.0",
+    "vconsole": "^3.15.1"
+  },
+  "devDependencies": {
+    "image-tools": "^1.4.0"
+  }
+}
