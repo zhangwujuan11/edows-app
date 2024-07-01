@@ -98,7 +98,7 @@ export default {
       const pages = getCurrentPages();
       let prevPage = pages[pages.length - 2];
       prevPage = prevPage.$vm; 
-      if (prevPage && prevPage.tabledata) {
+      if (prevPage && prevPage.getlist) {
         prevPage.getlist();
       }
     }

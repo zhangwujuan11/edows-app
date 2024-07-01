@@ -7,8 +7,8 @@
     "include": []
   },
   "setting": {
-  "ignoreDevUnusedFiles": false,
-  "ignoreUploadUnusedFiles": false,
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false,
     "coverView": true,
     "es6": true,
     "postcss": true,

@@ -52,12 +52,19 @@
       <view class="mix-btn blueGraShadow" :class="{'greyShadow' : subFlag == false}" @click="confirm(orderData)">
         确认支付</view>
       <view v-show="orderData.isOffline == 1" class="mix-btn blueGraShadow" :class="{'greyShadow' : subFlag == false}"
-        @click="upload(orderData)">线下支付</view>
+        @click="chioceView(orderData)">线下支付</view>
       <view class="goBack" @click="toMyOrder">我的订单</view>
     </block>
     <block v-else>
       <view class="mix-btn blueGraShadow" @click="toMyOrder">我的订单</view>
     </block>
+
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机、储存空间/照片权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -71,7 +78,10 @@
         subFlag: true,
         payType: 1,
         orderData: {},
-        accountType: 0
+        accountType: 0,
+        showMask: false,
+        timer: null ,
+        isPay: true
       };
     },
     computed: {
@@ -92,32 +102,42 @@
     methods: {
       //确认支付
       async confirm(item) {
+        clearTimeout(this.timer);
         var _self = this;
+        if (this.isPay) {
+          this.isPay = false;
+          uni.showLoading({
+            title: '支付中'
+          });
+          var params = {
+            orderSn: item.orderSn,
+            payType: 'MWEB',
+            useSecurityBalance: _self.orderData.useSecurityBalance
+          }
+          let res = await this.$axios(this.$baseUrl.orderPayer, params);
+          uni.hideLoading();
+          if (res.data.code == 200) {
+            let data = res.data.data
+            let mweb_url = res.data.data.mwebUrl
+            const platform = uni.getSystemInfoSync().platform
+            const domain = 'www.edows.cn'
+            const webview = plus.webview.create('', 'custom-webview');
+            switch (platform) {
+              case 'android':
+                webview.loadURL(mweb_url, { 'Referer': 'https://' + domain });
+                break;
+              case 'ios':
+                webview.loadURL(mweb_url, { 'Referer': domain + '://' });
+                break;
+              default:
+                break;
+            }
+          }
+        }
+        this.timer = setTimeout(()=>{
+            this.isPay = true;
+          },1000)
 
-        var params = {
-          orderSn: item.orderSn,
-          payType: 'MWEB',
-          useSecurityBalance: _self.orderData.useSecurityBalance
-        }
-        let res = await this.$axios(this.$baseUrl.orderPayer, params);
-        
-        if (res.data.code == 200) {
-		 let data = res.data.data
-		 let mweb_url = res.data.data.mwebUrl
-		 	const platform = uni.getSystemInfoSync().platform
-		 	const domain = 'www.edows.cn'
-		 	const webview = plus.webview.create('','custom-webview');
-		 	switch (platform) {
-		 		case 'android':
-		 			webview.loadURL(mweb_url, {'Referer': 'https://' + domain});
-		 			break;
-		 		case 'ios':
-		 			webview.loadURL(mweb_url, {'Referer': domain + '://'});
-		 			break;
-		 		default:
-		 			break;	
-		 	}
-        }
 
         // uni.requestPayment({
         //   provider: 'wxpay',
@@ -227,6 +247,33 @@
 
         }
       },
+      chioceView(item) {
+      var platform = uni.getSystemInfoSync().platform;
+      if (platform == "android") {
+        plus.android.checkPermission(
+          "android.permission.CAMERA",
+          (granted) => {
+            if (granted.checkResult == -1) {
+              //弹出
+              this.showMask = true;
+            }
+          },
+          (error) => {
+            console.error("Error checking permission:", error.message);
+          }
+        );
+        plus.android.requestPermissions(["android.permission.CAMERA","android.permission.READ_EXTERNAL_STORAGE"], (e) => {
+          //关闭
+          this.showMask = false;
+          if (e.granted.length > 0) {
+            this.upload(item)
+            //执行你有权限后的方法
+          }
+        });
+      }else{
+        this.upload(item)
+      }
+    },
       upload: function(item) {
         var _self = this;
         uni.chooseImage({
@@ -399,4 +446,27 @@
     text-align: center;
     border-radius: 12upx;
   }
+
+.authority_mask {
+  position:fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+  margin: 0 auto;
+	z-index: 998999999999999;
+	transition: .3s;
+  background: rgba(42, 45, 50, 0.7);
+}
+.box{
+  margin: 100rpx auto 0;
+  width: 600rpx;
+  height: 210rpx;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 20rpx;
+  background: #fff;
+  line-height: 70rpx;
+  padding: 34rpx;
+}
 </style>

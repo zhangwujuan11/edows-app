@@ -20,7 +20,7 @@
 
       <view class="row-select">
         <view class="label"><text class="symbol">*</text>业务员</view>
-        <view class="flex" @click="open(4)">
+        <view class="flex" @click="openSalesman">
           <view class="input" v-if="constructionWork">{{ constructionWork }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
@@ -58,6 +58,7 @@
           <image class="icon" src="/static/smalladd.png" @click="add"></image>
           <view class="add-font">添加产品</view>
         </view>
+        <view class="scan" @click="chioceView">扫描产品编码</view>        
         <image class="icon" src="/static/clear.png" @click="clear"></image>
       </view>
 
@@ -154,9 +155,7 @@
               <image v-if="item.outWarehouseDelId==outWarehouseDelId" @click="choice(item, index)" class="check"
                 src="/static/check.png"></image>
               <view v-else @click="choice(item, index)" class="spacecheck"></view>
-              <view class="name" style="height: 60upx; width: 540upx;     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; padding-top: 10upx;">{{ item.customer }}</view>
+              <view class="name" style="width: 540upx;padding-top: 10upx;">{{ item.customer }}</view>
             </view>
             <view class="main">
               <view class="flex-row">
@@ -188,6 +187,60 @@
         </view>
         <view class="bottom">
           <view class="btn" @click="join()">加入清单</view>
+        </view>
+      </view>
+    </uni-popup>
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view>
+
+    <uni-popup ref="salesman" type="bottom">
+      <view class="salesman">
+        <view class="header">
+          <view class="title"
+            >请选择业务员
+            <image
+              @click="closesalesman"
+              class="fork"
+              src="/static/close.png"
+            ></image>
+          </view>
+        </view>
+        <view class="content">
+          <scroll-view scroll-y="true" class="scroll-Y">
+            <view class="card" v-for="(item, index) of salesmanList" :key="index">
+              <view class="crow">
+                <image
+                  v-if="item.choice"
+                  @click="salesmanchoice(item)"
+                  class="check"
+                  src="/static/check.png"
+                ></image>
+                <view v-else @click="salesmanchoice(item)" class="spacecheck"></view>
+                <view class="name">{{ item.userId }}</view>
+              </view>
+              <view class="main">
+                <view class="flex-row">
+                  <view class="label">用户名称</view>
+                  <view class="val">{{ item.userName }}</view>
+                </view>
+                <view class="flex-row">
+                  <view class="label">用户昵称</view>
+                  <view class="val">{{ item.nickName }}</view>
+                </view>
+                <view class="flex-row">
+                  <view class="label">手机号</view>
+                  <view class="val">{{ item.phonenumber }}</view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="salesman-bottom">
+          <view class="btn" @click="submitSalesman">确定</view>
         </view>
       </view>
     </uni-popup>
@@ -269,6 +322,9 @@
             }]
           },
         },
+         showMask: false,
+         salesmanList: [],
+         choiceSalesman: {}
       };
     },
     async onLoad(e) {
@@ -393,22 +449,22 @@
               });
             }
             break;
-          case 4:
-            this.title = '请选择业务员'
-            const data3 = await getwen(this.params)
-            if (data3.rows) {
-              data3.rows.forEach(i => {
-                this.selectList.push(i.userName)
-                this.selectList1.push(i.userId)
-              })
-            } else {
-              uni.showToast({
-                title: "没有数据",
-                icon: "none",
-                duration: 1000,
-              });
-            }
-            break;
+          // case 4:
+          //   this.title = '请选择业务员'
+          //   const data3 = await getwen(this.params)
+          //   if (data3.rows) {
+          //     data3.rows.forEach(i => {
+          //       this.selectList.push(i.userName)
+          //       this.selectList1.push(i.userId)
+          //     })
+          //   } else {
+          //     uni.showToast({
+          //       title: "没有数据",
+          //       icon: "none",
+          //       duration: 1000,
+          //     });
+          //   }
+          //   break;
         }
         this.$refs.popup.open();
         this.openIndex = e;
@@ -499,11 +555,11 @@
               this.params.paymentTerms = 0
             }
             break;
-          case 4:
-            this.constructionWork = this.selectList[this.selectIndex];
-            this.params.constructionWork = this.constructionWork
-            this.params.constructionWorkId = this.selectList1[this.selectIndex];
-            break;
+          // case 4:
+          //   this.constructionWork = this.selectList[this.selectIndex];
+          //   this.params.constructionWork = this.constructionWork
+          //   this.params.constructionWorkId = this.selectList1[this.selectIndex];
+          //   break;
         }
         this.$refs.popup.close();
       },
@@ -637,7 +693,193 @@
         this.$set(this.params.detailList[this.index], 'usableQuantity', this.item.usableQuantity)
         this.$set(this.params.detailList[this.index], 'price', this.item.price)
         this.$refs.product.close();
-      }
+      },
+      chioceView() {
+          var platform = uni.getSystemInfoSync().platform;
+          if (platform == "android") {
+            plus.android.checkPermission(
+              "android.permission.CAMERA",
+              (granted) => {
+                if (granted.checkResult == -1) {
+                  //弹出
+                  this.showMask = true;
+                }
+              },
+              (error) => {
+                console.error("Error checking permission:", error.message);
+              }
+            );
+            plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+              //关闭
+              this.showMask = false;
+              if (e.granted.length > 0) {
+                this.scanCarg()
+                //执行你有权限后的方法
+              }
+            });
+          }else{
+            this.scanCarg()
+          }
+        },
+      chioceView() {
+          var platform = uni.getSystemInfoSync().platform;
+          if (platform == "android") {
+            plus.android.checkPermission(
+              "android.permission.CAMERA",
+              (granted) => {
+                if (granted.checkResult == -1) {
+                  //弹出
+                  this.showMask = true;
+                }
+              },
+              (error) => {
+                console.error("Error checking permission:", error.message);
+              }
+            );
+            plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+              //关闭
+              this.showMask = false;
+              if (e.granted.length > 0) {
+                this.scanCarg()
+                //执行你有权限后的方法
+              }
+            });
+          }else{
+            this.scanCarg()
+          }
+        },
+      scanCarg() {
+        uni.scanCode({
+          onlyFromCamera: true,
+          scanType: ["barCode"],
+          success: (res) => {
+            let params = {
+              carg: res.result,
+              pageNum: 1,
+              pageSize: 1,
+              customerId: this.params.customerId,
+              storeId: this.params.storeId,
+            };
+            getBound(params).then((final) => {
+              if (final.code == 200) {
+                if (final.data.items && final.data.items.length > 0) {
+                  for (var i = 0; i < this.params.detailList.length; i++) {
+                    if (
+                      this.params.detailList[i].productId == final.data.items[0].productId
+                    ) {
+                      return uni.showToast({
+                        title: "不能重复退货",
+                        icon: "none",
+                        duration: 1000,
+                      });
+                    }
+                  }
+                  var is_push = true;
+                  for (var i = 0; i < this.params.detailList.length; i++) {
+                    if (!this.params.detailList[i].productName) {
+                      this.$set(
+                        this.params.detailList[i],
+                        "productName",
+                        final.data.items[0].productName
+                      );
+                      this.$set(
+                        this.params.detailList[i],
+                        "productId",
+                        final.data.items[0].productId
+                      );
+                      this.$set(
+                        this.params.detailList[i],
+                        "price",
+                        final.data.items[0].price
+                      );
+                      this.$set(
+                        this.params.detailList[i],
+                        "inventoryId",
+                        final.data.items[0].inventoryId
+                      );
+                      this.$set(
+                        this.params.detailList[i],
+                        "positionCode",
+                        final.data.items[0].positionCode
+                      );
+                      this.$set(
+                        this.params.detailList[i],
+                        "usableQuantity",
+                        final.data.items[0].usableQuantity
+                      );
+                      this.$set(
+                        this.params.detailList[i],
+                        "outWarehouseDelId",
+                        final.data.items[0].outWarehouseDelId
+                      );
+                      is_push = false;
+                      break;
+                    }
+                  }
+                  if (is_push) {
+                    let temp = {
+                      productName: final.data.items[0].productName,
+                      productId: final.data.items[0].productId,
+                      price: final.data.items[0].price,
+                      inventoryId: final.data.items[0].inventoryId,
+                      positionCode: final.data.items[0].positionCode,
+                      usableQuantity: final.data.items[0].usableQuantity,
+                      outWarehouseDelId: final.data.items[0].outWarehouseDelId,
+                    };
+                    this.params.detailList.push(temp);
+                  }
+                  uni.showToast({
+                    title: "扫描添加成功",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                } else {
+                  uni.showToast({
+                    title: "该产品不存在",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                }
+              } else {
+                uni.showToast({
+                  title: final.message,
+                  icon: "none",
+                  duration: 2000,
+                });
+              }
+            });
+          },
+        });
+      },
+      openSalesman() {
+        let params = {
+          pageNum: 1,
+          pageSize: 1000
+        }
+        getwen(params).then((res)=>{
+          this.salesmanList = res.rows
+          this.$refs.salesman.open()
+        })
+      },
+      closesalesman() {
+        this.$refs.salesman.close()
+      },
+      salesmanchoice(item) {
+      this.salesmanList.forEach((ptem, pndex) => {
+        if (ptem.userId == item.userId) {
+          this.$set(this.salesmanList[pndex], "choice", true);
+          this.choiceSalesman = ptem;
+        } else {
+          this.$set(this.salesmanList[pndex], "choice", false);
+        }
+      });
+    },
+    submitSalesman (){
+      this.constructionWork = this.choiceSalesman.userName
+      this.params.constructionWork = this.choiceSalesman.userName
+      this.params.constructionWorkId = this.choiceSalesman.userId
+      this.$refs.salesman.close()
+    }
     },
   };
 </script>
@@ -797,12 +1039,27 @@
     .left {
       display: flex;
     }
-
+    .scan {
+    width: 204rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    border: 2rpx solid #007dff;
+    font-size: 24rpx;
+    font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+    font-weight: normal;
+    color: #007dff;
+    border-radius: 40rpx;
+    text-align: center;
+    position: absolute;
+    top: 24rpx;
+    right: 102rpx;
+  }
     .add {
       height: 120rpx;
       padding: 37rpx 31rpx 37rpx 31rpx;
       display: flex;
       justify-content: space-between;
+      position: relative;
     }
 
     .add-font {
@@ -811,6 +1068,7 @@
       font-weight: normal;
       color: #1862f5;
       margin-left: 9rpx;
+      justify-content: space-around;
     }
 
     .title {
@@ -885,6 +1143,7 @@
         align-items: center;
         position: relative;
         top: 90rpx;
+        justify-content: space-around;
       }
 
       .left {
@@ -908,7 +1167,7 @@
       }
 
       .uni-input {
-        margin-left: 32rpx;
+        // margin-left: 32rpx;
       }
 
       .search-icon {
@@ -938,7 +1197,7 @@
     }
 
     .content {
-      height: 1080rpx;
+      height: calc(70vh);
       background: #f1f1f1;
       padding: 24rpx 32rpx 24rpx 32rpx;
       overflow-y: auto;
@@ -977,10 +1236,8 @@
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
       font-weight: 500;
       color: #333333;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       width: 540rpx;
+      word-break: break-all;
     }
 
     .main {
@@ -1051,4 +1308,140 @@
     z-index: 999;
     padding: 0;
   }
+
+.salesman {
+  .scroll-Y {
+  height: 860rpx;
+  }
+  .header {
+    width: 750rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    background: #ffffff;
+    border-radius: 0rpx 0rpx 0rpx 0rpx;
+  }
+  .title {
+    font-size: 36rpx;
+    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+    font-weight: 500;
+    color: #303133;
+    text-align: center;
+    position: relative;
+  }
+  .fork {
+    width: 64rpx;
+    height: 64rpx;
+    position: absolute;
+    right: 32rpx;
+    top: 24rpx;
+  }
+  .content {
+    height: 900rpx;
+    background: #f1f1f1;
+    padding: 24rpx 32rpx 24rpx 32rpx;
+    overflow-y: hidden;
+  }
+  .card {
+    width: 686rpx;
+    height: 347rpx;
+    background: #ffffff;
+    box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+    border-radius: 20rpx;
+    margin-bottom: 24rpx;
+    padding: 26rpx 32rpx 32rpx 32rpx;
+  }
+  .check {
+    width: 60rpx;
+    height: 60rpx;
+  }
+  .crow {
+    display: flex;
+    align-items: center;
+  }
+  .spacecheck {
+    width: 60rpx;
+    height: 60rpx;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+  .name {
+    margin-left: 20rpx;
+    font-size: 32rpx;
+    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+    font-weight: 500;
+    color: #333333;
+  }
+  .main {
+    width: 622rpx;
+    height: 209rpx;
+    background: #f5f7fb;
+    margin-top: 20rpx;
+    border-radius: 20rpx;
+    padding: 28rpx 32rpx 28rpx 32rpx;
+  }
+  .flex-row {
+    display: flex;
+    margin-bottom: 24rpx;
+  }
+  .label {
+    font-size: 24rpx;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #999999;
+    width: 114rpx;
+    height: 35rpx;
+    line-height: 35rpx;
+  }
+  .val {
+    font-size: 24rpx;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    margin-left: 34rpx;
+  }
+  .salesman-bottom {
+    width: 750rpx;
+    height: 148rpx;
+    background: #ffffff;
+    box-shadow: 0rpx -6rpx 12rpx 1rpx rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn {
+    width: 686rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    background: #007dff;
+    border-radius: 16rpx 16rpx 16rpx 16rpx;
+    font-size: 28rpx;
+    font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+    font-weight: normal;
+    color: #ffffff;
+  }
+}
+
+  .authority_mask {
+    position:fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+    margin: 0 auto;
+		z-index: 998999999999999;
+		transition: .3s;
+    background: rgba(42, 45, 50, 0.7);
+  .box{
+      margin: 100rpx auto 0;
+      width: 600rpx;
+      height: 210rpx;
+      text-align: center;
+      font-weight: 700;
+      border-radius: 20rpx;
+      background: #fff;
+      line-height: 70rpx;
+      padding: 34rpx;
+    }
+}
 </style>

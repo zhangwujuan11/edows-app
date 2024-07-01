@@ -1,0 +1,36 @@
+
+.big_out.data-v-0e467c1c {
+	    z-index: 999;
+		background-color: #3A9EFE;
+		width: 100%;
+		position: fixed;
+		top: 0;
+}
+.back.data-v-0e467c1c {
+		position: absolute;
+		height: 32px;
+		width:100%;
+		color: white;
+		display: flex;
+		align-items: center;
+		background-color: #3A9EFE ;
+}
+.back_img.data-v-0e467c1c {
+		/* 用border值来控制箭头粗细 */
+		/* border: 3px solid white; */
+		/* 上、右、下、左  四个边框的宽度 */
+		/* border-width: 0px 2px 2px 0px; */
+		/* padding值控制箭头大小 */
+		padding: 5px;
+		margin-left: 30rpx;
+}
+.back_img image.data-v-0e467c1c{
+	 width:42rpx;
+	 height: 42rpx;
+}
+.back_text.data-v-0e467c1c {
+		padding: 0 20rpx;
+		box-sizing: border-box;
+		line-height: 42rpx;
+}
+

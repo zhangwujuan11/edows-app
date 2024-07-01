@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "新增产品信息",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "tki-tree": "/components/tki-tree"
+  }
+}

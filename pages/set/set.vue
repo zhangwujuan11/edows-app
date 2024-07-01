@@ -51,11 +51,12 @@
       <text class="cell-tit" @click="logoff">注销账号</text>
       <text class="cell-more yticon icon-you"></text>
     </view>
-    <!-- <view class="list-cell">
-      <text class="cell-tit">检查更新</text>
-      <text class="cell-tip">当前版本已是最新版本</text>
-      <text class="cell-more yticon icon-you"></text>
-    </view> -->
+    <view class="list-cell">
+      <text class="cell-tit">当前版本</text>
+      <!-- <text class="cell-tip">{{version}}</text> -->
+      <text class="cell-tip">V{{version}}</text>
+      <!-- <text class="cell-more yticon icon-you"></text> -->
+    </view>
 
     <!-- 帮助与客服 -->
     <view v-if="is_call" class="maskphoneBox">
@@ -143,6 +144,7 @@ export default {
       showPassword: true,
       showAgainPassword: true,
       personalizat: true,
+      version: ""
     };
   },
   computed: {
@@ -155,7 +157,7 @@ export default {
     //     url: "/pages/wxAuth/wxAuth?returnUrl=" + returnUrl,
     //   });
     // }
-
+    this.version = uni.getSystemInfoSync().appVersion;
     if (this.personalizat != "") {
       this.personalizat = uni.getStorageSync("personalizat");
     } else {
@@ -188,7 +190,7 @@ export default {
     logoff() {
       uni.showModal({
         title: "提示",
-        content: "确定注销账户?",
+        content: "确定要注销吗？注销后不能再使用",
         success: (res) => {
           if (res.confirm) {
             logoff({ token: uni.getStorageSync("userInfo").token })

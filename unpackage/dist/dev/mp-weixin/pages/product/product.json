@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "详情展示",
+  "usingComponents": {
+    "wm-watermark": "/components/wm-watermark/wm-watermark",
+    "share": "/components/share",
+    "swiper-dot": "/components/swiperDot",
+    "uni-number-box": "/components/uni-number-box"
+  }
+}

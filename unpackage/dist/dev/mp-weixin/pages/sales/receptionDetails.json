@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "前台开单详情",
+  "usingComponents": {
+    "uni-dateformat": "/uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat"
+  }
+}

@@ -1,0 +1,483 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page .cate-section.data-v-57280228 {
+  position: relative;
+  z-index: 5;
+  border-radius: 16rpx 16rpx 0 0;
+  margin-top: -20rpx;
+}
+page .carousel-section.data-v-57280228 {
+  margin-top: 120rpx;
+}
+page .carousel-section .titleNview-placing.data-v-57280228 {
+  padding-top: 0;
+  height: 0;
+}
+page .carousel-section .carousel .carousel-item.data-v-57280228 {
+  padding: 0;
+}
+page .carousel-section .swiper-dots.data-v-57280228 {
+  left: 45rpx;
+  bottom: 40rpx;
+}
+page.data-v-57280228 {
+  background: #399eff;
+}
+.topBg.data-v-57280228 {
+  width: 100%;
+  background-color: #399eff;
+  background-size: contain;
+}
+.yd_top.data-v-57280228 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #399eff;
+}
+.jifen.data-v-57280228 {
+  width: 15%;
+  text-align: center;
+  margin-right: 15rpx;
+  margin-top: 15rpx;
+}
+.jifen image.data-v-57280228 {
+  width: 40rpx;
+  height: 40rpx;
+}
+.jifen view.data-v-57280228 {
+  font-size: 24rpx;
+  color: #fff;
+}
+.showIcon.data-v-57280228 {
+  position: fixed;
+  right: 1%;
+  bottom: 150rpx;
+  z-index: 10;
+  width: 180rpx;
+  height: 180rpx;
+}
+.showIcon image.data-v-57280228 {
+  width: 180rpx;
+  height: 180rpx;
+}
+.m-t.data-v-57280228 {
+  margin-top: 16rpx;
+}
+.mp-search-box.data-v-57280228 {
+  position: relative;
+  width: 100%;
+  padding: 10rpx;
+}
+.mp-search-box .m-icon-search.data-v-57280228 {
+  position: absolute;
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  left: 70rpx;
+  top: 28rpx;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1ODhEQjM3M0Q0RkYxMUU5ODQ1OEQ2ODQ5RTUzNTlFMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1ODhEQjM3NEQ0RkYxMUU5ODQ1OEQ2ODQ5RTUzNTlFMiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU4OERCMzcxRDRGRjExRTk4NDU4RDY4NDlFNTM1OUUyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU4OERCMzcyRDRGRjExRTk4NDU4RDY4NDlFNTM1OUUyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+OqW1pAAAAr5JREFUeNrUmF9ojlEcx/d6xXvlQstEqNUkVst2pZRMSvMnEpoLc8FbQywXSvKv/EkkGtK71SgNK3Kl5sKFJoRpjRVpNn9K+X9lzcXr86vvU0/r9T5nz582T337vr/znPM733Oec37nd95UPp8vGQ/PhJJx8kwM0yiXy82EasF8UA1KwTD4CJ6Bl+BuNpt1nu7UaD4NAhZBTWA9SAdUfw/awQUEfYpNCCJaoG2+ot+gF/SBQQmzGZon9p4hsAMxbZGEIGAG1AkqVWQdnwe3cf71H22qoC0mAGRU3Ez93aGE4LAM6gFlKjqIs2Oj+JQ2iLNgk4pu0L4+jJA3UIWmtxYnj0Iu7iPQYZmX8dPoLITGV6AGmTU07o6yPfF3Dtojcxn+7gfGERpV+kQciCrCHnzYbnsrs8U1oJ0S9+PgRIxxa5W4nMGuKSqECtOgOpnH44yeDOq17TaZO4NmpM4XJ9oTiOZXxUuChHjBqJcRDCUgpEs8OUjIQnFPEocbg/sO/XJZrF7wGkjwsP3pIuSPOJOgkLSLkEHx3ASFlLoI8dZGdRIKCA/lhWa7kJDH4goazUlAixcePgcJuQd+6PfeBIR4B96tokKU3rXK3MWsZGL8LA2+OHXJ5aw56XvfEZOIqUYyLZ/tCxRCJfs0m2WuxsnRiCJsuz4Ak1S01fk6gZjr0EWZh3B2JkLGb2nEAm9g+P4SJme9CW2U+cIWG46eOIrIQqfBFBWto+2d0Fk8Dptt4fqKOnScd/mvCtRLaTEu1fTX6JWdLcup+zSO68RaS54LBLoBdZRWxJw+4v01sB/sA1USNBzpgiVBG5SVryxyHr2znQHa6PS52nkdPaRscWQhI7ajhetZYLYyfTunPtDRqwL1632JVit1tsciJKR4u5h5l6wViOkck38D6NiuExYW+sG3MZuR/+L/kb8CDACX2P6krY7VKwAAAABJRU5ErkJggg==) no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+.mp-search-box .ser-input.data-v-57280228 {
+  position: relative;
+  display: block;
+  width: 92%;
+  margin: 0 auto;
+  flex: 1;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-indent: 100rpx;
+  font-size: 28rpx;
+  color: #606266;
+  border-radius: 70rpx;
+  background: #ffffff;
+}
+/* 头部 轮播图 */
+.carousel-section.data-v-57280228 {
+  position: relative;
+}
+.carousel-section .titleNview-placing.data-v-57280228 {
+  height: 25px;
+  padding-top: 44px;
+  box-sizing: content-box;
+}
+.carousel-section .titleNview-background.data-v-57280228 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 426rpx;
+  transition: .4s;
+}
+.carousel.data-v-57280228 {
+  width: 710rpx;
+  padding-top: 20rpx;
+  margin: 0 auto;
+  height: 280rpx;
+}
+.carousel .carousel-item.data-v-57280228 {
+  width: 710rpx;
+  height: 256rpx;
+  overflow: hidden;
+}
+.carousel image.data-v-57280228 {
+  width: 710rpx;
+  height: 256rpx;
+  border-radius: 20rpx;
+}
+/* 分类 */
+.cate-section.data-v-57280228 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 30rpx 22rpx;
+  background: #fff;
+  /* 原图标颜色太深,不想改图了,所以加了透明度 */
+}
+.cate-section .cate-item.data-v-57280228 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 26rpx;
+  color: #303133;
+}
+.cate-section image.data-v-57280228 {
+  width: 88rpx;
+  height: 88rpx;
+  margin-bottom: 14rpx;
+  border-radius: 50%;
+  opacity: .7;
+  box-shadow: 4rpx 4rpx 20rpx rgba(250, 67, 106, 0.3);
+}
+.ad-1.data-v-57280228 {
+  width: 100%;
+  height: 210rpx;
+  padding: 10rpx 0;
+  background: #fff;
+}
+.ad-1 image.data-v-57280228 {
+  width: 100%;
+  height: 100%;
+}
+/* 秒杀专区 */
+.seckill-section.data-v-57280228 {
+  padding: 4rpx 30rpx 24rpx;
+}
+.seckill-section .inner-section.data-v-57280228 {
+  background: #f3f8fe;
+  border-radius: 20rpx;
+}
+.seckill-section .s-header.data-v-57280228 {
+  position: relative;
+  align-items: center;
+  height: 86rpx;
+}
+.seckill-section .s-header .pic-floor1.data-v-57280228 {
+  width: 282rpx;
+  height: 50rpx;
+}
+.seckill-section .s-header .pic-floor2.data-v-57280228 {
+  width: 262rpx;
+  height: 50rpx;
+}
+.seckill-section .s-header .pic-floor3.data-v-57280228,
+.seckill-section .s-header .pic-floor4.data-v-57280228 {
+  width: 222rpx;
+  height: 50rpx;
+}
+.seckill-section .s-header .line-h.data-v-57280228 {
+  height: 4rpx;
+  width: 424rpx;
+  position: absolute;
+  right: 0;
+  top: 4rpx;
+  background: #218fe6;
+}
+.seckill-section .s-header .line-h2.data-v-57280228 {
+  width: 464rpx;
+}
+.seckill-section .s-header .s-img.data-v-57280228 {
+  width: 140rpx;
+  height: 30rpx;
+}
+.seckill-section .s-header .tip.data-v-57280228 {
+  font-size: 28rpx;
+  color: #909399;
+  margin: 0 20rpx 0 40rpx;
+}
+.seckill-section .s-header .timer.data-v-57280228 {
+  display: inline-block;
+  width: 40rpx;
+  height: 36rpx;
+  text-align: center;
+  line-height: 36rpx;
+  margin-right: 14rpx;
+  font-size: 26rpx;
+  color: #fff;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.8);
+}
+.seckill-section .s-header .icon-you.data-v-57280228 {
+  font-size: 32rpx;
+  color: #909399;
+  flex: 1;
+  text-align: right;
+}
+.seckill-section .s-header .icon-you.data-v-57280228:before {
+  content: '';
+}
+.seckill-section .s-header .icon-you.data-v-57280228:after {
+  content: "\E606";
+}
+.seckill-section .floor-list.data-v-57280228 {
+  white-space: nowrap;
+}
+.seckill-section .scoll-wrapper.data-v-57280228 {
+  padding: 0 10px 10px;
+  display: flex;
+  align-items: flex-start;
+}
+.seckill-section .floor-item.data-v-57280228 {
+  width: 150rpx;
+  margin-right: 18rpx;
+  font-size: 26rpx;
+  color: #303133;
+  line-height: 1.8;
+}
+.seckill-section .floor-item image.data-v-57280228 {
+  width: 150rpx;
+  height: 150rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  border: 4rpx solid #2a9fe6;
+}
+.seckill-section .floor-item .title.data-v-57280228 {
+  padding: 14rpx 0 0 0;
+  font-size: 24rpx;
+  text-align: center;
+  color: #303133;
+  line-height: 38rpx;
+  height: 60rpx;
+}
+.seckill-section .floor-item .price.data-v-57280228 {
+  font-weight: 600;
+  color: #f04c41;
+}
+.f-header.data-v-57280228 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140rpx;
+  padding: 6rpx 30rpx 0;
+  color: #fff;
+  text-align: center;
+}
+.f-header image.data-v-57280228 {
+  flex-shrink: 0;
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+.f-header .tit.data-v-57280228 {
+  font-size: 34rpx;
+}
+.f-header .tit2.data-v-57280228 {
+  font-size: 24rpx;
+  color: #909399;
+}
+.f-header .icon-you.data-v-57280228 {
+  font-size: 34rpx;
+  color: #909399;
+}
+/* 团购楼层 */
+.group-section .g-swiper.data-v-57280228 {
+  height: 650rpx;
+  padding-bottom: 30rpx;
+}
+.group-section .g-swiper-item.data-v-57280228 {
+  width: 100%;
+  padding: 0 30rpx;
+  display: flex;
+}
+.group-section image.data-v-57280228 {
+  width: 100%;
+  height: 460rpx;
+  border-radius: 4px;
+}
+.group-section .g-item.data-v-57280228 {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.group-section .left.data-v-57280228 {
+  flex: 1.2;
+  margin-right: 24rpx;
+}
+.group-section .left .t-box.data-v-57280228 {
+  padding-top: 20rpx;
+}
+.group-section .right.data-v-57280228 {
+  flex: 0.8;
+  flex-direction: column-reverse;
+}
+.group-section .right .t-box.data-v-57280228 {
+  padding-bottom: 20rpx;
+}
+.group-section .t-box.data-v-57280228 {
+  height: 160rpx;
+  font-size: 30rpx;
+  color: #303133;
+  line-height: 1.6;
+}
+.group-section .price.data-v-57280228 {
+  font-weight: 600;
+  color: #f04c41;
+}
+.group-section .m-price.data-v-57280228 {
+  font-size: 26rpx;
+  text-decoration: line-through;
+  color: #909399;
+  margin-left: 8rpx;
+}
+.group-section .pro-box.data-v-57280228 {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: 28rpx;
+  padding-right: 10rpx;
+}
+.group-section .progress-box.data-v-57280228 {
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 8rpx;
+}
+/* 分类推荐楼层 */
+.hot-floor.data-v-57280228 {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+.hot-floor .floor-img-box.data-v-57280228 {
+  width: 100%;
+  height: 320rpx;
+  position: relative;
+}
+.hot-floor .floor-img-box.data-v-57280228:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.06) 30%, #f8f8f8);
+}
+.hot-floor .floor-img.data-v-57280228 {
+  width: 100%;
+  height: 100%;
+}
+.hot-floor .floor-list.data-v-57280228 {
+  white-space: nowrap;
+  padding: 20rpx;
+  padding-right: 50rpx;
+  border-radius: 6rpx;
+  margin-top: -140rpx;
+  margin-left: 30rpx;
+  background: #fff;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+.hot-floor .scoll-wrapper.data-v-57280228 {
+  display: flex;
+  align-items: flex-start;
+}
+.hot-floor .floor-item.data-v-57280228 {
+  width: 200rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+  color: #303133;
+  line-height: 1.8;
+}
+.hot-floor .floor-item image.data-v-57280228 {
+  border-radius: 6rpx;
+}
+.hot-floor .floor-item .price.data-v-57280228 {
+  color: #f04c41;
+}
+.hot-floor .more.data-v-57280228 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 6rpx;
+  background: #f3f3f3;
+  font-size: 28rpx;
+  color: #909399;
+}
+.hot-floor .more text.data-v-57280228:first-child {
+  margin-bottom: 4rpx;
+}
+/* 猜你喜欢 */
+.guess-section.data-v-57280228 {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30rpx;
+}
+.guess-section .guess-item.data-v-57280228 {
+  display: flex;
+  flex-direction: column;
+  width: 330rpx;
+  margin-bottom: 30rpx;
+  border-radius: 20rpx;
+  background: #fff;
+}
+.guess-section .guess-item.data-v-57280228:nth-child(2n+1) {
+  margin-right: 30rpx;
+}
+.guess-section .image-wrapper.data-v-57280228 {
+  width: 330rpx;
+  height: 330rpx;
+  border-radius: 20rpx 20rpx 0 0;
+  overflow: hidden;
+  background: #fff;
+}
+.guess-section .image-wrapper image.data-v-57280228 {
+  width: 330rpx;
+  height: 330rpx;
+  opacity: 1;
+  border-radius: 20rpx 20rpx 0 0;
+}
+.guess-section .inner-guess.data-v-57280228 {
+  padding: 20rpx;
+}
+.guess-section .title.data-v-57280228 {
+  padding: 14rpx 0 0 0;
+  font-size: 26rpx;
+  color: #303133;
+  line-height: 38rpx;
+  height: 60rpx;
+}
+.guess-section .price.data-v-57280228 {
+  font-weight: 600;
+  padding-top: 14rpx;
+  font-size: 32rpx;
+  color: #f04c41;
+  line-height: 1;
+}
+.container.data-v-57280228 {
+  background-color: #399eff;
+}
+

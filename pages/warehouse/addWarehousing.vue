@@ -23,7 +23,7 @@
           <image class="icon" src="/static/smalladd.png"></image>
           <view class="add-font">添加产品</view>
         </view>
-        <view class="scan" @click="scanCarg">扫描产品编码</view>
+        <view class="scan" @click="chioceView">扫描产品编码</view>
         <image @click="cleanUp" class="icon" src="/static/clear.png"></image>
       </view>
       <view class="title">
@@ -214,6 +214,13 @@
         </view>
       </view>
     </uni-popup>
+
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -281,6 +288,7 @@
         productIndex: 0,
         submitParams: {},
         is_show: false,
+        showMask: false
       };
     },
     onBackPress(event) {
@@ -385,9 +393,9 @@
       getWarehouseList() {
         return new Promise((resolve, reject) => {
           warehouseList().then((res) => {
-            resolve(res);
             if (res.code == 200) {
               this.paramsList[0].list = res.data.items;
+              resolve(res);              
             }
           });
         });
@@ -397,9 +405,9 @@
           supplierList({
             status: 0
           }).then((res) => {
-            resolve(res);
             if (res.code == 200) {
               this.paramsList[1].list = res.data.items;
+              resolve(res);
             }
           });
         });
@@ -407,9 +415,9 @@
       getPaymentTerms() {
         return new Promise((resolve, reject) => {
           paymentTerms().then((res) => {
-            resolve(res);
             if (res.code == 200) {
               this.paramsList[2].list = res.data;
+              resolve(res);
             }
           });
         });
@@ -692,6 +700,33 @@
       },
       bindPickerChange(e) {
         this.classifyIndex = e.detail.value;
+      },
+      chioceView() {
+          var platform = uni.getSystemInfoSync().platform;
+          if (platform == "android") {
+            plus.android.checkPermission(
+              "android.permission.CAMERA",
+              (granted) => {
+                if (granted.checkResult == -1) {
+                  //弹出
+                  this.showMask = true;
+                }
+              },
+              (error) => {
+                console.error("Error checking permission:", error.message);
+              }
+            );
+            plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+              //关闭
+              this.showMask = false;
+              if (e.granted.length > 0) {
+                this.scanCarg()
+                //执行你有权限后的方法
+              }
+            });
+          }else{
+            this.scanCarg()
+          }
       },
       scanCarg() {
         uni.scanCode({
@@ -1181,10 +1216,8 @@
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
       font-weight: 500;
       color: #333333;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       width: 540rpx;
+      word-break: break-all;
     }
 
     .main {
@@ -1258,5 +1291,28 @@
       width: 460rpx;
       height: 312rpx;
     }
+  }
+
+  .authority_mask {
+    position:fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+    margin: 0 auto;
+		z-index: 998999999999999;
+		transition: .3s;
+    background: rgba(42, 45, 50, 0.7);
+  .box{
+        margin: 100rpx auto 0;
+        width: 600rpx;
+        height: 210rpx;
+        text-align: center;
+        font-weight: 700;
+        border-radius: 20rpx;
+        background: #fff;
+        line-height: 70rpx;
+        padding: 34rpx;
+      }
   }
 </style>

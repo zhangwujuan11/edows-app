@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "法律声明及隐私权政策",
+  "usingComponents": {
+    "ss-preview": "/uni_modules/ss-preview/components/ss-preview/ss-preview"
+  }
+}

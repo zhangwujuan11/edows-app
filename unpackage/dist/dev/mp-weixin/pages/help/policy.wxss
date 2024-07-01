@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page {
+  background: #f8f8f8;
+}
+.inner-cont {
+  padding: 32rpx;
+  text-align: justify;
+  font-size: 26rpx;
+  line-height: 48rpx;
+}
+.po-titre {
+  font-size: 32rpx;
+  text-align: center;
+  margin-bottom: 20rpx;
+  font-weight: 600;
+}
+.po-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  text-indent: 52rpx;
+  margin-bottom: 10rpx;
+}
+.po-para {
+  margin-bottom: 8rpx;
+  text-indent: 52rpx;
+}
+.fw {
+  font-weight: 600;
+}
+

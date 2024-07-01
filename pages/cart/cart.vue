@@ -1,17 +1,17 @@
 <template>
   <view class="container">
     <!-- 空白页 -->
-    <view v-if="!hasLogin || empty===true" class="empty">
+    <view v-if="empty===true" class="empty">
       <image src="/static/emptyCart.jpg" mode="aspectFit"></image>
-      <view v-if="hasLogin" class="empty-tips">
+      <view class="empty-tips">
         空空如也
-        <navigator class="navigator" v-if="hasLogin" url="../index/index" open-type="switchTab">随便逛逛>
+        <navigator class="navigator" url="../index/index" open-type="switchTab">随便逛逛>
         </navigator>
       </view>
-      <view v-else class="empty-tips">
+      <!-- <view v-else class="empty-tips">
         空空如也
         <view class="navigator" @click="navToLogin">去登陆></view>
-      </view>
+      </view> -->
     </view>
     <view v-else>
       <!-- 列表 -->

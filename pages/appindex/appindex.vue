@@ -3,15 +3,15 @@
     <view class="banner">
       <view class="info">今日日期码：{{ datecode
       }}
-        <view class="message-box"
+      </view>
+      <view @click="gostorepage(18)" class="message-box"
           ><image
             class="message"
             src="../../static/message.png"
             mode=""
           ></image>
-          <view class="message-num" @click="gostorepage(18)">{{ messageNum>100 ? '99+' : messageNum }}</view>
+          <view v-if="messageNum > 0" class="message-num">{{ messageNum>100 ? '99+' : messageNum }}</view>
         </view>
-      </view>
       <view class="search">
         <view class="select">
           <picker @change="bindPickerChange" :value="index" :range="array">
@@ -51,104 +51,27 @@
         <view class="tit">
           <view class="text">门店服务</view>
         </view>
-        <view class="more" @click="gostorepage(0)">查看更多>></view>
+        <view class="more" @click="gostorepage(0)" v-if="accountType != 4 && accountType != 6">查看更多>></view>
         <view class="content">
-          <view class="item" @click="gostorepage(1)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/authentication.png" mode=""></image>
-            </view>
-            <view class="l2">门店认证</view>
-          </view>
-          <view class="item" @click="gostorepage(2)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/shop-icon5.png" mode=""></image>
-            </view>
-            <view class="l2">接单管理</view>
-          </view>
-          <view class="item" @click="gostorepage(3)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/shop-icon4.png" mode=""></image>
-            </view>
-            <view class="l2">保险查勘</view>
-          </view>
-          <view class="item" @click="gostorepage(4)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/shop-icon3.png" mode=""></image>
-            </view>
-            <view class="l2">会员查询</view>
-          </view>
-          <view class="item" @click="gostorepage(5)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/shop-icon6.png" mode=""></image>
-            </view>
-            <view class="l2">销售开单</view>
-          </view>
-          <view class="item" @click="gostorepage(6)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/shop-icon7.png" mode=""></image>
-            </view>
-            <view class="l2">信息工单</view>
-          </view>
-          <view class="item" @click="gostorepage(7)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/shop-icon8.png" mode=""></image>
-            </view>
-            <view class="l2">产品防伪</view>
-          </view>
-          <view class="item" @click="gostorepage(9)">
-            <view class="l1">
-              <image class="icon" src="../../static/appIndex/shop-icon9.png" mode=""></image>
-            </view>
-            <view class="l2">知识库</view>
-          </view>
+			<!--  -->
+			<!-- <view class="item" @click="ttttt()" >
+			  <view class="l1">
+			    <image class="icon" src="../../static/appIndex/shop-icon4.png" mode=""></image>
+			  </view>
+			  <view class="l2">会员卡测试</view>
+			</view> -->
+			
+			<!--  -->
+			
+			
+			<view class="item" v-for="(item,index) in shoplist" @click="gostorepage(item.href,item.menuType)" :key="index">
+			   <view class="l1">
+			     <image class="icon" :src="item.icon" mode=""></image>
+			   </view>
+			   <view class="l2">{{item.name}}</view>
+			 </view>
         </view>
       </view>
-      <!-- <view class="panel panel2">
-				<view class="content">
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu1.png" mode=""></image></view>
-						<view class="l2">门店认证</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu2.png" mode=""></image></view>
-						<view class="l2">会员查勘</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu3.png" mode=""></image></view>
-						<view class="l2">会员查询</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu4.png" mode=""></image></view>
-						<view class="l2">保险查勘</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu5.png" mode=""></image></view>
-						<view class="l2">保险查勘</view>
-					</view>
-				</view>
-				<view class="content">
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu6.png" mode=""></image></view>
-						<view class="l2">门店认证</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu7.png" mode=""></image></view>
-						<view class="l2">会员查勘</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu8.png" mode=""></image></view>
-						<view class="l2">会员查询</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu9.png" mode=""></image></view>
-						<view class="l2">保险查勘</view>
-					</view>
-					<view class="item">
-						<view class="l1"><image  class="icon2" src="../../static/appIndex/menu10.png" mode=""></image></view>
-						<view class="l2">保险查勘</view>
-					</view>
-				</view>
-			</view> -->
       <view v-if="noteList && noteList.length > 0" class="information" @click="gostorepage(17)">
         <view class="line"></view>
         <image class="img" src="../../static/appIndex/information.png"></image>
@@ -164,10 +87,17 @@
         </swiper>
       </view>
     </view>
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
+import { web } from "@/Api/config.js";
   import {
     pathToBase64
   } from "image-tools";
@@ -185,7 +115,8 @@
     orderData,
     notesList,
     vinCode,
-    messageNum
+    messageNum,
+	indexlist
   } from "@/Api/purchaseSales.js";
   export default {
     data() {
@@ -201,9 +132,14 @@
         noteList: [],
         vinCodeValue: "",
         messageNum: null,
+		accountType:uni.getStorageSync('UmsMember').UmsMember.accountType,
+        showMask: false,
+		shoplist:[]
       };
     },
     async onLoad() {
+		this.accountType = uni.getStorageSync('UmsMember').UmsMember.accountType
+		
       // let userInfo2 = uni.getStorageSync("userInfo") || "";
       // let that = this;
       // if (userInfo2.token) {
@@ -234,16 +170,21 @@
       // }
     },
     onShow() {
+		this.accountType=uni.getStorageSync('UmsMember').UmsMember.accountType
       let userInfo = uni.getStorageSync("userInfo") || "";
       if (userInfo.token) {
         this.token = userInfo.token;
-
         this.getDatecode();
         this.getBannerList();
         this.getOrderData();
         this.getNotesList();
         this.getMessageNum()
+        this.getCertificate()
       }
+	  
+	  indexlist().then(res=>{
+		  this.shoplist=res.data
+	  })
     },
     methods: {
       ...mapMutations(["login"]),
@@ -261,10 +202,17 @@
           });
         }
       },
-      gostorepage(e) {
-        uni.navigateTo({
-          url: "/pages/storepage/storepage?id=" + e,
-        });
+      gostorepage(e,menuType) {
+		  if(menuType == 0){
+			  uni.navigateTo({
+			    url: e
+			  });
+		  }else{
+			  uni.navigateTo({
+			    url: "/pages/storepage/storepage?id=" + e,
+			  });
+		  }
+        
       },
       getDatecode() {
         datecode({
@@ -300,23 +248,50 @@
           }
         });
       },
-      chioceView() {
-        uni.chooseImage({
-          count: 1, // 图片数量
-          sizeType: ["compressed"], // 指定选择的图片类型，可以选择原图和压缩图，这里设置为二者都有
-          sourceType: ["album", "camera"], // 指定选择图片的来源，这里设置为相册和相机
-          success: (res) => {
-            uni.getImageInfo({
-              src: res.tempFilePaths[0],
-              success: (path) => {
-                pathToBase64(path.path).then((base64) => {
-                  this.queryVinCode(base64);
-                });
-              },
-            });
+    chioceView() {
+      var platform = uni.getSystemInfoSync().platform;
+      if (platform == "android") {
+        plus.android.checkPermission(
+          "android.permission.CAMERA",
+          (granted) => {
+            if (granted.checkResult == -1) {
+              //弹出
+              this.showMask = true;
+            }
           },
+          (error) => {
+            console.error("Error checking permission:", error.message);
+          }
+        );
+        plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+          //关闭
+          this.showMask = false;
+          if (e.granted.length > 0) {
+            this.chooseImage()
+            //执行你有权限后的方法
+          }
         });
-      },
+      }else{
+        this.chooseImage()
+      }
+    },
+    chooseImage() {
+      uni.chooseImage({
+        count: 1, // 图片数量
+        sizeType: ["compressed"], // 指定选择的图片类型，可以选择原图和压缩图，这里设置为压缩图
+        sourceType: ['album',"camera"], // 指定选择图片的来源，这里设置为相机
+        success: (res) => {
+          uni.getImageInfo({
+            src: res.tempFilePaths[0],
+            success: (path) => {
+              pathToBase64(path.path).then((base64) => {
+                this.queryVinCode(base64);
+              });
+            },
+          });
+        },
+      });
+    },
       queryVinCode(val) {
         let params = {
           base64Data: val,
@@ -351,7 +326,39 @@
             this.messageNum = res.data;
           }
         })
-      }
+      },
+      getCertificate() {
+        var config = {};
+        config.token = uni.getStorageSync("userInfo").token;
+        uni
+          .request({
+            method: "post",
+            timeout: 10000,
+            url:
+              web.renew +
+                "member/updateCertificate?token=" +
+                uni.getStorageSync("userInfo").token || "",
+            dataType: "json",
+            header: config,
+          })
+          .then((response) => {
+            let [error, res] = response;
+            if (res.data.code == 200) {
+              if (res.data.data) {
+                uni.showToast({
+                  title: "证书已过期",
+                  icon: "none",
+                  duration: 3500,
+                });
+              }
+            }
+          });
+      },
+	  // ttttt(){
+		 //  uni.navigateTo({
+		 //    url: `/pages/vipcard/vipcard`,
+		 //  });
+	  // }
     }
   }
 </script>
@@ -384,21 +391,25 @@
 
   .app-index .message-box {
     position: relative;
-    width: 30rpx;
-    height: 36rpx;
-    right: -190rpx;
+    width: 100rpx;
+    height: 100rpx;
+    left: 620rpx;
+    top: -32rpx;
   }
 
   .app-index .message {
     width: 30rpx;
     height: 36rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50% , -50%);
   }
 
   .message-num {
     position: absolute;
-    right: 10rpx;
-    top: 0rpx;
-    right: -22rpx;
+    top: 24rpx;
+    right: 8rpx;
     font-size: 14rpx;
     font-family: Source Han Sans CN-Regular, Source Han Sans CN;
     font-weight: 400;
@@ -411,7 +422,7 @@
   }
 
   .app-index .search {
-    margin-top: 180rpx;
+    margin-top: 80rpx;
     width: 500rpx;
     margin-left: 32rpx;
     display: flex;
@@ -513,6 +524,12 @@
     text-align: center;
     margin-bottom: 8rpx;
   }
+  .panel .content .item:last-child:nth-child(4n - 1) {
+        margin-right: calc(24% + 4% / 4);
+    }
+   .panel .content .item:last-child:nth-child(4n - 2) {
+		margin-right: calc(48% + 8% / 4);
+	}
 
   .panel .content .l1 {
     line-height: 46rpx;
@@ -628,5 +645,27 @@
 
   .swiper-panel .swiper {
     height: 248rpx;
+  }
+  .authority_mask {
+    position:fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+    margin: 0 auto;
+		z-index: 998999999999999;
+		transition: .3s;
+    background: rgba(42, 45, 50, 0.7);
+    .box{
+      margin: 100rpx auto 0;
+      width: 600rpx;
+      height: 210rpx;
+      text-align: center;
+      font-weight: 700;
+      border-radius: 20rpx;
+      background: #fff;
+      line-height: 70rpx;
+      padding: 34rpx;
+    }
   }
 </style>

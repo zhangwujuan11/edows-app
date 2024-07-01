@@ -1,0 +1,541 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.top.data-v-286bb58e {
+  width: 750rpx;
+  min-height: 360rpx;
+  background: #ffffff;
+  border-radius: 0rpx 0rpx 0rpx 0rpx;
+  margin-top: 24rpx;
+}
+.row-select.data-v-286bb58e {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 37rpx 31rpx 37rpx 31rpx;
+  width: 750rpx;
+  height: 120rpx;
+  border-radius: 0rpx 0rpx 0rpx 0rpx;
+}
+.row-select .label.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #010914;
+}
+.row-select .symbol.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #df0000;
+  margin-right: 6rpx;
+}
+.row-select .expand.data-v-286bb58e {
+  width: 16rpx;
+  height: 24rpx;
+  vertical-align: middle;
+}
+.row-select .sel.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #b4b5bf;
+  margin-right: 20rpx;
+}
+.row-select .flex.data-v-286bb58e {
+  display: flex;
+  align-items: center;
+}
+.row-select .input.data-v-286bb58e {
+  margin-right: 6rpx;
+}
+.picker-view.data-v-286bb58e {
+  width: 750rpx;
+  height: 500rpx;
+}
+.item.data-v-286bb58e {
+  line-height: 100rpx;
+  text-align: center;
+}
+.mask.data-v-286bb58e {
+  background-color: #ffffff;
+}
+.mask .mask-row.data-v-286bb58e {
+  display: flex;
+  justify-content: space-between;
+  padding: 36rpx 32rpx 0px 32rpx;
+}
+.mask .success.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  color: #007dff;
+}
+.mask .close.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+}
+.row.data-v-286bb58e {
+  display: flex;
+  justify-content: space-between;
+  padding: 37rpx 32rpx 37rpx 32rpx;
+  width: 750rpx;
+  min-height: 118rpx;
+  background: #ffffff;
+}
+.row .money.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #b4b5bf;
+}
+.row .label.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #010914;
+}
+.row .uni-input.data-v-286bb58e {
+  text-align: right;
+}
+.row .placeholder.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #b4b5bf;
+}
+.row .symbol.data-v-286bb58e {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #df0000;
+  vertical-align: middle;
+  margin-right: 4rpx;
+}
+.expand.data-v-286bb58e {
+  width: 28rpx;
+  height: 28rpx;
+}
+.expand-top.data-v-286bb58e {
+  width: 24rpx;
+  height: 15rpx;
+}
+.main.data-v-286bb58e {
+  margin-top: 24rpx;
+  background: #fcfbfc;
+}
+.main .icon.data-v-286bb58e {
+  width: 40rpx;
+  height: 40rpx;
+}
+.main .left.data-v-286bb58e {
+  display: flex;
+}
+.main .scan.data-v-286bb58e {
+  width: 204rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border: 2rpx solid #007dff;
+  font-size: 24rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #007dff;
+  border-radius: 40rpx;
+  text-align: center;
+  position: absolute;
+  top: 24rpx;
+  right: 102rpx;
+}
+.main .add.data-v-286bb58e {
+  height: 120rpx;
+  padding: 37rpx 31rpx 37rpx 31rpx;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.main .add-font.data-v-286bb58e {
+  font-size: 29rpx;
+  font-family: SourceHanSansCN-Medium-, SourceHanSansCN-Medium;
+  font-weight: normal;
+  color: #1862f5;
+  margin-left: 9rpx;
+}
+.main .title.data-v-286bb58e {
+  padding: 37rpx 31rpx 37rpx 31rpx;
+  height: 120rpx;
+  background: linear-gradient(90deg, #f5f8ff 0%, #ffffff 100%);
+  border-radius: 0rpx 0rpx 0rpx 0rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.main .line.data-v-286bb58e {
+  width: 8rpx;
+  height: 28rpx;
+  background: #1862f5;
+  border-radius: 4rpx 4rpx 4rpx 4rpx;
+}
+.main .title-left.data-v-286bb58e {
+  display: flex;
+  align-items: center;
+}
+.main .title-label.data-v-286bb58e {
+  font-size: 29rpx;
+  font-family: SourceHanSansCN-Medium-, SourceHanSansCN-Medium;
+  font-weight: normal;
+  color: #010914;
+  margin-left: 16rpx;
+}
+.bottom.data-v-286bb58e {
+  position: fixed;
+  bottom: 0rpx;
+  width: 750rpx;
+  height: 148rpx;
+  background: #ffffff;
+  box-shadow: 0rpx -6rpx 12rpx 1rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+.btn.data-v-286bb58e {
+  margin: 0 auto;
+  width: 686rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #007dff;
+  border-radius: 16rpx 16rpx 16rpx 16rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #ffffff;
+}
+.product .header.data-v-286bb58e {
+  width: 750rpx;
+  height: 280rpx;
+  background: #ffffff;
+  border-radius: 0rpx 0rpx 0rpx 0rpx;
+}
+.product .header .search.data-v-286bb58e {
+  width: 686rpx;
+  height: 72rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 50rpx;
+  justify-content: space-around;
+}
+.product .header .search .uni-input.data-v-286bb58e {
+  width: 200rpx;
+  height: 72rpx;
+  background-color: #e5e5e5;
+  border-radius: 40rpx;
+  text-align: center;
+}
+.product .header .search1.data-v-286bb58e {
+  width: 686rpx;
+  height: 72rpx;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+  top: 70rpx;
+  justify-content: space-around;
+}
+.product .header .search1 .flex.data-v-286bb58e {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 30rpx;
+  padding-right: 20rpx;
+  background-color: #e5e5e5;
+  width: 200rpx;
+  height: 72rpx;
+  border-radius: 40rpx;
+}
+.product .header .search1 .flex1.data-v-286bb58e {
+  width: 200rpx;
+  height: 72rpx;
+  background: #007dff;
+  border-radius: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 28rpx;
+}
+.product .header .left.data-v-286bb58e {
+  display: flex;
+  align-items: center;
+}
+.product .header .left-label.data-v-286bb58e {
+  font-size: 24rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #333333;
+  margin-left: 32rpx;
+}
+.product .header .placeholder.data-v-286bb58e {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+}
+.product .header .search-icon.data-v-286bb58e {
+  width: 32rpx;
+  height: 32rpx;
+  position: absolute;
+  right: 20rpx;
+}
+.product .title.data-v-286bb58e {
+  font-size: 36rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #303133;
+  text-align: center;
+  position: relative;
+  top: 34rpx;
+}
+.product .fork.data-v-286bb58e {
+  width: 64rpx;
+  height: 64rpx;
+  position: absolute;
+  right: 32rpx;
+  top: -10rpx;
+}
+.product .content.data-v-286bb58e {
+  height: calc(70vh);
+  background: #f1f1f1;
+  padding: 24rpx 32rpx 24rpx 32rpx;
+  overflow-y: auto;
+  padding-bottom: 148rpx;
+}
+.product .card.data-v-286bb58e {
+  width: 686rpx;
+  min-height: 660rpx;
+  background: #ffffff;
+  box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+  border-radius: 20rpx;
+  margin-bottom: 24rpx;
+  padding: 26rpx 32rpx 32rpx 32rpx;
+}
+.product .check.data-v-286bb58e {
+  width: 60rpx;
+  height: 60rpx;
+}
+.product .crow.data-v-286bb58e {
+  display: flex;
+  align-items: center;
+}
+.product .spacecheck.data-v-286bb58e {
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+.product .name.data-v-286bb58e {
+  margin-left: 20rpx;
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #333333;
+  width: 540rpx;
+  word-break: break-all;
+}
+.product .main.data-v-286bb58e {
+  width: 622rpx;
+  height: 533rpx;
+  background: #f5f7fb;
+  margin-top: 20rpx;
+  border-radius: 20rpx;
+  padding: 28rpx 32rpx 28rpx 32rpx;
+}
+.product .flex-row.data-v-286bb58e {
+  display: flex;
+  margin-bottom: 24rpx;
+}
+.product .label.data-v-286bb58e {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+  width: 146rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+}
+.product .val.data-v-286bb58e {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #333333;
+  margin-left: 34rpx;
+}
+.product .bottom.data-v-286bb58e {
+  width: 750rpx;
+  height: 148rpx;
+  background: #ffffff;
+  box-shadow: 0rpx -6rpx 12rpx 1rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product .btn.data-v-286bb58e {
+  width: 686rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: #007dff;
+  border-radius: 16rpx 16rpx 16rpx 16rpx;
+  font-size: 28rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #ffffff;
+}
+.no-have.data-v-286bb58e {
+  padding-top: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.data-v-286bb58e .msg--active {
+  z-index: 999;
+  padding: 0;
+}
+.authority_mask.data-v-286bb58e {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: 998999999999999;
+  transition: .3s;
+  background: rgba(42, 45, 50, 0.7);
+}
+.authority_mask .box.data-v-286bb58e {
+  margin: 100rpx auto 0;
+  width: 600rpx;
+  height: 210rpx;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 20rpx;
+  background: #fff;
+  line-height: 70rpx;
+  padding: 34rpx;
+}
+.salesman .scroll-Y.data-v-286bb58e {
+  height: 860rpx;
+}
+.salesman .header.data-v-286bb58e {
+  width: 750rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  background: #ffffff;
+  border-radius: 0rpx 0rpx 0rpx 0rpx;
+}
+.salesman .title.data-v-286bb58e {
+  font-size: 36rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #303133;
+  text-align: center;
+  position: relative;
+}
+.salesman .fork.data-v-286bb58e {
+  width: 64rpx;
+  height: 64rpx;
+  position: absolute;
+  right: 32rpx;
+  top: 24rpx;
+}
+.salesman .content.data-v-286bb58e {
+  height: 900rpx;
+  background: #f1f1f1;
+  padding: 24rpx 32rpx 24rpx 32rpx;
+  overflow-y: hidden;
+}
+.salesman .card.data-v-286bb58e {
+  width: 686rpx;
+  height: 347rpx;
+  background: #ffffff;
+  box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+  border-radius: 20rpx;
+  margin-bottom: 24rpx;
+  padding: 26rpx 32rpx 32rpx 32rpx;
+}
+.salesman .check.data-v-286bb58e {
+  width: 60rpx;
+  height: 60rpx;
+}
+.salesman .crow.data-v-286bb58e {
+  display: flex;
+  align-items: center;
+}
+.salesman .spacecheck.data-v-286bb58e {
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+.salesman .name.data-v-286bb58e {
+  margin-left: 20rpx;
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #333333;
+}
+.salesman .main.data-v-286bb58e {
+  width: 622rpx;
+  height: 209rpx;
+  background: #f5f7fb;
+  margin-top: 20rpx;
+  border-radius: 20rpx;
+  padding: 28rpx 32rpx 28rpx 32rpx;
+}
+.salesman .flex-row.data-v-286bb58e {
+  display: flex;
+  margin-bottom: 24rpx;
+}
+.salesman .label.data-v-286bb58e {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+  width: 114rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+}
+.salesman .val.data-v-286bb58e {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #333333;
+  margin-left: 34rpx;
+}
+.salesman .salesman-bottom.data-v-286bb58e {
+  width: 750rpx;
+  height: 148rpx;
+  background: #ffffff;
+  box-shadow: 0rpx -6rpx 12rpx 1rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.salesman .btn.data-v-286bb58e {
+  width: 686rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: #007dff;
+  border-radius: 16rpx 16rpx 16rpx 16rpx;
+  font-size: 28rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #ffffff;
+}
+

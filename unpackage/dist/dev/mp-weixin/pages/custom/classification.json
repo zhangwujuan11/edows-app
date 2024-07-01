@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "客户分类",
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 20,
+  "usingComponents": {}
+}

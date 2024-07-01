@@ -11,7 +11,7 @@
       </view>
       <view class="row-select">
         <view class="label"><text class="symbol">*</text>业务员</view>
-        <view class="flex" @click="open(2)">
+        <view class="flex" @click="openSalesman">
           <view class="input" v-if="agentUser">{{ agentUser }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
@@ -30,6 +30,7 @@
           <image class="icon" src="/static/smalladd.png" @click="add"></image>
           <view class="add-font">添加产品</view>
         </view>
+        <view class="scan" @click="chioceView">扫描产品编码</view>
         <image class="icon" src="/static/clear.png" @click="clear"></image>
       </view>
       <view style="margin-bottom: 30upx;" v-for="(item, index) in params.storeInWarehouseDetailBoList" :key="index">
@@ -115,13 +116,13 @@
               <view v-else class="sel" style="font-size: 24upx;color: #999999;">请选择</view>
               <image class="expand" src="/static/bottom.png"></image>
             </view>
-            <view class="flex1" style="background-color: #009cff;margin-left: 33upx;" @click="search1">
+            <view class="flex1" style="background-color: #009cff;" @click="search1">
               <image src="@/static/white_search.png"
                 style="width: 32upx; height: 32upx; background-color: #009cff;margin-right: 12rpx;margin-top: 5upx;">
               </image>
               搜索
             </view>
-            <view class="flex1" style="background-color: #e5e5e5;margin-left: 33upx;color: black;" @click="reset">
+            <view class="flex1" style="background-color: #e5e5e5;color: black;" @click="reset">
               <image src="/static/clear.png"
                 style="width: 32upx; height: 32upx; background-color: #e5e5e5;margin-right: 12rpx;margin-top: 5upx; ">
               </image>
@@ -137,9 +138,7 @@
               <image v-if="item.inventoryId==inventoryId" @click="choice(item, index)" class="check"
                 src="/static/check.png"></image>
               <view v-else @click="choice(item, index)" class="spacecheck"></view>
-              <view class="name" style=" height: 60upx; width: 540upx;     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; padding-top: 10upx;">{{ item.productName }}</view>
+              <view class="name" style=" width: 540upx; padding-top: 10upx;">{{ item.productName }}</view>
             </view>
             <view class="main">
               <view class="flex-row">
@@ -207,6 +206,61 @@
             <view class="item" v-for="(item, index) in selectList" :key="index">{{ item }}</view>
           </picker-view-column>
         </picker-view>
+      </view>
+    </uni-popup>
+
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view>
+
+    <uni-popup ref="salesman" type="bottom">
+      <view class="salesman">
+        <view class="header">
+          <view class="title"
+            >请选择业务员
+            <image
+              @click="closesalesman"
+              class="fork"
+              src="/static/close.png"
+            ></image>
+          </view>
+        </view>
+        <view class="content">
+          <scroll-view scroll-y="true" class="scroll-Y">
+            <view class="card" v-for="(item, index) of salesmanList" :key="index">
+              <view class="crow">
+                <image
+                  v-if="item.choice"
+                  @click="salesmanchoice(item)"
+                  class="check"
+                  src="/static/check.png"
+                ></image>
+                <view v-else @click="salesmanchoice(item)" class="spacecheck"></view>
+                <view class="name">{{ item.userId }}</view>
+              </view>
+              <view class="main">
+                <view class="flex-row">
+                  <view class="label">用户名称</view>
+                  <view class="val">{{ item.userName }}</view>
+                </view>
+                <view class="flex-row">
+                  <view class="label">用户昵称</view>
+                  <view class="val">{{ item.nickName }}</view>
+                </view>
+                <view class="flex-row">
+                  <view class="label">手机号</view>
+                  <view class="val">{{ item.phonenumber }}</view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="salesman-bottom">
+          <view class="btn" @click="submitSalesman">确定</view>
+        </view>
       </view>
     </uni-popup>
   </view>
@@ -315,6 +369,9 @@
             }]
           },
         },
+         showMask: false,
+         salesmanList: [],
+         choiceSalesman: {}
       };
     },
     computed: {
@@ -387,22 +444,22 @@
               });
             }
             break;
-          case 2:
-            this.title = '请选择业务员'
-            const data2 = await getwen(this.params3)
-            if (data2.rows) {
-              data2.rows.forEach(i => {
-                this.selectList.push(i.userName)
-                this.selectList1.push(i.userId)
-              })
-            } else {
-              uni.showToast({
-                title: "没有数据",
-                icon: "none",
-                duration: 1000,
-              });
-            }
-            break;
+          // case 2:
+          //   this.title = '请选择业务员'
+          //   const data2 = await getwen(this.params3)
+          //   if (data2.rows) {
+          //     data2.rows.forEach(i => {
+          //       this.selectList.push(i.userName)
+          //       this.selectList1.push(i.userId)
+          //     })
+          //   } else {
+          //     uni.showToast({
+          //       title: "没有数据",
+          //       icon: "none",
+          //       duration: 1000,
+          //     });
+          //   }
+          //   break;
           case 3:
             this.title = '请选择分类'
             const data3 = await getclassification(this.params3)
@@ -490,11 +547,11 @@
             this.warehouseId = this.selectList1[this.selectIndex];
             this.params.warehouseCode = this.selectList2[this.selectIndex];
             break;
-          case 2:
-            this.agentUser = this.selectList[this.selectIndex];
-            this.params.constructionWork = this.agentUser
-            this.params.constructionWorkId = this.selectList1[this.selectIndex];
-            break;
+          // case 2:
+          //   this.agentUser = this.selectList[this.selectIndex];
+          //   this.params.constructionWork = this.agentUser
+          //   this.params.constructionWorkId = this.selectList1[this.selectIndex];
+          //   break;
           case 3:
             this.classification = this.selectList[this.selectIndex];
             this.params2.classify = this.classification
@@ -506,7 +563,7 @@
         this.params.remark = e.detail.value
       },
       clear() {
-        this.params.storeInWarehouseDetailBoList = [{
+          this.params.storeInWarehouseDetailBoList = [{
           receivalQuantity: '',
           position: '',
           price: ''
@@ -602,6 +659,147 @@
         this.$set(this.params.storeInWarehouseDetailBoList[this.index], 'price', this.item.price)
         this.$refs.product.close();
       },
+      chioceView() {
+          var platform = uni.getSystemInfoSync().platform;
+          if (platform == "android") {
+            plus.android.checkPermission(
+              "android.permission.CAMERA",
+              (granted) => {
+                if (granted.checkResult == -1) {
+                  //弹出
+                  this.showMask = true;
+                }
+              },
+              (error) => {
+                console.error("Error checking permission:", error.message);
+              }
+            );
+            plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+              //关闭
+              this.showMask = false;
+              if (e.granted.length > 0) {
+                this.scanCarg()
+                //执行你有权限后的方法
+              }
+            });
+          }else{
+            this.scanCarg()
+          }
+        },
+      scanCarg() {
+        uni.scanCode({
+          onlyFromCamera: true,
+          scanType: ["barCode"],
+          success: (res) => {
+            let params = {
+              carg: res.result,
+              pageNum: 1,
+              pageSize: 1,
+              warehouseId: this.params1.warehouseId,
+            };
+            getinventory(params).then((final) => {
+              if (final.code == 200) {
+                if (final.data.items && final.data.items.length > 0) {
+                  var is_push = true;
+                  for (var i = 0; i < this.params.storeInWarehouseDetailBoList.length; i++) {
+                    if (!this.params.storeInWarehouseDetailBoList[i].productName) {
+                      this.$set(
+                        this.params.storeInWarehouseDetailBoList[i],
+                        "productName",
+                        final.data.items[0].productName
+                      );
+                      this.$set(
+                        this.params.storeInWarehouseDetailBoList[i],
+                        "productId",
+                        final.data.items[0].productId
+                      );
+                      this.$set(
+                        this.params.storeInWarehouseDetailBoList[i],
+                        "receivalQuantity",
+                        final.data.items[0].usableQuantity
+                      );
+                      this.$set(
+                        this.params.storeInWarehouseDetailBoList[i],
+                        "inventoryId",
+                        final.data.items[0].inventoryId
+                      );
+                      this.$set(
+                        this.params.storeInWarehouseDetailBoList[i],
+                        "price",
+                        final.data.items[0].price
+                      );
+                      this.$set(
+                        this.params.storeInWarehouseDetailBoList[i],
+                        "position",
+                        final.data.items[0].positionCode
+                      );
+                      is_push = false;
+                      break;
+                    }
+                  }
+                  if (is_push) {
+                    let temp = {
+                      productName: final.data.items[0].productName,
+                      productId: final.data.items[0].productId,
+                      receivalQuantity: final.data.items[0].usableQuantity,
+                      inventoryId: final.data.items[0].inventoryId,
+                      position: final.data.items[0].positionCode,
+                      price: final.data.items[0].price
+                    };
+                    this.params.storeInWarehouseDetailBoList.push(temp);
+                  }
+                  uni.showToast({
+                    title: "扫描添加成功",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                } else {
+                  uni.showToast({
+                    title: "该产品不存在",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                }
+              } else {
+                uni.showToast({
+                  title: final.message,
+                  icon: "none",
+                  duration: 2000,
+                });
+              }
+            });
+          },
+        });
+      },
+      openSalesman() {
+        let params = {
+          pageNum: 1,
+          pageSize: 1000
+        }
+        getwen(params).then((res)=>{
+          this.salesmanList = res.rows
+          this.$refs.salesman.open()
+        })
+      },
+      closesalesman() {
+        this.$refs.salesman.close()
+      },
+      salesmanchoice(item) {
+      this.salesmanList.forEach((ptem, pndex) => {
+        if (ptem.userId == item.userId) {
+          this.$set(this.salesmanList[pndex], "choice", true);
+          this.choiceSalesman = ptem;
+        } else {
+          this.$set(this.salesmanList[pndex], "choice", false);
+        }
+      });
+    },
+      submitSalesman() {
+        this.agentUser = this.choiceSalesman.userName
+        this.params.constructionWork = this.choiceSalesman.userName
+        this.params.constructionWorkId = this.choiceSalesman.userId
+        this.$refs.salesman.close()
+      }
     },
   };
 </script>
@@ -761,12 +959,27 @@
     .left {
       display: flex;
     }
-
+    .scan {
+    width: 204rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    border: 2rpx solid #007dff;
+    font-size: 24rpx;
+    font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+    font-weight: normal;
+    color: #007dff;
+    border-radius: 40rpx;
+    text-align: center;
+    position: absolute;
+    top: 24rpx;
+    right: 102rpx;
+  }
     .add {
       height: 120rpx;
       padding: 37rpx 31rpx 37rpx 31rpx;
       display: flex;
       justify-content: space-between;
+      position: relative;
     }
 
     .add-font {
@@ -847,6 +1060,7 @@
         align-items: center;
         position: relative;
         top: 50rpx;
+        justify-content: space-around;
 
         .uni-input {
           width: 200rpx;
@@ -861,11 +1075,12 @@
         width: 686rpx;
         height: 72rpx;
         margin: 0 auto;
-        padding-left: 30upx;
+        // padding-left: 30upx;
         display: flex;
         // align-items: center;
         position: relative;
         top: 70rpx;
+        justify-content: space-around;
 
         .flex {
           display: flex;
@@ -915,7 +1130,7 @@
       }
 
       .uni-input {
-        margin-left: 32rpx;
+        // margin-left: 32rpx;
       }
 
       .search-icon {
@@ -945,7 +1160,7 @@
     }
 
     .content {
-      height: 980rpx;
+      height: calc(70vh);
       background: #f1f1f1;
       padding: 24rpx 32rpx 24rpx 32rpx;
       overflow-y: auto;
@@ -954,7 +1169,7 @@
 
     .card {
       width: 686rpx;
-      height: 660rpx;
+      min-height: 660rpx;
       background: #ffffff;
       box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
       border-radius: 20rpx;
@@ -985,10 +1200,8 @@
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
       font-weight: 500;
       color: #333333;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       width: 540rpx;
+      word-break: break-all;
     }
 
     .main {
@@ -1060,4 +1273,140 @@
     z-index: 999;
     padding: 0;
   }
+
+.authority_mask {
+    position:fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+    margin: 0 auto;
+		z-index: 998999999999999;
+		transition: .3s;
+    background: rgba(42, 45, 50, 0.7);
+.box{
+      margin: 100rpx auto 0;
+      width: 600rpx;
+      height: 210rpx;
+      text-align: center;
+      font-weight: 700;
+      border-radius: 20rpx;
+      background: #fff;
+      line-height: 70rpx;
+      padding: 34rpx;
+    }
+}
+
+.salesman {
+  .scroll-Y {
+  height: 860rpx;
+  }
+  .header {
+    width: 750rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    background: #ffffff;
+    border-radius: 0rpx 0rpx 0rpx 0rpx;
+  }
+  .title {
+    font-size: 36rpx;
+    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+    font-weight: 500;
+    color: #303133;
+    text-align: center;
+    position: relative;
+  }
+  .fork {
+    width: 64rpx;
+    height: 64rpx;
+    position: absolute;
+    right: 32rpx;
+    top: 24rpx;
+  }
+  .content {
+    height: 900rpx;
+    background: #f1f1f1;
+    padding: 24rpx 32rpx 24rpx 32rpx;
+    overflow-y: hidden;
+  }
+  .card {
+    width: 686rpx;
+    height: 347rpx;
+    background: #ffffff;
+    box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+    border-radius: 20rpx;
+    margin-bottom: 24rpx;
+    padding: 26rpx 32rpx 32rpx 32rpx;
+  }
+  .check {
+    width: 60rpx;
+    height: 60rpx;
+  }
+  .crow {
+    display: flex;
+    align-items: center;
+  }
+  .spacecheck {
+    width: 60rpx;
+    height: 60rpx;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+  .name {
+    margin-left: 20rpx;
+    font-size: 32rpx;
+    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+    font-weight: 500;
+    color: #333333;
+  }
+  .main {
+    width: 622rpx;
+    height: 209rpx;
+    background: #f5f7fb;
+    margin-top: 20rpx;
+    border-radius: 20rpx;
+    padding: 28rpx 32rpx 28rpx 32rpx;
+  }
+  .flex-row {
+    display: flex;
+    margin-bottom: 24rpx;
+  }
+  .label {
+    font-size: 24rpx;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #999999;
+    width: 114rpx;
+    height: 35rpx;
+    line-height: 35rpx;
+  }
+  .val {
+    font-size: 24rpx;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    margin-left: 34rpx;
+  }
+  .salesman-bottom {
+    width: 750rpx;
+    height: 148rpx;
+    background: #ffffff;
+    box-shadow: 0rpx -6rpx 12rpx 1rpx rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn {
+    width: 686rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    background: #007dff;
+    border-radius: 16rpx 16rpx 16rpx 16rpx;
+    font-size: 28rpx;
+    font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+    font-weight: normal;
+    color: #ffffff;
+  }
+}
 </style>

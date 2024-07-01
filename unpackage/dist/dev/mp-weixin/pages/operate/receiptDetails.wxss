@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.top.data-v-538573e4 {
+  width: 686rpx;
+  min-height: 547rpx;
+  background: #ffffff;
+  box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+  margin: 0rpx auto;
+  border-radius: 30rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+}
+.top .header.data-v-538573e4 {
+  display: flex;
+  justify-content: space-between;
+}
+.top .label.data-v-538573e4 {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 600;
+  color: #333333;
+}
+.top .date.data-v-538573e4 {
+  width: 166rpx;
+  height: 50rpx;
+  background: #e5f2ff;
+  border-radius: 25rpx 25rpx 25rpx 25rpx;
+  font-size: 24rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #007dff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.top .date.data-v-538573e4  .icon {
+  display: inline-block;
+}
+.top .date.data-v-538573e4  .uni-input {
+  display: inline-block;
+}
+.top .icon.data-v-538573e4 {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 10rpx;
+}
+.charts-box.data-v-538573e4 {
+  width: 100%;
+  height: 600rpx;
+}
+.bottom.data-v-538573e4 {
+  width: 686rpx;
+  background: #ffffff;
+  box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+  padding: 32rpx;
+  margin: 0 auto;
+  border-radius: 30rpx;
+}
+.bottom .header.data-v-538573e4 {
+  display: flex;
+  justify-content: space-between;
+}
+.bottom .labeltitle.data-v-538573e4 {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #333333;
+}
+.bottom .icon.data-v-538573e4 {
+  width: 32rpx;
+  height: 32rpx;
+}
+.bottom .content.data-v-538573e4 {
+  width: 622rpx;
+  min-height: 790rpx;
+  background: #f5f7fb;
+  margin-top: 28rpx;
+  border-radius: 30rpx;
+  padding: 28rpx 32rpx 0rpx 32rpx;
+}
+.bottom .flex.data-v-538573e4 {
+  display: flex;
+  padding-bottom: 24rpx;
+}
+.bottom .label.data-v-538573e4 {
+  width: 121rpx;
+  height: 35rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+}
+.bottom .input.data-v-538573e4 {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #333333;
+  margin-left: 27rpx;
+  width: 410rpx;
+}
+.no-have.data-v-538573e4 {
+  text-align: center;
+  padding-top: 60rpx;
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  color: #666666;
+}
+.no-have uni-image.data-v-538573e4 {
+  width: 460rpx;
+  height: 312rpx;
+}
+

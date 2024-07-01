@@ -23,19 +23,17 @@
       </view>
       <view class="row-select">
         <view class="label"><text class="symbol">*</text>业务员</view>
-        <view class="flex" @click="open(2)">
-          <view class="input" v-if="paramsList[2].value">{{
-            paramsList[2].value
-          }}</view>
+        <view class="flex" @click="openSalesman">
+          <view class="input" v-if="constructionWork">{{ constructionWork }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
         </view>
       </view>
       <view class="row-select">
         <view class="label">票据类型</view>
-        <view class="flex" @click="open(3)">
-          <view class="input" v-if="paramsList[3].value">{{
-            paramsList[3].value
+        <view class="flex" @click="open(2)">
+          <view class="input" v-if="paramsList[2].value">{{
+            paramsList[2].value
           }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
@@ -47,9 +45,9 @@
       </view>
       <view class="row-select">
         <view class="label"><text class="symbol">*</text>包装方式</view>
-        <view class="flex" @click="open(4)">
-          <view class="input" v-if="paramsList[4].value">{{
-            paramsList[4].value
+        <view class="flex" @click="open(3)">
+          <view class="input" v-if="paramsList[3].value">{{
+            paramsList[3].value
           }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
@@ -57,9 +55,9 @@
       </view>
       <view class="row-select">
         <view class="label">配送方式</view>
-        <view class="flex" @click="open(5)">
-          <view class="input" v-if="paramsList[5].value">{{
-            paramsList[5].value
+        <view class="flex" @click="open(4)">
+          <view class="input" v-if="paramsList[4].value">{{
+            paramsList[4].value
           }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
@@ -71,9 +69,9 @@
       </view>
       <view class="row-select">
         <view class="label"><text class="symbol">*</text>结算方式</view>
-        <view class="flex" @click="open(6)">
-          <view class="input" v-if="paramsList[6].value">{{
-            paramsList[6].value
+        <view class="flex" @click="open(5)">
+          <view class="input" v-if="paramsList[5].value">{{
+            paramsList[5].value
           }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
@@ -81,9 +79,9 @@
       </view>
       <view class="row-select">
         <view class="label"><text class="symbol">*</text>价格方式</view>
-        <view class="flex" @click="open(7)">
-          <view class="input" v-if="paramsList[7].value">{{
-            paramsList[7].value
+        <view class="flex" @click="open(6)">
+          <view class="input" v-if="paramsList[6].value">{{
+            paramsList[6].value
           }}</view>
           <view v-else class="sel">请选择</view>
           <image class="expand" src="/static/mine/to.png"></image>
@@ -102,6 +100,7 @@
           <view class="add-font">添加产品</view>
         </view>
         <view v-if="!outWarehouseId" class="change" @click="goChange">预计转销售</view>
+        <view class="scan" @click="chioceView">扫描产品编码</view>
         <image @click="cleanUp" class="icon" src="/static/clear.png"></image>
       </view>
       <view class="title">
@@ -267,6 +266,60 @@
         </view>
       </view>
     </uni-popup>
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view>
+
+    <uni-popup ref="salesman" type="bottom">
+      <view class="salesman">
+        <view class="header">
+          <view class="title"
+            >请选择业务员
+            <image
+              @click="closesalesman"
+              class="fork"
+              src="/static/close.png"
+            ></image>
+          </view>
+        </view>
+        <view class="content">
+          <scroll-view scroll-y="true" class="scroll-Y">
+            <view class="card" v-for="(item, index) of salesmanList" :key="index">
+              <view class="crow">
+                <image
+                  v-if="item.choice"
+                  @click="salesmanchoice(item)"
+                  class="check"
+                  src="/static/check.png"
+                ></image>
+                <view v-else @click="salesmanchoice(item)" class="spacecheck"></view>
+                <view class="name">{{ item.userId }}</view>
+              </view>
+              <view class="main">
+                <view class="flex-row">
+                  <view class="label">用户名称</view>
+                  <view class="val">{{ item.userName }}</view>
+                </view>
+                <view class="flex-row">
+                  <view class="label">用户昵称</view>
+                  <view class="val">{{ item.nickName }}</view>
+                </view>
+                <view class="flex-row">
+                  <view class="label">手机号</view>
+                  <view class="val">{{ item.phonenumber }}</view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="salesman-bottom">
+          <view class="btn" @click="submitSalesman">确定</view>
+        </view>
+      </view>
+    </uni-popup>
   </view>
 </template>
 
@@ -313,12 +366,6 @@
           },
           {
             name: "往来客户",
-            value: "",
-            list: [],
-            select: {},
-          },
-          {
-            name: "业务员",
             value: "",
             list: [],
             select: {},
@@ -379,6 +426,11 @@
         productIndex: 0,
         is_show: false,
         is_conversion: true,
+        showMask: false,
+        salesmanList: [],
+        choiceSalesman: {},
+        constructionWork: '',
+        constructionWorkId: ''
       };
     },
     onBackPress(event) {
@@ -443,12 +495,12 @@
             break;
           case 2:
             this.selectList = this.paramsList[e].list.map((res) => {
-              return res.userName;
+              return res.label;
             });
             break;
           case 3:
             this.selectList = this.paramsList[e].list.map((res) => {
-              return res.label;
+              return res.dictLabel;
             });
             break;
           case 4:
@@ -462,11 +514,6 @@
             });
             break;
           case 6:
-            this.selectList = this.paramsList[e].list.map((res) => {
-              return res.dictLabel;
-            });
-            break;
-          case 7:
             this.selectList = this.paramsList[e].list.map((res) => {
               return res.dictLabel;
             });
@@ -495,12 +542,12 @@
             break;
           case 2:
             this.paramsList[2].value =
-              this.paramsList[2].list[this.selectIndex].userName;
+              this.paramsList[2].list[this.selectIndex].label;
             this.paramsList[2].select = this.paramsList[2].list[this.selectIndex];
             break;
           case 3:
             this.paramsList[3].value =
-              this.paramsList[3].list[this.selectIndex].label;
+              this.paramsList[3].list[this.selectIndex].dictLabel;
             this.paramsList[3].select = this.paramsList[3].list[this.selectIndex];
             break;
           case 4:
@@ -517,11 +564,6 @@
             this.paramsList[6].value =
               this.paramsList[6].list[this.selectIndex].dictLabel;
             this.paramsList[6].select = this.paramsList[6].list[this.selectIndex];
-            break;
-          case 7:
-            this.paramsList[7].value =
-              this.paramsList[7].list[this.selectIndex].dictLabel;
-            this.paramsList[7].select = this.paramsList[7].list[this.selectIndex];
             break;
         }
         this.$refs.popup.close();
@@ -557,9 +599,9 @@
       getWarehouseList() {
         return new Promise((resolve, reject) => {
           warehouseList().then((res) => {
-            resolve(res);
             if (res.code == 200) {
               this.paramsList[0].list = res.data.items;
+              resolve(res);
             }
           });
         });
@@ -567,9 +609,9 @@
       getCustomManagementList() {
         return new Promise((resolve, reject) => {
           customManagementList().then((res) => {
-            resolve(res);
             if (res.code == 200) {
               this.paramsList[1].list = res.data.items;
+              resolve(res);
             }
           });
         });
@@ -580,9 +622,9 @@
             pageNum: 1,
             pageSize: 1500,
           }).then((res) => {
-            resolve(res);
             if (res.code == 200) {
-              this.paramsList[2].list = res.rows;
+              this.salesmanList = res.rows;
+              resolve(res);              
             }
           });
         });
@@ -590,9 +632,9 @@
       getPackagingMethod() {
         return new Promise((resolve, reject) => {
           dictData("packagingMethod").then((res) => {
-            resolve(res);
             if (res.code == 200) {
-              this.paramsList[4].list = res.data;
+              this.paramsList[3].list = res.data;
+              resolve(res);              
             }
           });
         });
@@ -600,9 +642,9 @@
       getDeliveryMethod() {
         return new Promise((resolve, reject) => {
           dictData("delivery_method").then((res) => {
-            resolve(res);
             if (res.code == 200) {
-              this.paramsList[5].list = res.data;
+              this.paramsList[4].list = res.data;
+              resolve(res);
             }
           });
         });
@@ -610,9 +652,9 @@
       getPaymentTerms() {
         return new Promise((resolve, reject) => {
           paymentTerms().then((res) => {
-            resolve(res);
             if (res.code == 200) {
-              this.paramsList[6].list = res.data;
+              this.paramsList[5].list = res.data;
+              resolve(res);              
             }
           });
         });
@@ -620,9 +662,9 @@
       getPriceMode() {
         return new Promise((resolve, reject) => {
           dictData("priceMode").then((res) => {
-            resolve(res);
             if (res.code == 200) {
-              this.paramsList[7].list = res.data;
+              this.paramsList[6].list = res.data;
+              resolve(res);
             }
           });
         });
@@ -662,32 +704,35 @@
             }
 
             if (res.data.constructionWorkId) {
+              this.constructionWorkId = res.data.constructionWorkId
+              this.constructionWork = res.data.constructionWork
+            }
+
+            if (res.data.billType) {
               for (var i = 0; i < this.paramsList[2].list.length; i++) {
-                if (
-                  this.paramsList[2].list[i].userId == res.data.constructionWorkId
-                ) {
-                  this.paramsList[2].value = res.data.constructionWork;
+                if (this.paramsList[2].list[i].value == res.data.billType) {
+                  this.paramsList[2].value = this.paramsList[2].list[i].label;
                   this.paramsList[2].select = this.paramsList[2].list[i];
                   break;
                 }
               }
             }
 
-            if (res.data.billType) {
+            if (res.data.packagingMethod) {
               for (var i = 0; i < this.paramsList[3].list.length; i++) {
-                if (this.paramsList[3].list[i].value == res.data.billType) {
-                  this.paramsList[3].value = this.paramsList[3].list[i].label;
+                if (
+                  this.paramsList[3].list[i].dictValue == res.data.packagingMethod
+                ) {
+                  this.paramsList[3].value = this.paramsList[3].list[i].dictLabel;
                   this.paramsList[3].select = this.paramsList[3].list[i];
                   break;
                 }
               }
             }
 
-            if (res.data.packagingMethod) {
+            if (res.data.delivery) {
               for (var i = 0; i < this.paramsList[4].list.length; i++) {
-                if (
-                  this.paramsList[4].list[i].dictValue == res.data.packagingMethod
-                ) {
+                if (this.paramsList[4].list[i].dictValue == res.data.delivery) {
                   this.paramsList[4].value = this.paramsList[4].list[i].dictLabel;
                   this.paramsList[4].select = this.paramsList[4].list[i];
                   break;
@@ -695,9 +740,11 @@
               }
             }
 
-            if (res.data.delivery) {
+            if (res.data.paymentTerms) {
               for (var i = 0; i < this.paramsList[5].list.length; i++) {
-                if (this.paramsList[5].list[i].dictValue == res.data.delivery) {
+                if (
+                  this.paramsList[5].list[i].dictValue == res.data.paymentTerms
+                ) {
                   this.paramsList[5].value = this.paramsList[5].list[i].dictLabel;
                   this.paramsList[5].select = this.paramsList[5].list[i];
                   break;
@@ -705,23 +752,11 @@
               }
             }
 
-            if (res.data.paymentTerms) {
-              for (var i = 0; i < this.paramsList[6].list.length; i++) {
-                if (
-                  this.paramsList[6].list[i].dictValue == res.data.paymentTerms
-                ) {
-                  this.paramsList[6].value = this.paramsList[6].list[i].dictLabel;
-                  this.paramsList[6].select = this.paramsList[6].list[i];
-                  break;
-                }
-              }
-            }
-
             if (res.data.priceMode) {
-              for (var i = 0; i < this.paramsList[7].list.length; i++) {
-                if (this.paramsList[7].list[i].dictValue == res.data.priceMode) {
-                  this.paramsList[7].value = res.data.priceMode;
-                  this.paramsList[7].select = this.paramsList[7].list[i];
+              for (var i = 0; i < this.paramsList[6].list.length; i++) {
+                if (this.paramsList[6].list[i].dictValue == res.data.priceMode) {
+                  this.paramsList[6].value = res.data.priceMode;
+                  this.paramsList[6].select = this.paramsList[6].list[i];
                   break;
                 }
               }
@@ -851,25 +886,25 @@
             icon: "none",
             duration: 1000,
           });
-        } else if (!this.paramsList[2].value) {
+        } else if (!this.constructionWork) {
           return uni.showToast({
             title: "业务员不能为空",
             icon: "none",
             duration: 1000,
           });
-        } else if (!this.paramsList[4].value) {
+        } else if (!this.paramsList[3].value) {
           return uni.showToast({
             title: "包装方式不能为空",
             icon: "none",
             duration: 1000,
           });
-        } else if (!this.paramsList[6].value) {
+        } else if (!this.paramsList[5].value) {
           return uni.showToast({
             title: "结算方式不能为空",
             icon: "none",
             duration: 1000,
           });
-        } else if (!this.paramsList[7].value) {
+        } else if (!this.paramsList[6].value) {
           return uni.showToast({
             title: "价格方式不能为空",
             icon: "none",
@@ -910,13 +945,13 @@
           storeId: this.paramsList[0].select.warehouseId,
           customer: this.paramsList[1].select.name,
           customerId: this.paramsList[1].select.customerId,
-          constructionWorkId: this.paramsList[2].select.userId,
-          constructionWork: this.paramsList[2].select.userName,
-          billType: this.paramsList[3].select.value,
-          packagingMethod: this.paramsList[4].select.dictValue,
-          delivery: this.paramsList[5].select.dictValue,
-          paymentTerms: this.paramsList[6].select.dictValue,
-          priceMode: this.paramsList[7].select.dictValue,
+          constructionWorkId: this.constructionWorkId,
+          constructionWork: this.constructionWork,
+          billType: this.paramsList[2].select.value,
+          packagingMethod: this.paramsList[3].select.dictValue,
+          delivery: this.paramsList[4].select.dictValue,
+          paymentTerms: this.paramsList[5].select.dictValue,
+          priceMode: this.paramsList[6].select.dictValue,
           state: 0,
           detailList: this.product,
         };
@@ -1003,6 +1038,157 @@
       bindPickerChange(e) {
         this.classifyIndex = e.detail.value;
       },
+    chioceView() {
+      var platform = uni.getSystemInfoSync().platform;
+      if (platform == "android") {
+        plus.android.checkPermission(
+          "android.permission.CAMERA",
+          (granted) => {
+            if (granted.checkResult == -1) {
+              //弹出
+              this.showMask = true;
+            }
+          },
+          (error) => {
+            console.error("Error checking permission:", error.message);
+          }
+        );
+        plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+          //关闭
+          this.showMask = false;
+          if (e.granted.length > 0) {
+            this.scanCarg();
+            //执行你有权限后的方法
+          }
+        });
+      } else {
+        this.scanCarg();
+      }
+    },
+    scanCarg() {
+      uni.scanCode({
+        onlyFromCamera: true,
+        scanType: ["barCode"],
+        success: (res) => {
+          let params = {
+            carg: res.result,
+            pageNum: 1,
+            pageSize: 1,
+            warehouseId: this.paramsList[0].select.warehouseId,
+          };
+          inventoryList(params).then((final) => {
+            if (final.code == 200) {
+              if (final.data.items && final.data.items.length > 0) {
+                for (var i = 0; i < this.product.length; i++) {
+                  if (
+                    this.product[i].productId == final.data.items[0].productId
+                  ) {
+                    return uni.showToast({
+                      title: "产品已存在",
+                      icon: "none",
+                      duration: 1000,
+                    });
+                  }
+                }
+                var is_push = true;
+                for (var i = 0; i < this.product.length; i++) {
+                  if (!this.product[i].productName) {
+                    this.$set(
+                      this.product[i],
+                      "productName",
+                      final.data.items[0].productName
+                    );
+                    this.$set(
+                      this.product[i],
+                      "productId",
+                      final.data.items[0].productId
+                    );
+                    this.$set(
+                      this.product[i],
+                      "price",
+                      final.data.items[0].price
+                    );
+                    this.$set(
+                      this.product[i],
+                      "inventoryId",
+                      final.data.items[0].inventoryId
+                    );
+                    this.$set(
+                      this.product[i],
+                      "positionCode",
+                      final.data.items[0].positionCode
+                    );
+                    this.$set(
+                      this.product[i],
+                      "remark",
+                      final.data.items[0].remark
+                    );
+                    is_push = false;
+                    break;
+                  }
+                }
+                if (is_push) {
+                  let temp = {
+                    productName: final.data.items[0].productName,
+                    productId: final.data.items[0].productId,
+                    price: final.data.items[0].price,
+                    inventoryId: final.data.items[0].inventoryId,
+                    positionCode: final.data.items[0].positionCode,
+                    remark: final.data.items[0].remark
+                  };
+                  this.product.push(temp);
+                }
+                uni.showToast({
+                  title: "扫描添加成功",
+                  icon: "none",
+                  duration: 2000,
+                });
+              } else {
+                uni.showToast({
+                  title: "该产品不存在",
+                  icon: "none",
+                  duration: 2000,
+                });
+              }
+            } else {
+              uni.showToast({
+                title: final.message,
+                icon: "none",
+                duration: 2000,
+              });
+            }
+          });
+        },
+      });
+      },
+    openSalesman() {
+        let params = {
+          pageNum: 1,
+          pageSize: 1000
+        }
+        storeUserlist(params).then((res)=>{
+          this.salesmanList = res.rows
+          this.$refs.salesman.open()
+        })
+      },
+    closesalesman() {
+        this.$refs.salesman.close()
+    },
+    salesmanchoice(item) {
+      this.salesmanList.forEach((ptem, pndex) => {
+        if (ptem.userId == item.userId) {
+          this.$set(this.salesmanList[pndex], "choice", true);
+          this.choiceSalesman = ptem;
+        } else {
+          this.$set(this.salesmanList[pndex], "choice", false);
+        }
+      });
+    },
+    submitSalesman (){
+      this.constructionWork = this.choiceSalesman.userName
+      this.constructionWorkId = this.choiceSalesman.userId
+      this.$refs.salesman.close()
+    }
     },
   };
 </script>
@@ -1194,7 +1380,21 @@
       top: 24rpx;
       right: 102rpx;
     }
-
+    .scan {
+      width: 204rpx;
+      height: 72rpx;
+      line-height: 72rpx;
+      border: 2rpx solid #007dff;
+      font-size: 24rpx;
+      font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+      font-weight: normal;
+      color: #007dff;
+      border-radius: 40rpx;
+      text-align: center;
+      position: absolute;
+      top: 24rpx;
+      right: 314rpx;
+    }
     .add {
       height: 120rpx;
       padding: 37rpx 31rpx 37rpx 31rpx;
@@ -1394,7 +1594,7 @@
 
     .card {
       width: 686rpx;
-      height: 701rpx;
+      min-height: 701rpx;
       background: #ffffff;
       box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
       border-radius: 20rpx;
@@ -1425,10 +1625,8 @@
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
       font-weight: 500;
       color: #333333;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       width: 540rpx;
+      word-break: break-all;
     }
 
     .main {
@@ -1503,4 +1701,117 @@
       height: 312rpx;
     }
   }
+
+  .salesman {
+  .scroll-Y {
+  height: 860rpx;
+  }
+  .header {
+    width: 750rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    background: #ffffff;
+    border-radius: 0rpx 0rpx 0rpx 0rpx;
+  }
+  .title {
+    font-size: 36rpx;
+    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+    font-weight: 500;
+    color: #303133;
+    text-align: center;
+    position: relative;
+  }
+  .fork {
+    width: 64rpx;
+    height: 64rpx;
+    position: absolute;
+    right: 32rpx;
+    top: 24rpx;
+  }
+  .content {
+    height: 900rpx;
+    background: #f1f1f1;
+    padding: 24rpx 32rpx 24rpx 32rpx;
+    overflow-y: hidden;
+  }
+  .card {
+    width: 686rpx;
+    height: 347rpx;
+    background: #ffffff;
+    box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+    border-radius: 20rpx;
+    margin-bottom: 24rpx;
+    padding: 26rpx 32rpx 32rpx 32rpx;
+  }
+  .check {
+    width: 60rpx;
+    height: 60rpx;
+  }
+  .crow {
+    display: flex;
+    align-items: center;
+  }
+  .spacecheck {
+    width: 60rpx;
+    height: 60rpx;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+  .name {
+    margin-left: 20rpx;
+    font-size: 32rpx;
+    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+    font-weight: 500;
+    color: #333333;
+  }
+  .main {
+    width: 622rpx;
+    height: 209rpx;
+    background: #f5f7fb;
+    margin-top: 20rpx;
+    border-radius: 20rpx;
+    padding: 28rpx 32rpx 28rpx 32rpx;
+  }
+  .flex-row {
+    display: flex;
+    margin-bottom: 24rpx;
+  }
+  .label {
+    font-size: 24rpx;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #999999;
+    width: 114rpx;
+    height: 35rpx;
+    line-height: 35rpx;
+  }
+  .val {
+    font-size: 24rpx;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+    margin-left: 34rpx;
+  }
+  .salesman-bottom {
+    width: 750rpx;
+    height: 148rpx;
+    background: #ffffff;
+    box-shadow: 0rpx -6rpx 12rpx 1rpx rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn {
+    width: 686rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    background: #007dff;
+    border-radius: 16rpx 16rpx 16rpx 16rpx;
+    font-size: 28rpx;
+    font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+    font-weight: normal;
+    color: #ffffff;
+  }
+}
 </style>

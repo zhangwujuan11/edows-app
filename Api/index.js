@@ -22,6 +22,7 @@ const axios = (opts, data) => {
 	let promise = new Promise(function(resolve, reject) {
 		uni.request(httpDefaultOpts).then(
 			(res) => {
+				// console.log(res,httpDefaultOpts)
 				//new Vue().$util.msg("测试弹框");
 				if (res[1].data.code == 200) {
 					resolve(res[1])
@@ -43,7 +44,7 @@ const axios = (opts, data) => {
 					
 				} else {
 					uni.showToast({
-						title: res[1].data.message || '出错啦，请稍后再试～',
+						title: res[1].data.message || '出错啦,请稍后再试～',
 						icon: "none",
 						duration: 2000
 					});

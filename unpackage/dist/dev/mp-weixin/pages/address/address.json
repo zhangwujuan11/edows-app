@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "地址管理",
+  "usingComponents": {
+    "uni-load-more": "/components/uni-load-more"
+  }
+}

@@ -163,13 +163,6 @@
 				uni.navigateTo({
 					url: "/pages/search/search?kw=" + key
 				})
-				//以下是示例跳转淘宝搜索
-				//#ifdef APP-PLUS
-				plus.runtime.openURL('taobao://s.taobao.com/search?q=' + key);
-				//#endif
-				//#ifdef H5
-				window.location.href = 'taobao://s.taobao.com/search?q=' + key
-				//#endif
 			},
 			//保存关键字到历史记录
 			saveKeyword(keyword) {

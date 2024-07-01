@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.dowcon.data-v-7fa227ec {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.dowcon .ul.data-v-7fa227ec {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dowcon .ul uni-image.data-v-7fa227ec {
+  width: 460rpx;
+  height: 312rpx;
+}
+.dowcon .ul .li.data-v-7fa227ec {
+  width: 686rpx;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  box-sizing: border-box;
+  background-color: white;
+  margin-top: 24rpx;
+}
+.dowcontitle.data-v-7fa227ec {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-size: 24rpx;
+}
+.dowcontitle .title.data-v-7fa227ec {
+  font-size: 32rpx;
+  width: 300rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dowcontitle .state.data-v-7fa227ec {
+  width: 86rpx;
+  height: 46rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  line-height: 46rpx;
+  text-align: center;
+  color: black;
+}
+.licon.data-v-7fa227ec {
+  background-color: #F5F7FB;
+  border-radius: 10rpx;
+  padding: 28rpx 32rpx;
+  box-sizing: border-box;
+  margin-top: 28rpx;
+  color: #333333;
+  font-size: 24rpx;
+}
+.liconceng text.data-v-7fa227ec {
+  color: #999999;
+  width: 160rpx !important;
+  display: block;
+  margin-right: 34rpx;
+}
+.liconceng.data-v-7fa227ec {
+  font-size: 26rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+}
+.liconceng view.data-v-7fa227ec {
+  width: 410rpx;
+}
+

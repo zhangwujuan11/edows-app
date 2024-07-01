@@ -1,0 +1,32 @@
+
+.custom-tab-bar.data-v-25678e6a {
+  display: flex;
+  width:90%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #52AAFE;
+  position: absolute;
+  top: 104rpx !important;
+ border-radius: 20rpx;
+}
+.tab-bar-item.data-v-25678e6a {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color:white;
+  font-size: 10px;
+}
+.tab-bar-item .active.data-v-25678e6a {
+  color: #007BFF; /* 选中的 Tab 文字颜色 */
+}
+image.data-v-25678e6a{
+	width: 42rpx;
+	height: 45rpx;
+}
+
+/* 添加更多的样式 */
+

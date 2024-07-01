@@ -121,11 +121,8 @@ width: 300upx;">{{ item.warehouseName }}</view>
           <view class="title">共享库存</view>
           <uni-icons type="closeempty" size="24" @click="cancel1"></uni-icons>
         </view>
-        <view
-          style="width: 536upx; height: 72upx;border: 1upx solid black;margin-left: 5upx; margin-top: 60upx;margin-bottom: 50upx;border-radius: 20upx;">
-          <input style="width: 100%;height: 100%;margin-left: 20upx;" class="uni-input" placeholder="请输入共享数量"
+          <input type="number" class="edit-input" placeholder-class="placeholder" placeholder="请输入共享数量"
             v-model="currDel.shareQuantity" />
-        </view>
         <view class="bottom">
           <view class="sure" @click="confirm1">共享</view>
           <view class="cancel" @click="cancel1">取消</view>
@@ -631,6 +628,22 @@ width: 300upx;">{{ item.warehouseName }}</view>
         color: #ffffff;
       }
     }
+      .edit-input {
+        width: 536rpx;
+        height: 72rpx;
+        background: #ffffff;
+        border-radius: 12rpx 12rpx 12rpx 12rpx;
+        border: 1px #707070 solid;
+        padding-left: 32rpx;
+        margin-top: 72rpx;
+        margin-bottom: 56rpx;
+    }
+      .placeholder {
+        font-size: 28rpx;
+        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+        font-weight: 400;
+        color: #999999;
+      }
   }
 
   .no-have {

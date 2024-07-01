@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "易道大咖商城",
+  "navigationBarBackgroundColor": "#399eff",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "back-pages": "/components/backPages",
+    "custom-tab-bar": "/components/CustomTabBar"
+  }
+}

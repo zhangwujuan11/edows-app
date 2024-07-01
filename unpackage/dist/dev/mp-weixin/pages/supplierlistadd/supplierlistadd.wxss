@@ -1,0 +1,100 @@
+
+.modal-footer.data-v-4d428e14 {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 35rpx 0;
+  z-index: 9;
+}
+.modal-footer button.data-v-4d428e14 {
+  width: 330rpx;
+  border: none;
+  border-radius: 5rpx;
+  cursor: pointer;
+}
+.formcon.data-v-4d428e14 {
+  width: 100%;
+  background-color: white;
+  padding: 37rpx;
+  padding-bottom: 100rpx;
+  margin: 20rpx 0;
+}
+.data-v-4d428e14 .uni-form-item {
+  display: flex;
+  height: 120rpx;
+}
+.uni-form-item .title.data-v-4d428e14 {
+  width: 190rpx;
+}
+.uni-form-item .title ._span.data-v-4d428e14 {
+  color: red;
+}
+.uni-form-item .uni-input.data-v-4d428e14 {
+  width: calc(100% - 92px);
+  text-align: right;
+}
+.mask.data-v-4d428e14 {
+  background-color: #ffffff;
+}
+.mask .row.data-v-4d428e14 {
+  display: flex;
+  justify-content: space-between;
+  padding: 37rpx 32rpx 37rpx 32rpx;
+  width: 750rpx;
+  height: 118rpx;
+  background: #ffffff;
+}
+.mask .center.data-v-4d428e14 {
+  font-size: 36rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #303133;
+}
+.mask .success.data-v-4d428e14 {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  color: #007dff;
+}
+.mask .close.data-v-4d428e14 {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+}
+.picker-view.data-v-4d428e14 {
+  width: 750rpx;
+  height: 500rpx;
+}
+.item.data-v-4d428e14 {
+  line-height: 100rpx;
+  text-align: center;
+}
+.sel.data-v-4d428e14 {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #999999;
+  margin-right: 20rpx;
+  width: calc(100% - 92px);
+  text-align: right;
+}
+.input.data-v-4d428e14 {
+  font-size: 32rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #333333;
+  margin-right: 20rpx;
+  width: calc(100% - 92px);
+  text-align: right;
+}
+.expand.data-v-4d428e14 {
+  width: 16rpx;
+  height: 24rpx;
+  margin-top: 14rpx;
+  /* vertical-align: middle; */
+}
+

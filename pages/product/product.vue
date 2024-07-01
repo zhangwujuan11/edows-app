@@ -177,7 +177,7 @@
               <text>{{item.name}}</text>
               <view class="item-list">
                 <text v-for="(subItem, subIndex) in item.valueList" v-if="subItem.pCode === item.code" :key="subIndex"
-                  class="tit" :class="{selected: subItem.selected, disabled : subItem.isShow == 0}"
+                  class="tit" :class="{selected: subItem.selected, disabled : subItem.isShow == 0 && index !=0}"
                   @click="selectSpec(index, subIndex, subItem.pCode)">
                   {{subItem.name}}
                 </text>
@@ -281,28 +281,10 @@
       } else {
         this.productCode = options.code;
       }
-
       this.isIphoneX = getApp().globalData.isIphoneX;
-      console.log(this.isIphoneX)
-      // this.setData({
-      // 	isIphoneX: isIphoneX
-      // })
-      console.log(this.productCode)
-      //this.$api.msg(this.productCode);
       this.getData();
       this.getCartNum();
       this.getProductComments();
-
-      // 			const query = wx.createSelectorQuery()
-      // 			query.select('#attr-cells').boundingClientRect()
-      // 			query.selectViewport().scrollOffset()
-      // 			query.exec(function(res) {
-      // 				res[0].top // #the-id节点的上边界坐标
-      // 				res[1].scrollTop // 显示区域的竖直滚动位置
-      // 
-      // 				console.log('打印高度', res[0].top);
-      // 				console.log('打印demo的元素的信息', res);
-      // 			})
     },
     onShareAppMessage(res) {
       return {
@@ -321,25 +303,157 @@
         let res = await this.$axios(this.$baseUrl.getProductByCode, params);
         this.productInfo = res.data.data;
         this.desc = res.data.data.detail;
-        //this.desc = fn.replaceStr(res.data.data.detail);
         this.imgList = res.data.data.subImgList;
         this.serviceList = res.data.data.serviceList;
         this.attrList = res.data.data.attrList;
         //规格 默认选中第一条开始
         this.defualtAttrList = res.data.data.defualtAttrList;
         for (var i in this.attrList) {
-          if (this.attrList[i].code == this.defualtAttrList[i].attrCode) {
-            for (var j in this.attrList[i].valueList) {
-              if (this.attrList[i].valueList[j].name == this.defualtAttrList[i].attrValue) {
-                this.$set(this.attrList[i].valueList[j], 'selected', true);
-              }
-            }
-          }
+        	if (this.attrList[i].code == this.defualtAttrList[i].attrCode) {
+        		for (var j in this.attrList[i].valueList) {
+        			if (this.attrList[i].valueList[j].name == this.defualtAttrList[i].attrValue) {
+        				this.$set(this.attrList[i].valueList[j], 'selected', true);
+        			}
+        		}
+        	}
         }
+		
         //规格 默认选中第一条结束
-
       },
-
+	  async getDataser() {
+	    var params = {
+	      attrValueDtos: this.defualtAttrList,
+	      productCode: this.productCode
+	    }
+	    let res = await this.$axios(this.$baseUrl.getProductByCode, params);
+	    this.productInfo = res.data.data;
+	    this.desc = res.data.data.detail;
+	    this.imgList = res.data.data.subImgList;
+	    this.serviceList = res.data.data.serviceList;
+	    this.attrList = res.data.data.attrList;
+	    //规格 默认选中第一条开始
+	    this.defualtAttrList = res.data.data.defualtAttrList;
+	    for (var i in this.attrList) {
+	      if (this.attrList[i].code == this.defualtAttrList[i].attrCode) {
+	        for (var j in this.attrList[i].valueList) {
+	          if (this.attrList[i].valueList[j].name == this.defualtAttrList[i].attrValue) {
+	            this.$set(this.attrList[i].valueList[j], 'selected', true);
+	          }
+	        }
+	      }
+	    }
+	    //规格 默认选中第一条结束
+	  },
+	  //规格弹窗开关
+	  toggleSpec(type) {
+	    this.optionType = type;
+	    if (this.specClass === 'show') {
+	      this.specClass = 'hide';
+	      //不记录状态					
+	      let sum = 0;
+	      let len = this.defualtAttrList.length;
+	      for (var i in this.defualtAttrList) {
+	        if (this.defualtAttrList[i].attrValue != " ") {
+	          sum += 1
+	        }
+	      }
+	      if (sum != len) {
+	        this.productInfo = this.oldProductInfo;
+	        this.imgList = this.oldProductInfo.subImgList;
+	        this.serviceList = this.oldProductInfo.serviceList;
+	        this.defualtAttrList = this.oldProductInfo.defualtAttrList;
+	        this.attrList = this.oldProductInfo.attrList;
+			this.selectSpec(0, 0, this.attrList[0].valueList[0].pCode)
+	        //规格 默认选中第一条
+	  //       for (var i in this.attrList) {
+	  //         if (this.attrList[i].code == this.defualtAttrList[i].attrCode) {
+	  //           for (var j in this.attrList[i].valueList) {
+	  //             if (this.attrList[i].valueList[j].name == this.defualtAttrList[i].attrValue) {
+	  //               this.$set(this.attrList[i].valueList[j], 'selected', true);
+	  //             }
+	  //           }
+	  //         }
+	  //       }
+	      }
+	  
+	  
+	      setTimeout(() => {
+	        this.specClass = 'none';
+	      }, 250);
+	  
+	    } else if (this.specClass === 'none') {
+	      //this.defualtAttrList=[];
+	      this.specClass = 'show';
+	    }
+	  },
+	//选择规格
+	selectSpec(index, subIndex, pid) {
+	  let list = this.attrList;
+	  let sum = 0;
+	  let len = this.productInfo.defualtAttrList.length;
+	  for (var i in this.productInfo.defualtAttrList) {
+	    if (this.productInfo.defualtAttrList[i].attrValue != " ") {
+	      sum += 1
+	    }
+	  }
+	  if (sum == len) {
+	    this.oldProductInfo = this.productInfo;
+	  }
+	
+	  //可以取消当前项
+	  let flagSelected = list[index].valueList[subIndex].selected || false;
+	  // if (list[index].valueList[subIndex].isShow) {
+	    for (var i in list[index].valueList) {
+	      if (list[index].valueList[i].pCode == pid) {
+	        this.$set(list[index].valueList[i], 'selected', false);
+	      }
+	    }
+	    if (flagSelected) {
+	      this.$set(list[index].valueList[subIndex], 'selected', false);
+		  if(list[index+1]){
+				for(var t=0;t<list[index+1].valueList.length;t++){
+					this.$set(list[index+1].valueList[t], 'selected', false);
+				}
+			}
+			if(list[index+2]){
+				for(var t=0;t<list[index+2].valueList.length;t++){
+					this.$set(list[index+2].valueList[t], 'selected', false);
+				}
+			}
+	    } else {
+	      this.$set(list[index].valueList[subIndex], 'selected', true);
+		  if(list[index+1]){
+				for(var t=0;t<list[index+1].valueList.length;t++){
+					this.$set(list[index+1].valueList[t], 'selected', false);
+				}
+			}
+			if(list[index+2]){
+				for(var t=0;t<list[index+2].valueList.length;t++){
+					this.$set(list[index+2].valueList[t], 'selected', false);
+				}
+			}
+	    }
+	    //存储已选择
+	    /**
+	     * 修复选择规格存储错误
+	     * 将这几行代码替换即可
+	     * 选择的规格存放在defualtAttrList中
+	     */
+	    this.defualtAttrList = [];
+	    list.forEach(item => {
+	      for (var i in item.valueList) {
+	        var obj = {};
+	        if (item.valueList[i].selected === true) {
+	          obj.attrCode = item.valueList[i].pCode;
+	          obj.attrValue = item.valueList[i].name;
+	          this.defualtAttrList.push(obj);
+	        }
+	      }
+	    })
+	    this.getDataser();
+	  // }
+	  //可以取消当前项结束	
+	},
       //得到购物车的数量 
       async getCartNum() {
         //let list = await this.$api.json('cartList'); 
@@ -380,7 +494,6 @@
       preview(res) {
 
         let myindex = res.currentTarget.id;
-        console.log(myindex)
         uni.previewImage({
           urls: this.imgList,
           current: myindex
@@ -415,7 +528,6 @@
         if (this.productNum > this.max) {
           this.productNum = this.max
         }
-        console.log('数量：', this.productNum)
       },
       //服务说明 弹框开关
       toggleService() {
@@ -429,55 +541,6 @@
         }
       },
 
-      //规格弹窗开关
-      toggleSpec(type) {
-        this.optionType = type;
-        console.log(type)
-        //this.defualtAttrList=[];
-        //this.getData();
-        if (this.specClass === 'show') {
-          this.specClass = 'hide';
-          //不记录状态					
-          let sum = 0;
-          let len = this.defualtAttrList.length;
-          for (var i in this.defualtAttrList) {
-            if (this.defualtAttrList[i].attrValue != " ") {
-              sum += 1
-            }
-          }
-          console.log(sum, ':', len)
-          if (sum != len) {
-            this.productInfo = this.oldProductInfo;
-            this.imgList = this.oldProductInfo.subImgList;
-            this.serviceList = this.oldProductInfo.serviceList;
-            this.defualtAttrList = this.oldProductInfo.defualtAttrList;
-            this.attrList = this.oldProductInfo.attrList;
-            //规格 默认选中第一条
-            for (var i in this.attrList) {
-              if (this.attrList[i].code == this.defualtAttrList[i].attrCode) {
-                for (var j in this.attrList[i].valueList) {
-                  if (this.attrList[i].valueList[j].name == this.defualtAttrList[i].attrValue) {
-
-                    this.$set(this.attrList[i].valueList[j], 'selected', true);
-                  }
-                }
-              }
-            }
-            //不记录状态 
-            //this.defualtAttrList=[];
-            //this.getData();
-          }
-
-
-          setTimeout(() => {
-            this.specClass = 'none';
-          }, 250);
-
-        } else if (this.specClass === 'none') {
-          //this.defualtAttrList=[];
-          this.specClass = 'show';
-        }
-      },
       //确定 
       async toggleSpecSur() {
         //let sum = 0;
@@ -540,74 +603,7 @@
           // this.getData();
         }, 250);
       },
-      //选择规格
-      selectSpec(index, subIndex, pid) {
-        console.log(index, subIndex)
-        let list = this.attrList;
-        let sum = 0;
-        let len = this.productInfo.defualtAttrList.length;
-        for (var i in this.productInfo.defualtAttrList) {
-          if (this.productInfo.defualtAttrList[i].attrValue != " ") {
-            sum += 1
-          }
-        }
-        console.log(sum, ':', len)
-        if (sum == len) {
-          this.oldProductInfo = this.productInfo;
-        }
-
-        //可以取消当前项
-        let flagSelected = list[index].valueList[subIndex].selected || false;
-        if (list[index].valueList[subIndex].isShow) {
-
-          for (var i in list[index].valueList) {
-
-            if (list[index].valueList[i].pCode == pid) {
-              this.$set(list[index].valueList[i], 'selected', false);
-            }
-          }
-          console.log(flagSelected)
-          if (flagSelected) {
-            this.$set(list[index].valueList[subIndex], 'selected', false);
-          } else {
-            this.$set(list[index].valueList[subIndex], 'selected', true);
-          }
-
-          //this.$set(list[index].valueList[subIndex], 'selected', true);
-
-
-
-          //存储已选择
-          /**
-           * 修复选择规格存储错误
-           * 将这几行代码替换即可
-           * 选择的规格存放在defualtAttrList中
-           */
-          this.defualtAttrList = [];
-
-          list.forEach(item => {
-
-            for (var i in item.valueList) {
-              var obj = {};
-              if (item.valueList[i].selected === true) {
-                obj.attrCode = item.valueList[i].pCode;
-                obj.attrValue = item.valueList[i].name;
-                this.defualtAttrList.push(obj);
-              }
-            }
-          })
-          console.log(this.defualtAttrList)
-          // for (var i = 0; i < this.defualtAttrList.length; i++) {
-          // 	if (this.defualtAttrList[i].attrValue != " ") {
-          // 		this.getData();
-          // 	}
-          // }
-          this.getData();
-
-        }
-
-        //可以取消当前项结束	
-      },
+      
       //分享
       share() {
         this.$refs.share.toggleMask();
@@ -1477,4 +1473,7 @@
       }
     }
   }
-</style>
+  .introduce-section .subTit{
+  	display: contents;
+  }
+  </style>

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.orderInfo-box {
+  position: relative;
+  padding-top: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.orderInfo-box image {
+  width: 200rpx;
+  height: 200rpx;
+}
+.orderInfo-box text {
+  line-height: 100rpx;
+}
+.price-box {
+  background-color: #fff;
+  height: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  font-size: 28rpx;
+  color: #909399;
+}
+.price-box .price {
+  font-size: 50rpx;
+  color: #f04c41;
+  margin-top: 12rpx;
+}
+.price-box .price:before {
+  content: '￥';
+  font-size: 40rpx;
+}
+.success-icon {
+  font-size: 160rpx;
+  color: #fa436a;
+  margin-top: 100rpx;
+}
+.btn-group {
+  position: relative;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 100rpx;
+}
+.mix-btn {
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 260rpx;
+  height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #339cfe;
+  border-radius: 10rpx;
+}
+.mix-btn.hollow {
+  background: #fff;
+  color: #303133;
+  border: 1px solid #ccc;
+}
+

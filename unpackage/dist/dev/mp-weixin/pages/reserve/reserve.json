@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "预约服务",
+  "usingComponents": {
+    "list-index": "/components/list-index/list-index",
+    "list-brand": "/components/list-brand/list-brand",
+    "uni-drawer": "/components/uni-drawer/uni-drawer"
+  }
+}

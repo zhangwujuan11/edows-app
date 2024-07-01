@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "积分商城",
+  "usingComponents": {
+    "wm-watermark": "/components/wm-watermark/wm-watermark",
+    "share": "/components/share",
+    "swiper-dot": "/components/swiperDot",
+    "uni-number-box": "/components/uni-number-box"
+  }
+}

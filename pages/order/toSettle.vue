@@ -58,7 +58,7 @@
 		</view>
 		<view class="fiche-info">
 			<view class="btn-fiche">
-				<button @click="upload">上传付款凭证</button>
+				<button @click="chioceView">上传付款凭证</button>
 			</view>
 
 			<view class="pic-fiche" v-if="imgPath">
@@ -79,6 +79,13 @@
 			</view>
 			<view class="set-foot-btn" @click="toSettle">
 				<text>确认结算</text>
+			</view>
+		</view>
+
+		<view class="authority_mask" v-if="showMask">
+			<view class="box">
+				<view>相机、储存空间/照片权限使用说明：</view>
+				<view>用于拍摄照片、扫码、上传图片等场景</view>
 			</view>
 		</view>
 	</view>
@@ -105,7 +112,8 @@
 				orderSn: '',
 				orderInfo:{},
 				totalPrice: 0,
-				imgPath: ""
+				imgPath: "",
+				showMask: false
 			};
 		},
 
@@ -136,7 +144,33 @@
 				this.orderList = res.data.data.orderVOList;
 
 			},
-
+			chioceView() {
+				var platform = uni.getSystemInfoSync().platform;
+				if (platform == "android") {
+					plus.android.checkPermission(
+					"android.permission.CAMERA",
+					(granted) => {
+						if (granted.checkResult == -1) {
+						//弹出
+						this.showMask = true;
+						}
+					},
+					(error) => {
+						console.error("Error checking permission:", error.message);
+					}
+					);
+					plus.android.requestPermissions(["android.permission.CAMERA","android.permission.READ_EXTERNAL_STORAGE"], (e) => {
+					//关闭
+					this.showMask = false;
+					if (e.granted.length > 0) {
+						this.upload()
+						//执行你有权限后的方法
+					}
+					});
+				}else{
+					this.upload()
+				}
+			},
 			//图片上传
 			upload: function() {
 				var _self = this;
@@ -700,4 +734,27 @@
 			opacity: .2
 		}
 	}
+
+.authority_mask {
+  position:fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: 998999999999999;
+  transition: .3s;
+  background: rgba(42, 45, 50, 0.7);
+}
+.box{
+  margin: 100rpx auto 0;
+  width: 600rpx;
+  height: 210rpx;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 20rpx;
+  background: #fff;
+  line-height: 70rpx;
+  padding: 34rpx;
+}
 </style>

@@ -4,7 +4,7 @@
       <view class="user-info-box ">
         <block v-if="scores.name">
           <view class="portrait-box">
-            <image class="portrait" :src="userInfo.avatar"></image>
+            <image class="portrait" src="https://img.edows.cn/2019-12-03/images/ydda.jpg"></image>
           </view>
           <view class="info-box">
             <text class="username">{{scores.name}}</text>

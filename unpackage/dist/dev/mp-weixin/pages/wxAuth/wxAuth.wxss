@@ -1,0 +1,88 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.header {
+  margin: 90rpx 0 90rpx 50rpx;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  width: 650rpx;
+  height: 300rpx;
+}
+.header image {
+  width: 200rpx;
+  height: 200rpx;
+}
+.header text {
+  display: block;
+  margin-top: 10rpx;
+}
+.content {
+  text-align: center;
+}
+.content text {
+  display: block;
+  color: #9d9d9d;
+  margin-top: 40rpx;
+}
+.bottom {
+  border-radius: 10rpx;
+  margin: 100rpx 50rpx 0 50rpx;
+  font-size: 35rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  background: #09bb07;
+}
+.maskFull {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+.winChoose {
+  position: absolute;
+  background: #fff;
+  width: 570rpx;
+  height: 500rpx;
+  left: 50%;
+  top: 50%;
+  margin: -285rpx 0 0 -288rpx;
+  border-radius: 10rpx;
+  padding: 38rpx;
+}
+.winChoose .win-tit {
+  display: block;
+  height: 70rpx;
+  text-align: center;
+}
+.winChoose .win-cell-list {
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  border-radius: 10rpx;
+  justify-content: space-between;
+  padding: 26rpx;
+  margin-top: 26rpx;
+}
+.winChoose .win-cell-list view {
+  display: flex;
+  flex-direction: column;
+}
+.winChoose .win-cell-list view .cell-user {
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+}
+.winChoose .win-cell-list view .cell-tit {
+  font-size: 22rpx;
+}
+.winChoose .win-cell-list image {
+  width: 94rpx;
+  height: 94rpx;
+}
+

@@ -1,18 +1,19 @@
 <template>
   <view class="app-mine">
     <view class="banner">
-      <image class="photo" src="../../static/mine/photo.png" mode=""></image>
+      <image  v-if="accountType != 4" class="photo" src="https://img.edows.cn/2019-12-03/images/ydda.jpg" mode=""></image>
       <view class="name">{{form.name}}</view>
-      <view class="info">门店编号：{{form.code}}</view>
-      <view class="info">门店星级：
+      <view class="info" v-if="accountType != 4">门店编号：{{form.code}}</view>
+      <view class="info" v-if="accountType != 4">门店星级：
         <text v-for="(item,index) in arr" :key="index">
           <image class="star" src="../../static/mine/star.png" mode=""></image>
         </text>
-
       </view>
+      <view class="info" v-if="accountType != 4">非玻年度任务金额：{{scores.taskPrice}}</view>
+      <view class="info" v-if="accountType != 4">当前完成金额：{{scores.completeTaskPrice}}</view>
     </view>
     <view style="position: relative;top: -60rpx">
-      <view class="mine-panel">
+      <view class="mine-panel" v-if="accountType != 4 && accountType != 6">
         <!-- <view class="tit">我的工单</view> -->
         <view class="content">
           <view class="item" @click="navTo('/pages/shopAccount/shopAccount?id=3')">
@@ -38,7 +39,16 @@
         </view>
       </view>
       <view class="mine-panel2">
-        <view class="item" @click="gopage(10)">
+		  <view class="item" @click="gopage(211)" v-if="accountType == 4">
+		    <view class="c1">
+		      <image class="icon" src="../../static/mine/i1.png" mode=""></image>
+		    </view>
+		    <view class="c2">结算确认</view>
+		    <view class="c3">
+		      <image class="to" src="../../static/mine/to.png" mode=""></image>
+		    </view>
+		  </view>
+        <view class="item" @click="gopage(10)" v-if="accountType != 4  && accountType != 6">
           <view class="c1">
             <image class="icon" src="../../static/mine/i1.png" mode=""></image>
           </view>
@@ -47,7 +57,7 @@
             <image class="to" src="../../static/mine/to.png" mode=""></image>
           </view>
         </view>
-        <view class="item" @click="gopage(11)">
+        <view class="item" @click="gopage(11)" v-if="accountType != 4 && accountType != 6">
           <view class="c1">
             <image class="icon" src="../../static/mine/i2.png" mode=""></image>
           </view>
@@ -56,7 +66,16 @@
             <image class="to" src="../../static/mine/to.png" mode=""></image>
           </view>
         </view>
-        <view class="item" @click="gopage(12)">
+		<view class="item" @click="gopage(511)" v-if="accountType == 6 ">
+		  <view class="c1">
+		    <image class="icon" src="../../static/mine/i2.png" mode=""></image>
+		  </view>
+		  <view class="c2">店员信息</view>
+		  <view class="c3">
+		    <image class="to" src="../../static/mine/to.png" mode=""></image>
+		  </view>
+		</view>
+        <view class="item" @click="gopage(12)" v-if="accountType != 4 && accountType != 6">
           <view class="c1">
             <image class="icon" src="../../static/mine/i3.png" mode=""></image>
           </view>
@@ -65,7 +84,7 @@
             <image class="to" src="../../static/mine/to.png" mode=""></image>
           </view>
         </view>
-        <view class="item" @click="gopage(7)">
+        <view class="item" @click="gopage(7)" v-if="accountType != 4 && accountType != 6">
           <view class="c1">
             <image class="icon" src="../../static/mine/i4.png" mode=""></image>
           </view>
@@ -76,7 +95,7 @@
         </view>
       </view>
       <view class="mine-panel2">
-        <view class="item" @click="gopage(13)">
+        <view class="item" @click="gopage(13)" v-if="accountType != 4 && accountType != 6">
           <view class="c1">
             <image class="icon" src="../../static/mine/d1.png" mode=""></image>
           </view>
@@ -85,7 +104,7 @@
             <image class="to" src="../../static/mine/to.png" mode=""></image>
           </view>
         </view>
-        <view class="item" @click="gopage(14)">
+        <view class="item" @click="gopage(14)" v-if="accountType != 4">
           <view class="c1">
             <image class="icon" src="../../static/mine/d2.png" mode=""></image>
           </view>
@@ -94,7 +113,7 @@
             <image class="to" src="../../static/mine/to.png" mode=""></image>
           </view>
         </view>
-        <!--      <view class="item">
+        <view class="item"  @click="gopage(212)" v-if="accountType == 4  || accountType == 6">
           <view class="c1">
             <image class="icon" src="../../static/mine/d3.png" mode=""></image>
           </view>
@@ -102,7 +121,7 @@
           <view class="c3">
             <image class="to" src="../../static/mine/to.png" mode=""></image>
           </view>
-        </view> -->
+        </view>
       </view>
       <view class="mine-panel2" @click="goSet">
         <view class="item">
@@ -117,21 +136,16 @@
       </view>
       <view class="full-btn" @click="logout1">退出</view>
     </view>
-
-
   </view>
 </template>
 
 <script>
-  import {
-    mapMutations
-  } from 'vuex'
-  import {
-    logout2
-  } from '@/Api/ww.js'
+  import { mapMutations } from 'vuex'
+  import { logout2 } from '@/Api/ww.js'
   export default {
     data() {
       return {
+		accountType:uni.getStorageSync('UmsMember').UmsMember.accountType,
         value: 0,
         scores: {
           limitedBalance: 0,
@@ -142,11 +156,16 @@
       }
     },
     onLoad() {
-      this.getData()
+	  // this.accountType=uni.getStorageSync('UmsMember').UmsMember.accountType
+		 this.getData() 
+	  // console.log(uni.getStorageSync('UmsMember').UmsMember.accountType)
     },
     onShow() {
       this.arr = []
-      this.getData1()
+	  this.accountType=uni.getStorageSync('UmsMember').UmsMember.accountType
+	  if(this.accountType != 4){
+	  		 this.getData1()
+	  }
     },
     methods: {
       ...mapMutations(['logout']),
@@ -200,7 +219,7 @@
           url: "/pages/set/set",
         });
       }
-    },
+    }
   }
 </script>
 
@@ -225,6 +244,7 @@
     position: absolute;
     left: 32rpx;
     top: 50rpx;
+	border-radius: 50%;
   }
 
   .app-mine .banner .name {
@@ -237,7 +257,7 @@
 
   .app-mine .banner .info {
     margin-top: 10rpx;
-    width: 318rpx;
+    width: 400rpx;
     height: 50rpx;
     line-height: 50rpx;
     color: #FFFFFF;

@@ -1,0 +1,144 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.app-mine.data-v-dcbcfe34 {
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 20rpx;
+  background: #F1F1F1;
+}
+.app-mine .banner.data-v-dcbcfe34 {
+  background: #359BFF;
+  background-size: 100% auto;
+  padding: 50rpx 0 80rpx 220rpx;
+  position: relative;
+}
+.app-mine .banner .photo.data-v-dcbcfe34 {
+  width: 170rpx;
+  height: 170rpx;
+  position: absolute;
+  left: 32rpx;
+  top: 50rpx;
+}
+.app-mine .banner .name.data-v-dcbcfe34 {
+  height: 49rpx;
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 49rpx;
+}
+.app-mine .banner .info.data-v-dcbcfe34 {
+  margin-top: 10rpx;
+  width: 400rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #FFFFFF;
+  font-size: 24rpx;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+  border-radius: 25rpx;
+  padding-left: 14rpx;
+}
+.app-mine .banner .star.data-v-dcbcfe34 {
+  width: 25rpx;
+  height: 23rpx;
+  margin-right: 10rpx;
+}
+.app-mine .mine-panel.data-v-dcbcfe34 {
+  margin: 24rpx 32rpx 20rpx 32rpx;
+  background: #FFFFFF;
+  box-shadow: 0px 8px 8px 1px rgba(178, 178, 178, 0.16);
+  border-radius: 20rpx;
+  padding: 28rpx 0;
+  position: relative;
+}
+.mine-panel .tit.data-v-dcbcfe34 {
+  width: 128rpx;
+  height: 47rpx;
+  line-height: 47rpx;
+  font-size: 32rpx;
+  font-family: Source Han Sans SC-Medium, Source Han Sans SC;
+  font-weight: 500;
+  color: #333333;
+  margin-left: 40rpx;
+  position: relative;
+}
+.mine-panel .text.data-v-dcbcfe34 {
+  position: relative;
+  z-index: 5;
+}
+.mine-panel .content.data-v-dcbcfe34 {
+  display: flex;
+  margin-top: 38rpx;
+}
+.mine-panel .content .item.data-v-dcbcfe34 {
+  flex: 1;
+  text-align: center;
+}
+.mine-panel .content .l1.data-v-dcbcfe34 {
+  line-height: 46rpx;
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+  font-weight: bold;
+  color: #007DFF;
+}
+.mine-panel .content .l2.data-v-dcbcfe34 {
+  height: 35rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+  margin-top: 14rpx;
+}
+.mine-panel .content .icon.data-v-dcbcfe34 {
+  width: 56rpx;
+  height: 56rpx;
+}
+.app-mine .mine-panel2.data-v-dcbcfe34 {
+  margin: 24rpx 32rpx 20rpx 32rpx;
+  background: #FFFFFF;
+  box-shadow: 0px 8px 8px 1px rgba(178, 178, 178, 0.16);
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.mine-panel2 .item.data-v-dcbcfe34 {
+  display: flex;
+  padding: 34rpx 0;
+  line-height: 52rpx;
+  height: 110rpx;
+  overflow: hidden;
+}
+.mine-panel2 .item .c1.data-v-dcbcfe34 {
+  width: 107rpx;
+}
+.mine-panel2 .item .c2.data-v-dcbcfe34 {
+  flex: 1;
+}
+.mine-panel2 .item .c3.data-v-dcbcfe34 {
+  width: 45rpx;
+}
+.mine-panel2 .item .icon.data-v-dcbcfe34 {
+  width: 52rpx;
+  height: 52rpx;
+  margin-left: 32rpx;
+}
+.mine-panel2 .item .to.data-v-dcbcfe34 {
+  width: 16rpx;
+  height: 24rpx;
+}
+.full-btn.data-v-dcbcfe34 {
+  margin: 24rpx 32rpx 20rpx 32rpx;
+  text-align: center;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(306deg, #FF6D58 0%, #FF4931 100%);
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+

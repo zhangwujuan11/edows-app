@@ -28,7 +28,7 @@
         </view>
         <view class="uni-form-item uni-column">
           <view class="title">图片上传</view>
-          <image class="cramchekimg" @click="checkimg" src="https://store.edows.cn//image/imageadd.png"></image>
+          <image class="cramchekimg" @click="chioceView" src="https://store.edows.cn//image/imageadd.png"></image>
           <image v-if="form.brandImg" :src="form.brandImg" class="cramchekimg" style="margin-left: 10upx;"></image>
         </view>
         <view class="uni-form-item uni-column" style="margin-top: 226upx;">
@@ -43,6 +43,12 @@
         v-if="ischange">修改</button>
               <button type="button" @click="subten('yes')" style="background-color: #007DFF;color: white;"
         v-if="!ischange">确定</button>
+    </view>
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机、储存空间/照片权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
     </view>
   </view>
 </template>
@@ -67,7 +73,8 @@ export default {
         type: '',
         remark: ''
       },
-      ischange: false
+      ischange: false ,
+      showMask: false
     }
   },
   onBackPress (event) {
@@ -75,7 +82,7 @@ export default {
       const pages = getCurrentPages();
       let prevPage = pages[pages.length - 2];
       prevPage = prevPage.$vm;
-      if (prevPage && prevPage.tabledata) {
+      if (prevPage && prevPage.geilist) {
         prevPage.geilist();
       }
     }
@@ -103,6 +110,33 @@ export default {
     bindPickerChange (e) {
       this.index = e.target.value
       this.form.type = e.target.value
+    },
+    chioceView() {
+      var platform = uni.getSystemInfoSync().platform;
+      if (platform == "android") {
+        plus.android.checkPermission(
+          "android.permission.CAMERA",
+          (granted) => {
+            if (granted.checkResult == -1) {
+              //弹出
+              this.showMask = true;
+            }
+          },
+          (error) => {
+            console.error("Error checking permission:", error.message);
+          }
+        );
+        plus.android.requestPermissions(["android.permission.CAMERA","android.permission.READ_EXTERNAL_STORAGE"], (e) => {
+          //关闭
+          this.showMask = false;
+          if (e.granted.length > 0) {
+            this.checkimg()
+            //执行你有权限后的方法
+          }
+        });
+      }else{
+        this.checkimg();
+      }
     },
     // 长传图片
     checkimg () {
@@ -226,4 +260,28 @@ button {
   width: 216upx;
   height: 216upx;
   display: block;
-}</style>
+}
+
+.authority_mask {
+  position:fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+  margin: 0 auto;
+	z-index: 998999999999999;
+	transition: .3s;
+  background: rgba(42, 45, 50, 0.7);
+}
+.box{
+  margin: 100rpx auto 0;
+  width: 600rpx;
+  height: 210rpx;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 20rpx;
+  background: #fff;
+  line-height: 70rpx;
+  padding: 34rpx;
+}
+</style>

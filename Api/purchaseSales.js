@@ -477,3 +477,11 @@ export function messageNum(data) {
         method: 'GET',
     })
 }
+
+// 首页门店服务列表
+export function indexlist(){
+	return sendRequest({
+		url:'app/getMenu',
+		method:'get'
+	})
+}

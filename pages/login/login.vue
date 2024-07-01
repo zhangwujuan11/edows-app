@@ -17,18 +17,19 @@
     </view>
     <view class="bottom">
       <view class="login" @click="Loginbtn('form')">登录</view>
+      <view class="register" @click="gopage(24)">若无账号，请先注册</view>
     </view>
     <view class="agreeInfo" style="margin-bottom: 20rpx;">
       <checkbox @click="check1" :checked='show1'></checkbox>
       <label style="font-size: 28rpx;">是否记住账号密码</label>
     </view>
     <view class="agreeInfo">
-      <checkbox @click="check"></checkbox>
+      <checkbox @click="check" :checked='show'></checkbox>
       <label>我已阅读并同意</label>
       <label class="blue" @click="policy">《法律声明及隐私权政策》</label>
-      <label>和</label>
+      <!-- <label>和</label>
       <label class="blue" @click="pdf">《协作门店合作协议》</label>
-      <label>内容</label>
+      <label>内容</label> -->
     </view>
 
     <uni-popup ref="popup" type="center" :is-mask-click="false">
@@ -81,10 +82,10 @@ import uniPopup from "@/uni_modules/uni-popup/components/uni-popup/uni-popup.vue
         },
         show: false,
         show1: false,
-        pdf1: {
-          type: '2',
-          src: 'http://27.155.120.108:51085/api/sop/webview?file=images/cooperate.pdf'
-        },
+        // pdf1: {
+        //   type: '2',
+        //   src: 'http://27.155.120.108:51085/api/sop/webview?file=images/cooperate.pdf'
+        // },
       }
     },
     onLoad() {
@@ -99,6 +100,7 @@ import uniPopup from "@/uni_modules/uni-popup/components/uni-popup/uni-popup.vue
         this.formData.userName = HBuserName;
         this.formData.password = HBpassword;
         this.show1 = HBshow
+		this.show = HBshow
       }
     },
     onReady(){
@@ -114,11 +116,11 @@ import uniPopup from "@/uni_modules/uni-popup/components/uni-popup/uni-popup.vue
           url: "/pages/storepage/storepage?id=" + 20,
         });
       },
-      pdf() {
-        uni.navigateTo({
-          url: '/pages/login/agreement?item=' + encodeURIComponent(JSON.stringify(this.pdf1))
-        })
-      },
+      // pdf() {
+      //   uni.navigateTo({
+      //     url: '/pages/login/agreement?item=' + encodeURIComponent(JSON.stringify(this.pdf1))
+      //   })
+      // },
        Loginbtn(ref) {
         let that = this
         uni.showLoading()
@@ -199,6 +201,16 @@ import uniPopup from "@/uni_modules/uni-popup/components/uni-popup/uni-popup.vue
       check1() {
         this.show1 = !this.show1
       },
+      toRegister() {
+        uni.navigateTo({
+          url: '/pages/register/register'
+        })
+      },
+      gopage(e) {
+        uni.navigateTo({
+          url: "/pages/storepage/storepage?id=" + e,
+        });
+      },
     },
   }
 </script>
@@ -211,7 +223,7 @@ import uniPopup from "@/uni_modules/uni-popup/components/uni-popup/uni-popup.vue
     // height: 100%;
 
     .form-control {
-      margin-top: 100rpx;
+      margin-top: 50rpx;
     }
 
     /deep/ .uni-forms-item {
@@ -245,7 +257,16 @@ import uniPopup from "@/uni_modules/uni-popup/components/uni-popup/uni-popup.vue
         font-size: 32rpx;
         background-color: #359cff;
       }
-
+      .register{
+        width: 100%;
+        margin-top: 10px;
+        height: 92rpx;
+        line-height: 92rpx;
+        border: 1px solid #ccc;
+        border-radius: 20rpx;
+        text-align: center;
+        font-size: 32rpx
+      }
     }
 
     .agreeInfo {

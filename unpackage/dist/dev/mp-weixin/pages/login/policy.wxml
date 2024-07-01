@@ -1,0 +1,1 @@
+<view><ss-preview vue-id="238f68d6-1" fileUrl="{{fileUrl}}" fileType="{{fileType}}" imageList="{{imageList}}" bind:__l="__l"></ss-preview></view>

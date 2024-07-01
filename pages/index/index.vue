@@ -196,7 +196,6 @@
         var params = {}
         let res = await this.$axios(this.$baseUrl.getHomePageData, params);
 
-        console.log("测试一：", res)
         this.bannerList = res.data.data.bannerList;
         this.popularityProductList = res.data.data.popularityProductList;
         this.productList = res.data.data.productList;
@@ -209,7 +208,6 @@
 
       //记录广告访问Log
       async visitLog(e) {
-        console.log('adv：', e)
         var params = {
           "advertisementId": e.id
         }

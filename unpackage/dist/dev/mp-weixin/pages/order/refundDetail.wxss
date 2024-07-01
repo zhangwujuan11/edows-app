@@ -1,0 +1,334 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page {
+  background: #f8f8f8;
+  padding-bottom: 100rpx;
+}
+.state-section {
+  padding: 50rpx 70rpx;
+  position: relative;
+  width: 100%;
+  display: flex;
+  color: #fff;
+  align-items: center;
+}
+.state-section image {
+  width: 86rpx;
+  height: 86rpx;
+  margin-right: 20rpx;
+}
+.logistics-section {
+  margin-bottom: 16rpx;
+}
+.address-section {
+  padding: 30rpx 0;
+  background: #fff;
+  position: relative;
+}
+.address-section .order-content {
+  display: flex;
+  align-items: center;
+}
+.address-section .order-content .name {
+  line-height: 60rpx;
+}
+.address-section .m-icon-car {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 0 26rpx 0 26rpx;
+}
+.address-section .icon-shouhuodizhi {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90rpx;
+  color: #888;
+  font-size: 44rpx;
+}
+.address-section .cen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 28rpx;
+  color: #303133;
+}
+.address-section .name {
+  font-size: 34rpx;
+  margin-right: 24rpx;
+}
+.address-section .address {
+  margin-top: 16rpx;
+  margin-right: 20rpx;
+  color: #909399;
+}
+.address-section .icon-you {
+  font-size: 32rpx;
+  color: #909399;
+  margin-right: 30rpx;
+}
+.address-section .a-bg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 5rpx;
+}
+.goods-section {
+  margin-top: 16rpx;
+  background: #fff;
+  padding-bottom: 1px;
+}
+.goods-section .g-header {
+  display: flex;
+  align-items: center;
+  height: 84rpx;
+  padding: 0 30rpx;
+  position: relative;
+}
+.goods-section .logo {
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 100px;
+}
+.goods-section .name {
+  font-size: 30rpx;
+  color: #606266;
+  margin-left: 24rpx;
+}
+.goods-section .g-item {
+  display: flex;
+  margin: 20rpx 30rpx;
+}
+.goods-section .g-item image {
+  flex-shrink: 0;
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 4rpx;
+}
+.goods-section .g-item .right {
+  flex: 1;
+  padding-left: 24rpx;
+  overflow: hidden;
+}
+.goods-section .g-item .title {
+  font-size: 30rpx;
+  color: #303133;
+}
+.goods-section .g-item .spec {
+  font-size: 26rpx;
+  color: #909399;
+  padding: 10rpx 12rpx;
+}
+.goods-section .g-item .spec text {
+  padding-right: 10rpx;
+}
+.goods-section .g-item .price-box {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+  color: #303133;
+  padding-top: 10rpx;
+}
+.goods-section .g-item .price-box .price {
+  margin-bottom: 4rpx;
+  color: #f04c41;
+}
+.goods-section .g-item .price-box .number {
+  font-size: 26rpx;
+  color: #339cfe;
+  margin-left: 20rpx;
+}
+.goods-section .g-item .step-box {
+  position: relative;
+}
+.facture-setion {
+  margin-top: 16rpx;
+  background: #fff;
+  padding-bottom: 1px;
+  font-size: 25rpx;
+  padding: 20rpx 0;
+  line-height: 60rpx;
+}
+.facture-setion .f-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10rpx 26rpx;
+}
+.facture-setion .f-item text.grey {
+  width: 200rpx;
+}
+.facture-setion .f-item text.red {
+  color: #f04c41;
+  width: 200rpx;
+}
+.facture-setion .f-item text.blue {
+  color: #339cfe;
+}
+.price-section {
+  margin-top: 16rpx;
+  background: #fff;
+  padding-bottom: 1px;
+  font-size: 26rpx;
+}
+.price-section .g-header {
+  display: flex;
+  align-items: center;
+  height: 84rpx;
+  padding: 0 30rpx;
+  position: relative;
+}
+.price-section .name {
+  font-size: 30rpx;
+  color: #606266;
+  margin-left: 24rpx;
+}
+.price-section .p-items {
+  padding: 20rpx 0;
+  line-height: 60rpx;
+}
+.price-section .p-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 26rpx;
+}
+.price-section .p-item text {
+  margin-right: 60rpx;
+}
+.price-section .p-item .red {
+  font-size: 32rpx;
+  color: #f04c41;
+}
+.yt-list {
+  margin-top: 16rpx;
+  background: #fff;
+}
+.yt-list-cell {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 30rpx 10rpx 40rpx;
+  line-height: 70rpx;
+  position: relative;
+}
+.yt-list-cell.cell-hover {
+  background: #fafafa;
+}
+.yt-list-cell.b-b:after {
+  left: 30rpx;
+}
+.yt-list-cell .cell-icon {
+  height: 32rpx;
+  width: 32rpx;
+  font-size: 22rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 32rpx;
+  background: #f85e52;
+  border-radius: 4rpx;
+  margin-right: 12rpx;
+}
+.yt-list-cell .cell-icon.hb {
+  background: #ffaa0e;
+}
+.yt-list-cell .cell-icon.lpk {
+  background: #3ab54a;
+}
+.yt-list-cell .cell-more {
+  align-self: center;
+  font-size: 24rpx;
+  color: #909399;
+  margin-left: 8rpx;
+  margin-right: -10rpx;
+}
+.yt-list-cell .cell-tit {
+  flex: 1;
+  font-size: 26rpx;
+  color: #909399;
+  margin-right: 10rpx;
+}
+.yt-list-cell .cell-tip {
+  font-size: 26rpx;
+  color: #303133;
+}
+.yt-list-cell .cell-tip.disabled {
+  color: #909399;
+}
+.yt-list-cell .cell-tip.active {
+  color: #339cfe;
+}
+.yt-list-cell .cell-tip.red {
+  color: #f04c41;
+}
+.yt-list-cell .cell-tip.blue {
+  color: #339cfe;
+}
+.yt-list-cell.desc-cell .cell-tit {
+  max-width: 90rpx;
+}
+.yt-list-cell .desc {
+  flex: 1;
+  font-size: 28rpx;
+  color: #303133;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 995;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 90rpx;
+  font-size: 24rpx;
+  background-color: #fff;
+  z-index: 998;
+  color: #606266;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+.footer .innerFooter {
+  position: relative;
+  width: 96%;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 24rpx;
+}
+.footer .innerFooter .action-btn {
+  width: 160rpx;
+  height: 60rpx;
+  margin: 0;
+  margin-left: 24rpx;
+  padding: 0;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  color: #303133;
+  background: #fff;
+}
+.footer .innerFooter .action-btn:after {
+  border: none;
+  border-radius: 4rpx;
+}
+.footer .innerFooter .action-btn.red {
+  color: #f04c41;
+  border: 2rpx solid #f04c41;
+}
+.footer .innerFooter .action-btn.recom {
+  color: #339cfe;
+  border: 2rpx solid #339cfe;
+}
+.footer .innerFooter .action-btn.blue {
+  background: #339cfe;
+  color: #fff;
+  border: 2rpx solid #339cfe;
+}
+

@@ -372,50 +372,53 @@
       },
 
       async toSurPay(item) {
-        var orderSn = "";
-        var arrOrderSn = [];
-        if (item.orderSn) {
-          orderSn = item.orderSn;
-          console.log(orderSn)
-        } else {
-          for (var i in item) {
-            arrOrderSn.push(item[i].orderSn)
-          }
-          orderSn = arrOrderSn.join(',')
-          console.log(orderSn)
-        }
+        // var orderSn = "";
+        // var arrOrderSn = [];
+        // if (item.orderSn) {
+        //   orderSn = item.orderSn;
+        //   console.log(orderSn)
+        // } else {
+        //   for (var i in item) {
+        //     arrOrderSn.push(item[i].orderSn)
+        //   }
+        //   orderSn = arrOrderSn.join(',')
+        //   console.log(orderSn)
+        // }
+		var orderSn = "";
+		var arrOrderSn = [];
+		const _self = this
+		if (item.orderSn) {
+			orderSn = item.orderSn;
+		} else {
+			for (var i in item) {
+				arrOrderSn.push(item[i].orderSn)
+			}
+			orderSn = arrOrderSn.join(',')
+		}
+		var params = {
+		  orderSn: orderSn,
+		  payType: 'MWEB',
+		  // useSecurityBalance: item.totalPrice
+		}
+		let res = await this.$axios(this.$baseUrl.orderPayer, params);
+		if (res.data.code == 200) {
+		 let data = res.data.data
+		 let mweb_url = res.data.data.mwebUrl
+		 	const platform = uni.getSystemInfoSync().platform
+		 	const domain = 'www.edows.cn'
+		 	const webview = plus.webview.create('','custom-webview');
+		 	switch (platform) {
+		 		case 'android':
+		 			webview.loadURL(mweb_url, {'Referer': 'https://' + domain});
+		 			break;
+		 		case 'ios':
+		 			webview.loadURL(mweb_url, {'Referer': domain + '://'});
+		 			break;
+		 		default:
+		 			break;	
+		 	}
+		}
 
-        uni.login({
-          provider: 'weixin',
-          success: async (loginRes) => {
-            var params = {
-              orderSn: orderSn,
-              openId: uni.getStorageSync('openId') ? uni.getStorageSync('openId') : ''
-            }
-            console.log(params)
-            let res = await this.$axios(this.$baseUrl.orderPayer, params);
-            console.log("返回数据：", res.data.data)
-            uni.requestPayment({
-              provider: 'wxpay',
-              appId: res.data.data.appId,
-              timeStamp: res.data.data.timeStamp,
-              nonceStr: res.data.data.nonceStr,
-              package: res.data.data.packageValue,
-              signType: res.data.data.signType,
-              paySign: res.data.data.paySign,
-              success: function(res) {
-                uni.redirectTo({
-                  url: '/pages/money/paySuccess?totalPrice=' + item.totalPrice
-                })
-              },
-              fail: function(err) {
-                _self.$api.msg('支付失败');
-                console.log('fail:' + JSON.stringify(err));
-              }
-            });
-
-          }
-        });
       },
 
 

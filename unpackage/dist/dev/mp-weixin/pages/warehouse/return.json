@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "采购退货",
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 20,
+  "usingComponents": {
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup"
+  }
+}

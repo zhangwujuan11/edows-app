@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.content.data-v-5abb2c66 {
+  width: 686rpx;
+  margin-top: 24rpx;
+  margin-left: 32rpx;
+  border-radius: 30rpx;
+  background-color: #fff;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+  padding-bottom: 20rpx;
+}
+.content .top.data-v-5abb2c66 {
+  padding-top: 32rpx;
+}
+.content .licon.data-v-5abb2c66 {
+  width: 622rpx;
+  background-color: #F5F7FB;
+  border-radius: 10rpx;
+  padding: 28rpx 32rpx;
+  box-sizing: border-box;
+  margin-top: 28rpx;
+  color: #333333;
+  font-size: 26rpx;
+  margin-bottom: 10rpx;
+}
+.content .liconceng1.data-v-5abb2c66 {
+  font-size: 24rpx;
+  word-break: break-all;
+  width: 600rpx;
+  margin-top: 20rpx;
+}
+.content .liconceng text.data-v-5abb2c66 {
+  color: #999999;
+  width: 160rpx !important;
+  display: block;
+  margin-right: 34rpx;
+}
+.content .liconceng view.data-v-5abb2c66 {
+  width: 410rpx;
+}
+.content .liconceng.data-v-5abb2c66 {
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+}
+

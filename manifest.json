@@ -2,8 +2,8 @@
     "name" : "易道大咖",
     "appid" : "__UNI__EB48189",
     "description" : "",
-    "versionName" : "V2.3.0",
-    "versionCode" : 111,
+    "versionName" : "2.4.5",
+    "versionCode" : 126,
     "transformPx" : false,
     "app-plus" : {
         /* android打包配置 */
@@ -55,6 +55,7 @@
                     "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
                     "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.REQUEST_INSTALL_PACKAGES\"/>",
                     "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
                     "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
@@ -67,9 +68,11 @@
             "ios" : {
                 "dSYMs" : false,
                 "privacyDescription" : {
-                    "NSPhotoLibraryUsageDescription" : "该应用需要读取你的相册，以便为你上传图片",
-                    "NSPhotoLibraryAddUsageDescription" : "该应用需要读取你的相册，以便为你上传图片",
-                    "NSCameraUsageDescription" : "该应用需要你的相机，以便为你上传图片"
+                    "NSPhotoLibraryUsageDescription" : "我们需要获取访问您设备相册的权限，以便您能够选择并上传图片到我们的应用中。",
+                    "NSPhotoLibraryAddUsageDescription" : "我们需要获取写入权限，以便我们能够将您通过应用程序拍摄的照片保存到您的设备相册中。",
+                    "NSCameraUsageDescription" : "需要扫描二维码或拍照，是否允许打开相机？",
+                    "NSLocationWhenInUseUsageDescription" : "如您同意提供位置信息，我们将能够为您提供基于位置的个性化服务，例如显示当前位置经纬度和搜索经纬度位置。",
+                    "NSLocationAlwaysUsageDescription" : "如您同意提供位置信息，我们将能够为您提供基于位置的个性化服务，例如显示当前位置经纬度和搜索经纬度位置。"
                 }
             },
             /* ios打包配置 */
@@ -77,7 +80,7 @@
                 "ad" : {},
                 "geolocation" : {
                     "system" : {
-                        "__platform__" : [ "ios", "android" ]
+                        "__platform__" : [ "android" ]
                     }
                 },
                 "maps" : {},
@@ -85,7 +88,7 @@
                 "oauth" : {},
                 "payment" : {
                     "weixin" : {
-                        "__platform__" : [ "android" ],
+                        "__platform__" : [ "ios", "android" ],
                         "appid" : "wx9f6acd5467bf42cc",
                         "UniversalLinks" : "https://store.edows.cn/ulink/"
                     }
@@ -99,7 +102,7 @@
                     "xxxhdpi" : "unpackage/res/android/mipmap-xxxhdpi/ic_launcher.png"
                 },
                 "ios" : {
-                    "appstore" : "unpackage/res/android/mipmap-xxxhdpi/ic_launcher.png",
+                    "appstore" : "unpackage/res/ios/AppIcon.appiconset/icon-1024.png",
                     "ipad" : {
                         "app" : "unpackage/res/ios/AppIcon.appiconset/icon-38@2x.png",
                         "app@2x" : "unpackage/res/ios/AppIcon.appiconset/icon-76@2x.png",
@@ -134,7 +137,7 @@
     "mp-weixin" : {
         /* 小程序特有相关 */
         "usingComponents" : true,
-        "appid" : "wx53e1bc0e7443fb07",
+        "appid" : "wx9f6acd5467bf42cc",
         "setting" : {
             "urlCheck" : true,
             "postcss" : true

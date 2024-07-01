@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.box.data-v-891c2434 {
+  margin: 20rpx 20rpx 0rpx 20rpx;
+  background: #fff;
+  border-radius: 6px;
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-size: 26rpx;
+}
+.box .expand.data-v-891c2434 {
+  width: 16rpx;
+  height: 24rpx;
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: 20rpx;
+}
+.box .title.data-v-891c2434 {
+  height: 64rpx;
+  border-bottom: 1px solid #eee;
+}
+.box .title.data-v-891c2434::before {
+  content: " ";
+  padding: 1rpx 4rpx 0rpx 4rpx;
+  background: #349cff;
+  margin-right: 20rpx;
+}
+.box .symbol.data-v-891c2434 {
+  color: red;
+}
+.box .label.data-v-891c2434 {
+  color: #999;
+  text-indent: 6rpx;
+  width: 180rpx;
+}
+.box .item-input.data-v-891c2434 {
+  display: flex;
+  width: 69%;
+  background: #f4f6f8;
+  border-radius: 12rpx;
+  margin: 0rpx 10rpx 0rpx 0rpx;
+  padding: 18rpx 20rpx 18rpx 20rpx;
+  font-size: 28rpx;
+  align-items: center;
+}
+.box .item-input .uni-inputs.data-v-891c2434 input {
+  font-size: 26rpx;
+  width: 270rpx;
+}
+.box .item-input .uni-input.data-v-891c2434 {
+  font-size: 26rpx;
+}
+.box .placeholder.data-v-891c2434 {
+  font-size: 26rpx;
+}
+.box .box-item.data-v-891c2434 {
+  display: flex;
+  justify-content: space-between;
+  min-height: 90rpx;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.box .server-check.data-v-891c2434 {
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.box .codeName.data-v-891c2434 {
+  font-size: 28rpx;
+  width: 220rpx;
+  color: #999;
+  line-height: 46rpx;
+  text-align: center;
+}
+.box .time-labelb.data-v-891c2434 {
+  margin-right: 20rpx;
+}
+.box .time-labele.data-v-891c2434 {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.read-box.data-v-891c2434 {
+  display: flex;
+  margin: 32rpx 0 20rpx 5%;
+}
+.read-box .label.data-v-891c2434 {
+  font-size: 26rpx;
+}
+.read-box .link.data-v-891c2434 {
+  color: #349cff;
+  font-size: 26rpx;
+  margin-left: 10rpx;
+}
+.confirm.data-v-891c2434 {
+  position: fixed;
+  bottom: 0rpx;
+  width: 100%;
+  height: 92rpx;
+  line-height: 92rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  background-color: #359cff;
+}
+.data-v-891c2434 .uni-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  margin-bottom: 10rpx;
+}
+

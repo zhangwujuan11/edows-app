@@ -47,6 +47,7 @@
           <image class="icon" src="/static/smalladd.png" @click="add"></image>
           <view class="add-font">添加产品</view>
         </view>
+        <view class="scan" @click="chioceView">扫描产品编码</view>
         <image class="icon" src="/static/clear.png" @click="clear"></image>
       </view>
       <view style="margin-bottom: 30upx;" v-for="(item, index) of params.transferDetailList" :key="index">
@@ -151,9 +152,7 @@
               <image v-if="item.inventoryId==inventoryId" @click="choice(item, index)" class="check"
                 src="/static/check.png"></image>
               <view v-else @click="choice(item, index)" class="spacecheck"></view>
-              <view class="name" style=" height: 60upx; width: 540upx;     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; padding-top: 10upx;">{{ item.productName }}</view>
+              <view class="name" style="width: 540upx;padding-top: 10upx;">{{ item.productName }}</view>
             </view>
             <view class="main">
               <view class="flex-row">
@@ -223,6 +222,12 @@
         </picker-view>
       </view>
     </uni-popup>
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view> 
   </view>
 </template>
 
@@ -322,6 +327,7 @@
             }]
           },
         },
+          showMask: false
       };
     },
     async onLoad(e) {
@@ -644,7 +650,141 @@
         this.$set(this.params.transferDetailList[this.index], 'price', this.item.price)
         this.$refs.product.close();
       },
-
+      chioceView() {
+          var platform = uni.getSystemInfoSync().platform;
+          if (platform == "android") {
+            plus.android.checkPermission(
+              "android.permission.CAMERA",
+              (granted) => {
+                if (granted.checkResult == -1) {
+                  //弹出
+                  this.showMask = true;
+                }
+              },
+              (error) => {
+                console.error("Error checking permission:", error.message);
+              }
+            );
+            plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+              //关闭
+              this.showMask = false;
+              if (e.granted.length > 0) {
+                this.scanCarg()
+                //执行你有权限后的方法
+              }
+            });
+          }else{
+            this.scanCarg()
+          }
+        },
+      scanCarg() {
+        uni.scanCode({
+          onlyFromCamera: true,
+          scanType: ["barCode"],
+          success: (res) => {
+            let params = {
+              carg: res.result,
+              pageNum: 1,
+              pageSize: 1,
+              warehouseId: this.params.warehouseId,
+            };
+            getinventory(params).then((final) => {
+              if (final.code == 200) {
+                if (final.data.items && final.data.items.length > 0) {
+                  for (var i = 0; i < this.params.transferDetailList.length; i++) {
+                    if (
+                      this.params.transferDetailList[i].productId == final.data.items[0].productId
+                    ) {
+                      return uni.showToast({
+                        title: "不能添加相同的产品",
+                        icon: "none",
+                        duration: 1000,
+                      });
+                    }
+                  }
+                  var is_push = true;
+                  for (var i = 0; i < this.params.transferDetailList.length; i++) {
+                    if (!this.params.transferDetailList[i].productName) {
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "productName",
+                        final.data.items[0].productName
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "carg",
+                        final.data.items[0].carg
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "productId",
+                        final.data.items[0].productId
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "quantity",
+                        final.data.items[0].usableQuantity
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "inventoryId",
+                        final.data.items[0].inventoryId
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "oldPosition",
+                        final.data.items[0].positionCode
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "price",
+                        final.data.items[0].price
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "remark",
+                        final.data.items[0].remark
+                      );
+                      is_push = false;
+                      break;
+                    }
+                  }
+                  if (is_push) {
+                    let temp = {
+                      productName: final.data.items[0].productName,
+                      carg: final.data.items[0].carg,
+                      productId: final.data.items[0].productId,
+                      quantity: final.data.items[0].usableQuantity,
+                      inventoryId: final.data.items[0].inventoryId,
+                      oldPosition: final.data.items[0].positionCode,
+                      price: final.data.items[0].price,
+                      remark: final.data.items[0].remark,
+                    };
+                    this.params.transferDetailList.push(temp);
+                  }
+                  uni.showToast({
+                    title: "扫描添加成功",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                } else {
+                  uni.showToast({
+                    title: "该产品不存在",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                }
+              } else {
+                uni.showToast({
+                  title: final.message,
+                  icon: "none",
+                  duration: 2000,
+                });
+              }
+            });
+          },
+        });
+      },
     },
   };
 </script>
@@ -996,7 +1136,7 @@
 
     .card {
       width: 686rpx;
-      height: 660rpx;
+      min-height: 660rpx;
       background: #ffffff;
       box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
       border-radius: 20rpx;
@@ -1027,10 +1167,8 @@
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
       font-weight: 500;
       color: #333333;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       width: 540rpx;
+      word-break: break-all;
     }
 
     .main {

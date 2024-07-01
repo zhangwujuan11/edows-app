@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "picker-address": "/components/pickerAddress"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "流水",
+  "usingComponents": {
+    "empty": "/components/empty"
+  }
+}

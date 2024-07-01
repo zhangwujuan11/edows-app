@@ -1,0 +1,57 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.main.data-v-1e8e6fe4 {
+  width: 686rpx;
+  min-height: 1102rpx;
+  background: #ffffff;
+  box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+  margin: 24rpx auto;
+  border-radius: 20rpx;
+  padding: 32rpx;
+}
+.main .label.data-v-1e8e6fe4 {
+  width: 600rpx;
+  word-break: break-all;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #333333;
+  margin-top: 20rpx;
+}
+.main .content.data-v-1e8e6fe4 {
+  width: 622rpx;
+  min-height: 440rpx;
+  background: #f5f7fb;
+  border-radius: 30rpx;
+  margin-top: 26rpx;
+  padding: 28rpx 32rpx 0rpx 32rpx;
+}
+.main .flex.data-v-1e8e6fe4 {
+  word-break: break-all;
+  width: 600rpx;
+  display: flex;
+  padding-bottom: 24rpx;
+}
+.main .name.data-v-1e8e6fe4 {
+  width: 128rpx;
+  height: 35rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+  white-space: nowrap;
+}
+.main .val.data-v-1e8e6fe4 {
+  width: 410rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #333333;
+  margin-left: 34rpx;
+}
+

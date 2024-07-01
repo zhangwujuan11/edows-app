@@ -46,6 +46,7 @@
           <image class="icon" src="/static/smalladd.png" @click="add"></image>
           <view class="add-font">添加产品</view>
         </view>
+        <view class="scan" @click="chioceView">扫描产品编码</view>
         <image class="icon" src="/static/clear.png" @click="clear"></image>
       </view>
       <view style="margin-bottom: 30upx;" v-for="(item, index) of params.transferDetailList" :key="index">
@@ -151,9 +152,7 @@
               <image v-if="item.inventoryId==inventoryId" @click="choice(item, index)" class="check"
                 src="/static/check.png"></image>
               <view v-else @click="choice(item, index)" class="spacecheck"></view>
-              <view class="name" style=" height: 60upx; width: 540upx;     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; padding-top: 10upx;">{{ item.productName }}</view>
+              <view class="name" style="width: 540upx;padding-top: 10upx;">{{ item.productName }}</view>
             </view>
             <view class="main">
               <view class="flex-row">
@@ -223,6 +222,13 @@
         </picker-view>
       </view>
     </uni-popup>
+
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view> 
   </view>
 </template>
 
@@ -324,6 +330,7 @@
             }]
           },
         },
+        showMask: false
       };
     },
     async onLoad() {
@@ -646,7 +653,141 @@
         this.$set(this.params.transferDetailList[this.index], 'price', this.item.price)
         this.$refs.product.close();
       },
-
+      chioceView() {
+          var platform = uni.getSystemInfoSync().platform;
+          if (platform == "android") {
+            plus.android.checkPermission(
+              "android.permission.CAMERA",
+              (granted) => {
+                if (granted.checkResult == -1) {
+                  //弹出
+                  this.showMask = true;
+                }
+              },
+              (error) => {
+                console.error("Error checking permission:", error.message);
+              }
+            );
+            plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+              //关闭
+              this.showMask = false;
+              if (e.granted.length > 0) {
+                this.scanCarg()
+                //执行你有权限后的方法
+              }
+            });
+          }else{
+            this.scanCarg()
+          }
+        },
+      scanCarg() {
+        uni.scanCode({
+          onlyFromCamera: true,
+          scanType: ["barCode"],
+          success: (res) => {
+            let params = {
+              carg: res.result,
+              pageNum: 1,
+              pageSize: 1,
+              warehouseId: this.params.warehouseId,
+            };
+            getinventory(params).then((final) => {
+              if (final.code == 200) {
+                if (final.data.items && final.data.items.length > 0) {
+                  for (var i = 0; i < this.params.transferDetailList.length; i++) {
+                    if (
+                      this.params.transferDetailList[i].productId == final.data.items[0].productId
+                    ) {
+                      return uni.showToast({
+                        title: "不能添加相同的产品",
+                        icon: "none",
+                        duration: 1000,
+                      });
+                    }
+                  }
+                  var is_push = true;
+                  for (var i = 0; i < this.params.transferDetailList.length; i++) {
+                    if (!this.params.transferDetailList[i].productName) {
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "productName",
+                        final.data.items[0].productName
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "carg",
+                        final.data.items[0].carg
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "productId",
+                        final.data.items[0].productId
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "quantity",
+                        final.data.items[0].usableQuantity
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "inventoryId",
+                        final.data.items[0].inventoryId
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "oldPosition",
+                        final.data.items[0].positionCode
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "price",
+                        final.data.items[0].price
+                      );
+                      this.$set(
+                        this.params.transferDetailList[i],
+                        "remark",
+                        final.data.items[0].remark
+                      );
+                      is_push = false;
+                      break;
+                    }
+                  }
+                  if (is_push) {
+                    let temp = {
+                      productName: final.data.items[0].productName,
+                      carg: final.data.items[0].carg,
+                      productId: final.data.items[0].productId,
+                      quantity: final.data.items[0].usableQuantity,
+                      inventoryId: final.data.items[0].inventoryId,
+                      oldPosition: final.data.items[0].positionCode,
+                      price: final.data.items[0].price,
+                      remark: final.data.items[0].remark,
+                    };
+                    this.params.transferDetailList.push(temp);
+                  }
+                  uni.showToast({
+                    title: "扫描添加成功",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                } else {
+                  uni.showToast({
+                    title: "该产品不存在",
+                    icon: "none",
+                    duration: 2000,
+                  });
+                }
+              } else {
+                uni.showToast({
+                  title: final.message,
+                  icon: "none",
+                  duration: 2000,
+                });
+              }
+            });
+          },
+        });
+      },
     },
   };
 </script>
@@ -806,12 +947,27 @@
     .left {
       display: flex;
     }
-
+    .scan {
+      width: 204rpx;
+      height: 72rpx;
+      line-height: 72rpx;
+      border: 2rpx solid #007dff;
+      font-size: 24rpx;
+      font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+      font-weight: normal;
+      color: #007dff;
+      border-radius: 40rpx;
+      text-align: center;
+      position: absolute;
+      top: 24rpx;
+      right: 102rpx;
+    }
     .add {
       height: 120rpx;
       padding: 37rpx 31rpx 37rpx 31rpx;
       display: flex;
       justify-content: space-between;
+      position: relative;
     }
 
     .add-font {
@@ -892,7 +1048,7 @@
         align-items: center;
         position: relative;
         top: 50rpx;
-
+        justify-content: space-around;
         .uni-input {
           width: 200rpx;
           height: 72rpx;
@@ -903,14 +1059,15 @@
       }
 
       .search1 {
-        width: 686rpx;
+        width: 656rpx;
         height: 72rpx;
         margin: 0 auto;
-        padding-left: 30upx;
+        // padding-left: 30upx;
         display: flex;
         // align-items: center;
         position: relative;
         top: 70rpx;
+        justify-content: space-around;
 
         .flex {
           display: flex;
@@ -958,7 +1115,7 @@
       }
 
       .uni-input {
-        margin-left: 32rpx;
+        // margin-left: 32rpx;
       }
 
       .search-icon {
@@ -988,7 +1145,7 @@
     }
 
     .content {
-      height: 980rpx;
+      height: calc(70vh);
       background: #f1f1f1;
       padding: 24rpx 32rpx 24rpx 32rpx;
       overflow-y: auto;
@@ -997,7 +1154,7 @@
 
     .card {
       width: 686rpx;
-      height: 660rpx;
+      min-height: 660rpx;
       background: #ffffff;
       box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
       border-radius: 20rpx;
@@ -1028,10 +1185,8 @@
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
       font-weight: 500;
       color: #333333;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       width: 540rpx;
+      word-break: break-all;
     }
 
     .main {
@@ -1102,5 +1257,28 @@
   /deep/ .msg--active {
     z-index: 999;
     padding: 0;
+  }
+
+  .authority_mask {
+    position:fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+    margin: 0 auto;
+		z-index: 998999999999999;
+		transition: .3s;
+    background: rgba(42, 45, 50, 0.7);
+  .box{
+        margin: 100rpx auto 0;
+        width: 600rpx;
+        height: 210rpx;
+        text-align: center;
+        font-weight: 700;
+        border-radius: 20rpx;
+        background: #fff;
+        line-height: 70rpx;
+        padding: 34rpx;
+      }
   }
 </style>

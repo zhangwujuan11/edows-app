@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "请选择预计转前台",
+  "onReachBottomDistance": 20,
+  "usingComponents": {
+    "uni-dateformat": "/uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat"
+  }
+}

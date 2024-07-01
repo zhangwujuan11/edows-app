@@ -396,9 +396,9 @@ export default {
     getClassifyList() {
       return new Promise((resolve, reject) => {
         customerClassifyList().then((res) => {
-          resolve(res);
           if (res.code == 200) {
             this.classifyList = res.data.items;
+            resolve(res);
           }
         });
       });

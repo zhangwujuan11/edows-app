@@ -1,0 +1,34 @@
+
+.modal-footer.data-v-93722ff4 {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 35rpx 0;
+}
+.modal-footer button.data-v-93722ff4 {
+  width: 330rpx;
+  border: none;
+  border-radius: 5rpx;
+  cursor: pointer;
+}
+.formcon.data-v-93722ff4 {
+  width: 100%;
+  min-height: 552rpx;
+  background-color: white;
+  padding: 37rpx;
+  margin-top: 20rpx;
+}
+.data-v-93722ff4 .uni-form-item {
+  display: flex;
+  min-height: 120rpx;
+}
+.uni-form-item .title.data-v-93722ff4 {
+  width: 160rpx;
+}
+.uni-form-item .title ._span.data-v-93722ff4 {
+  color: red;
+}

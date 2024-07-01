@@ -98,7 +98,7 @@
 									v-if="item.settleStatus==0">取消订单</button>
 								<button class="action-btn recom" @click="toPay(item)"
 									v-if="accountType!=3 && item.totalPrice != 0">立即支付</button>
-								<button class="action-btn recom" @click="upload(item)" v-if="isOffline==1">线下支付</button>
+								<button class="action-btn recom" @click="chioceView(item)" v-if="isOffline==1">线下支付</button>
 							</view>
 							<view class="action-box b-t" v-if="item.orderStatus==102">
 								<block v-if="item.refundStatus">
@@ -192,6 +192,13 @@
 				</view>
 			</view>
 		</view>
+
+		<view class="authority_mask" v-if="showMask">
+		<view class="box">
+			<view>相机、储存空间/照片权限使用说明：</view>
+			<view>用于拍摄照片、扫码、上传图片等场景</view>
+		</view>
+		</view>
 	</view>
 </template>
 
@@ -261,13 +268,13 @@
 				totalPrice: 0,
 				orderSnList: [],
 				accountType: 0,
-				isOffline: 0
+				isOffline: 0,
+				showMask: false
 			};
 		},
 
 		onLoad(options) {
 			// let returnUrl = getCurrentPages()[0].route;
-			// console.log('当前路由：', returnUrl);
 			// if (!this.hasLogin) {
 			// 	uni.reLaunch({
 			// 		url: '/pages/wxAuth/wxAuth?returnUrl=' + returnUrl
@@ -277,9 +284,7 @@
 			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
 			 * 替换onLoad下代码即可
 			 */
-			console.log(options.state)
 			this.isOffline = uni.getStorageSync('UmsMember').UmsMember.isOffline ? uni.getStorageSync('UmsMember').UmsMember.isOffline : 0;
-			 console.log(uni.getStorageSync('UmsMember').UmsMember.isOffline,uni.getStorageSync('UmsMember').UmsMember.accountType,66666)
 			this.accountType =  uni.getStorageSync('UmsMember').UmsMember.accountType ?  uni.getStorageSync('UmsMember').UmsMember.accountType : 0;
 			this.tabCurrentIndex = +options.state;
 			// #ifndef MP
@@ -306,13 +311,11 @@
 				let res = await this.$axios(this.$baseUrl.getOrderList, JSON.stringify(params));
 				for (var i in res.data.data) {
 					res.data.data[i].flagSel = false;
-
 				}
 				this.res = res;
 				if (this.pageNo == 1) {
 					this.totalPage = this.res.data.pages;
 				}
-
 				this.orderList = this.res.data.data.filter(item => {
 					//添加不同状态下订单的表现形式
 					item = Object.assign(item, this.orderStateExp(item.orderStatus));
@@ -342,7 +345,6 @@
 
 				} else {
 					this.pageNo = this.pageNo + 1;
-					console.log(this.pageNo)
 					this.getData(orderStatus, navItem);
 					navItem.loadingType = 'more';
 				}
@@ -354,7 +356,6 @@
 				let index = this.tabCurrentIndex;
 				let navItem = this.navList[index];
 				let orderStatus = navItem.orderStatus;
-				console.log("来源：", source)
 
 				if (source === 'tabChange' && navItem.loaded === true) {
 					this.$set(navItem, 'loaded', false);
@@ -393,7 +394,6 @@
 
 			//选择
 			selSet(e) {
-				//console.log(this.navList)
 				e.flagSel = !e.flagSel;
 				let list = this.navList[1].orderList; //正式改为1
 				var len = list.length;
@@ -403,7 +403,6 @@
 						sumLen += 1;
 					}
 				}
-				console.log('订单长度：', len, ' 选中长度：', sumLen)
 				if (len == sumLen) {
 					this.allSelect = true;
 				} else {
@@ -450,7 +449,6 @@
 					}
 				})
 				this.totalPrice = total.toFixed(2);
-				console.log("订单序号：", this.orderSnList)
 			},
 
 			//判断信息
@@ -492,7 +490,6 @@
 				this.optsType = "";
 				this.shareCouponOrderList = "";
 				if (item.shareCoupon) {
-					console.log("上面的")
 					this.shareCouponOrderList = item.shareCouponOrderList;
 					this.optsType = "付款";
 					this.toggleService();
@@ -516,11 +513,10 @@
 					}
 					orderSn = arrOrderSn.join(',')
 				}
-				console.log(item)
 				var params = {
 				  orderSn: orderSn,
 				  payType: 'MWEB',
-				  useSecurityBalance: item.totalPrice
+				  // useSecurityBalance: item.totalPrice
 				}
 				let res = await this.$axios(this.$baseUrl.orderPayer, params);
 				if (res.data.code == 200) {
@@ -548,9 +544,7 @@
 				// 			orderSn: orderSn,
 				// 			openId: uni.getStorageSync('openId') ? uni.getStorageSync('openId') : ''
 				// 		}
-				// 		console.log(params)
 				// 		let res = await this.$axios(this.$baseUrl.orderPayer, params);
-				// 		console.log("返回数据：", res.data.data)
 				// 		if (res.data.data.appId) {
 				// 			uni.requestPayment({
 				// 				provider: 'wxpay',
@@ -569,7 +563,6 @@
 				// 				},
 				// 				fail: function(err) {
 				// 					_self.$api.msg('支付失败');
-				// 					console.log('fail:' + JSON.stringify(err));
 				// 				}
 				// 			});
 				// 		} else if (res.data.data == '支付成功') {
@@ -639,7 +632,6 @@
 				uni.makePhoneCall({
 					phoneNumber: this.serviceNo,
 					success: () => {
-						console.log("成功拨打电话")
 					}
 				})
 			},
@@ -688,19 +680,16 @@
 				uni.showLoading({
 					title: '请稍后'
 				})
-				console.log(item)
 
 				var orderSn = "";
 				var arrOrderSn = [];
 				if (item.orderSn) {
 					orderSn = item.orderSn;
-					console.log(orderSn)
 				} else {
 					for (var i in item) {
 						arrOrderSn.push(item[i].orderSn)
 					}
 					orderSn = arrOrderSn[0]
-					console.log(orderSn)
 				}
 				var params = {
 					orderSn: orderSn
@@ -797,7 +786,6 @@
 						arrOrderSn.push(item[i].orderSn)
 					}
 					orderSn = arrOrderSn.join(',')
-					console.log(orderSn)
 				}
 				var params = {
 					orderSn: orderSn,
@@ -812,6 +800,33 @@
 					}, 1600)
 				}
 			},
+			chioceView(item) {
+				var platform = uni.getSystemInfoSync().platform;
+				if (platform == "android") {
+					plus.android.checkPermission(
+					"android.permission.CAMERA",
+					(granted) => {
+						if (granted.checkResult == -1) {
+						//弹出
+						this.showMask = true;
+						}
+					},
+					(error) => {
+						console.error("Error checking permission:", error.message);
+					}
+					);
+					plus.android.requestPermissions(["android.permission.CAMERA","android.permission.READ_EXTERNAL_STORAGE"], (e) => {
+					//关闭
+					this.showMask = false;
+					if (e.granted.length > 0) {
+						this.upload(item)
+						//执行你有权限后的方法
+					}
+					});
+				}else{
+					this.upload(item)
+				}
+				},
 			upload: function(item) {
 				var _self = this;
 				uni.chooseImage({
@@ -819,14 +834,12 @@
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album', 'camera'], //从相册选择
 					success: res => {
-						console.log(res, 0)
 						const tempFilePaths = res.tempFilePaths;
 						wx.getFileSystemManager().readFile({
 							filePath: res.tempFilePaths[0], //选择图片返回的相对路径
 							encoding: 'base64', //编码格式
 							success: async res => { //成功的回调
 								let imgPath = 'data:image/png;base64,' + res.data;
-								console.log(res, 1)
 								var params = {
 									"base64Data": imgPath,
 									"bizType": 0
@@ -834,7 +847,6 @@
 								let {
 									data
 								} = await _self.$axios(_self.$baseUrl.uploadPic, params)
-								console.log(data)
 								if (data.code == 200) {
 									item.pzImg = data.data.webPath
 									setTimeout(() => {
@@ -845,7 +857,6 @@
 						})
 					},
 					error: function(e) {
-						console.log(e);
 					}
 				});
 			},
@@ -1512,4 +1523,27 @@
 			}
 		}
 	}
+
+.authority_mask {
+  position:fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: 998999999999999;
+  transition: .3s;
+  background: rgba(42, 45, 50, 0.7);
+}
+.box{
+  margin: 100rpx auto 0;
+  width: 600rpx;
+  height: 210rpx;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 20rpx;
+  background: #fff;
+  line-height: 70rpx;
+  padding: 34rpx;
+}
 </style>

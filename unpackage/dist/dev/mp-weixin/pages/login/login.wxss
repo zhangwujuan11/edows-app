@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.content.data-v-b237504c {
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+}
+.content .form-control.data-v-b237504c {
+  margin-top: 50rpx;
+}
+.content.data-v-b237504c .uni-forms-item {
+  width: 90vw;
+  margin-left: 5vw;
+  border-bottom: 1rpx solid gainsboro;
+  font-size: 30rpx;
+}
+.content.data-v-b237504c .uni-forms-item .uni-input {
+  display: inline-block;
+  width: 80%;
+  height: 100%;
+  padding-left: 4vw;
+}
+.content .bottom.data-v-b237504c {
+  width: 90vw;
+  margin-left: 5vw;
+  margin-bottom: 50rpx;
+}
+.content .bottom .login.data-v-b237504c {
+  width: 100%;
+  margin-top: 80rpx;
+  height: 92rpx;
+  line-height: 92rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  background-color: #359cff;
+}
+.content .bottom .register.data-v-b237504c {
+  width: 100%;
+  margin-top: 10px;
+  height: 92rpx;
+  line-height: 92rpx;
+  border: 1px solid #ccc;
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+.content .agreeInfo.data-v-b237504c {
+  font-size: 24rpx;
+  width: 90vw;
+  margin-left: 6vw;
+}
+.content ._a.data-v-b237504c {
+  text-decoration: none;
+}
+.content.data-v-b237504c  .uni-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  margin-bottom: 10rpx;
+}
+.iframe-box.data-v-b237504c {
+  position: relative;
+  padding: 60rpx 2rpx 110rpx 0rpx;
+  width: 680rpx;
+  height: 900rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+}
+.iframe-box .iframe.data-v-b237504c {
+  width: 680rpx;
+  height: 730rpx;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+}
+.iframe-box .iframe.data-v-b237504c::-webkit-scrollbar {
+  display: none;
+}
+.iframe-box .nokonw.data-v-b237504c {
+  width: 50%;
+  height: 96rpx;
+  line-height: 96rpx;
+  border-bottom-left-radius: 20rpx;
+  text-align: center;
+  color: #e2dede;
+  font-size: 28rpx;
+  background-color: #359cff;
+  position: absolute;
+  left: 0%;
+  -webkit-transform: translate(0%, 19%);
+          transform: translate(0%, 19%);
+  border-right: 1rpx solid #d6cccc;
+}
+.iframe-box .konw.data-v-b237504c {
+  width: 50%;
+  height: 96rpx;
+  line-height: 96rpx;
+  border-bottom-right-radius: 20rpx;
+  text-align: center;
+  color: #ffffff;
+  font-size: 28rpx;
+  background-color: #359cff;
+  position: absolute;
+  right: 0%;
+  -webkit-transform: translate(0%, 19%);
+          transform: translate(0%, 19%);
+}
+

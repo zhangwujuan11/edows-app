@@ -147,7 +147,6 @@
 					this.loadingType = 'loading';
 				} else {
 					this.loadingType = 'more';
-
 				}
 				var params = {
 					"classId": this.classId,
@@ -169,7 +168,6 @@
 				}
 
 				let goodsList = res.data.data.data;
-				console.log('商品列表：',goodsList)
 				if (type === 'refresh') {
 					this.goodsList = [];
 				}
@@ -187,7 +185,6 @@
 				
 				} else {
 					this.page = this.page + 1;
-					console.log(this.page)
 					this.loadData();
 					this.loadingType = 'more';
 				}

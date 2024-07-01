@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page,
+.content {
+  height: 100%;
+  background-color: #ffffff;
+}
+.content {
+  display: flex;
+}
+.left-aside {
+  flex-shrink: 0;
+  width: 160rpx;
+  height: 100%;
+  background-color: #f8f8f8;
+}
+.f-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100rpx;
+  font-size: 28rpx;
+  color: #606266;
+  border-left: 2px solid #f8f8f8;
+  position: relative;
+}
+.f-item.active {
+  color: #339cfe;
+  background: #fff;
+  border-left: 2px solid #339cfe;
+}
+.f-item.active:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 36rpx;
+  width: 8rpx;
+  /* background-color: $base-color; */
+  border-radius: 0 4px 4px 0;
+  opacity: .8;
+}
+.right-aside {
+  flex: 1;
+  overflow: hidden;
+  /* padding-bottom: 10upx; */
+}
+.s-item {
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  /* padding-top: 8upx; */
+  text-indent: 20rpx;
+  font-size: 28rpx;
+  /* background: #fff; */
+  color: #303133;
+  font-weight: 600;
+}
+.t-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 574rpx;
+  background: #fff;
+  padding-top: 12rpx;
+}
+.t-list:after {
+  content: '';
+  flex: 99;
+  height: 0;
+}
+.t-item {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 175rpx;
+  font-size: 24rpx;
+  color: #666;
+  padding-bottom: 30rpx;
+  margin-left: 16rpx;
+}
+.t-item image {
+  width: 175rpx;
+  height: 175rpx;
+}
+.t-item text {
+  padding-top: 10rpx;
+  width: 175rpx;
+  text-align: center;
+}
+

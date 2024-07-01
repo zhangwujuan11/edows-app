@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.list-box.data-v-69d7659b {
+  width: 686rpx;
+  min-height: 447rpx;
+  background: #ffffff;
+  box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
+  border-radius: 30rpx;
+  margin: 0rpx auto;
+  margin-bottom: 24rpx;
+  padding: 32rpx;
+}
+.list-box .title.data-v-69d7659b {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: bold;
+  color: #333333;
+}
+.list-box .content.data-v-69d7659b {
+  width: 622rpx;
+  min-height: 209rpx;
+  background: #f5f7fb;
+  border-radius: 20rpx;
+  margin-top: 28rpx;
+  padding: 28rpx 32rpx 0rpx 32rpx;
+}
+.list-box .content .flex.data-v-69d7659b {
+  display: flex;
+  padding-bottom: 24rpx;
+}
+.list-box .content .label.data-v-69d7659b {
+  width: 114rpx;
+  height: 35rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 500;
+  color: #999999;
+  margin-right: 34rpx;
+}
+.list-box .content .input.data-v-69d7659b {
+  width: 420rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: #333333;
+  word-break: break-all;
+}
+.list-box .btn-box.data-v-69d7659b {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28rpx;
+}
+.list-box .btn-box .btn.data-v-69d7659b {
+  width: 140rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  background: #f5f7fb;
+  font-size: 24rpx;
+  font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+  font-weight: normbal;
+  color: #007dff;
+  border-radius: 40rpx;
+  margin-left: 20rpx;
+}
+.add.data-v-69d7659b {
+  width: 88rpx;
+  height: 88rpx;
+  position: fixed;
+  bottom: 185rpx;
+  right: 32rpx;
+}
+.no-have.data-v-69d7659b {
+  text-align: center;
+  margin-top: 260rpx;
+  font-size: 32rpx;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  color: #666666;
+}
+.no-have uni-image.data-v-69d7659b {
+  width: 460rpx;
+  height: 312rpx;
+}
+

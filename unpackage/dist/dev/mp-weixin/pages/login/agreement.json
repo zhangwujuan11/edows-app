@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "协作门店合作协议",
+  "usingComponents": {
+    "ss-preview": "/uni_modules/ss-preview/components/ss-preview/ss-preview"
+  }
+}

@@ -1,0 +1,1 @@
+<view class="app"><view class="orderInfo-box"><image src="../../static/order.png"></image><text>预约服务提交成功</text></view><view class="order-box"><text>耐心等待客服人员与您联系</text></view><view class="order-box"><text>请保持手机畅通</text></view><view data-event-opts="{{[['tap',[['toBack',['$event']]]]]}}" class="mix-btn blueGraShadow" bindtap="__e">返回首页</view></view>

@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "积分详情",
+  "usingComponents": {
+    "share": "/components/share",
+    "empty": "/components/empty"
+  }
+}

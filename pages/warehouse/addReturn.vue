@@ -29,6 +29,7 @@
           <image class="icon" src="/static/smalladd.png"></image>
           <view class="add-font">添加产品</view>
         </view>
+        <view class="scan" @click="chioceView">扫描产品编码</view>
         <image @click="cleanUp()" class="icon" src="/static/clear.png"></image>
       </view>
       <view class="title">
@@ -269,6 +270,13 @@
         </view>
       </view>
     </uni-popup>
+
+    <view class="authority_mask" v-if="showMask">
+      <view class="box">
+        <view>相机权限使用说明：</view>
+        <view>用于拍摄照片、扫码、上传图片等场景</view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -295,12 +303,7 @@ export default {
       supplier: "",
       selectList: [],
       currIndex: 0,
-      product: [
-        {
-          receivalQuantity: "",
-          price: "",
-        },
-      ],
+      product: [{}],
       productList: [],
       carg: "",
       productVal: "",
@@ -343,6 +346,7 @@ export default {
       productIndex: 0,
       submitParams: {},
       is_show: false,
+      showMask: false,
     };
   },
   onBackPress(event) {
@@ -470,9 +474,9 @@ export default {
     getWarehouseList() {
       return new Promise((resolve, reject) => {
         warehouseList().then((res) => {
-          resolve(res);
           if (res.code == 200) {
             this.paramsList[0].list = res.data.items;
+            resolve(res);
           }
         });
       });
@@ -480,9 +484,9 @@ export default {
     getSupplierList() {
       return new Promise((resolve, reject) => {
         supplierList({ status: 0 }).then((res) => {
-          resolve(res);
           if (res.code == 200) {
             this.paramsList[1].list = res.data.items;
+            resolve(res);
           }
         });
       });
@@ -490,9 +494,9 @@ export default {
     getPaymentTerms() {
       return new Promise((resolve, reject) => {
         paymentTerms().then((res) => {
-          resolve(res);
           if (res.code == 200) {
             this.paramsList[2].list = res.data;
+            resolve(res);
           }
         });
       });
@@ -504,7 +508,6 @@ export default {
         });
         inWarehouseDetails(this.inWarehouseId).then((res) => {
           uni.hideLoading();
-          resolve(res);
           if (res.code == 200) {
             this.product = res.data.storeInWarehouseDetailBoList;
             this.submitParams = res.data;
@@ -549,6 +552,7 @@ export default {
                 }
               }
             }
+            resolve(res);
           }
         });
       });
@@ -612,7 +616,7 @@ export default {
           duration: 1000,
         });
       }
-      
+
       for (var i = 0; i < this.product.length; i++) {
         if (this.product[i].productId == this.choiceProduct.productId) {
           return uni.showToast({
@@ -792,6 +796,120 @@ export default {
     bindPickerChange(e) {
       this.classifyIndex = e.detail.value;
     },
+    chioceView() {
+      var platform = uni.getSystemInfoSync().platform;
+      if (platform == "android") {
+        plus.android.checkPermission(
+          "android.permission.CAMERA",
+          (granted) => {
+            if (granted.checkResult == -1) {
+              //弹出
+              this.showMask = true;
+            }
+          },
+          (error) => {
+            console.error("Error checking permission:", error.message);
+          }
+        );
+        plus.android.requestPermissions(["android.permission.CAMERA"], (e) => {
+          //关闭
+          this.showMask = false;
+          if (e.granted.length > 0) {
+            this.scanCarg();
+            //执行你有权限后的方法
+          }
+        });
+      } else {
+        this.scanCarg();
+      }
+    },
+    scanCarg() {
+      uni.scanCode({
+        onlyFromCamera: true,
+        scanType: ["barCode"],
+        success: (res) => {
+          let params = {
+            carg: res.result,
+            pageNum: 1,
+            pageSize: 1,
+            warehouseId: this.paramsList[0].selectList.warehouseId,
+            vendorId: this.paramsList[1].selectList.supplierId,
+          };
+          inventoryList(params).then((final) => {
+            if (final.code == 200) {
+              if (final.data.items && final.data.items.length > 0) {
+                for (var i = 0; i < this.product.length; i++) {
+                  if (
+                    this.product[i].productId == final.data.items[0].productId
+                  ) {
+                    return uni.showToast({
+                      title: "不能重复退货",
+                      icon: "none",
+                      duration: 1000,
+                    });
+                  }
+                }
+                var is_push = true;
+                for (var i = 0; i < this.product.length; i++) {
+                  if (!this.product[i].productName) {
+                    this.$set(
+                      this.product[i],
+                      "productName",
+                      final.data.items[0].productName
+                    );
+                    this.$set(
+                      this.product[i],
+                      "productId",
+                      final.data.items[0].productId
+                    );
+                    this.$set(
+                      this.product[i],
+                      "price",
+                      final.data.items[0].price
+                    );
+                    this.$set(
+                      this.product[i],
+                      "inventoryId",
+                      final.data.items[0].inventoryId
+                    );
+                    this.$set(this.product[i], "receivalQuantity", null);
+                    is_push = false;
+                    break;
+                  }
+                }
+                if (is_push) {
+                  let temp = {
+                    productName: final.data.items[0].productName,
+                    productId: final.data.items[0].productId,
+                    price: final.data.items[0].price,
+                    inventoryId: final.data.items[0].inventoryId,
+                    receivalQuantity: null,
+                  };
+                  this.product.push(temp);
+                }
+                uni.showToast({
+                  title: "扫描添加成功",
+                  icon: "none",
+                  duration: 2000,
+                });
+              } else {
+                uni.showToast({
+                  title: "该产品不存在",
+                  icon: "none",
+                  duration: 2000,
+                });
+              }
+            } else {
+              uni.showToast({
+                title: final.message,
+                icon: "none",
+                duration: 2000,
+              });
+            }
+          });
+        },
+      });
+    },
   },
 };
 </script>
@@ -936,11 +1054,27 @@ export default {
   .left {
     display: flex;
   }
+  .scan {
+    width: 204rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    border: 2rpx solid #007dff;
+    font-size: 24rpx;
+    font-family: SourceHanSansCN-Regular-, SourceHanSansCN-Regular;
+    font-weight: normal;
+    color: #007dff;
+    border-radius: 40rpx;
+    text-align: center;
+    position: absolute;
+    top: 24rpx;
+    right: 102rpx;
+  }
   .add {
     height: 120rpx;
     padding: 37rpx 31rpx 37rpx 31rpx;
     display: flex;
     justify-content: space-between;
+    position: relative;
   }
   .add-font {
     font-size: 29rpx;
@@ -1120,7 +1254,7 @@ export default {
   }
   .card {
     width: 686rpx;
-    height: 701rpx;
+    min-height: 701rpx;
     background: #ffffff;
     box-shadow: 0rpx 8rpx 8rpx 1rpx rgba(178, 178, 178, 0.16);
     border-radius: 20rpx;
@@ -1147,10 +1281,8 @@ export default {
     font-family: Source Han Sans CN-Medium, Source Han Sans CN;
     font-weight: 500;
     color: #333333;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     width: 540rpx;
+    word-break: break-all;
   }
   .main {
     width: 622rpx;
@@ -1214,6 +1346,28 @@ export default {
   uni-image {
     width: 460rpx;
     height: 312rpx;
+  }
+}
+.authority_mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: 998999999999999;
+  transition: 0.3s;
+  background: rgba(42, 45, 50, 0.7);
+  .box {
+    margin: 100rpx auto 0;
+    width: 600rpx;
+    height: 210rpx;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 20rpx;
+    background: #fff;
+    line-height: 70rpx;
+    padding: 34rpx;
   }
 }
 </style>

@@ -1,4 +1,4 @@
-import { request, sendRequestsencond } from '@/Api/request.js'
+import { request, sendRequestsencond, requestvipcard } from '@/Api/request.js'
 export function loginss(data){
 	return sendRequestsencond({
 		url:'store/user/login',
@@ -286,4 +286,57 @@ export function treelisrt(){
 		method:'get'
 	})
 }
+
+// 新增会员卡
+export function cardListselect(){
+	return requestvipcard({
+		url:'memberCar/cardList',
+		method:'get'
+	})
+}
+export function uploadeimgvipcard(){
+	return requestvipcard({
+		url:'memberCar/memberCar',
+		method:'get'
+	})
+}
+export function uplodeimg(data){
+	return requestvipcard({
+		url:'cus/memberCar/upload',
+		method:'post',
+		data:data
+	})
+}
+export function addvipcard(data){
+	return requestvipcard({
+		url:'memberCar/add',
+		method:'post',
+		data:data
+	})
+}
+export function infovipcard(data){
+	return requestvipcard({
+		url:'memberCar/carDetail',
+		method:'get',
+		params:data
+	})
+}
+export function updatevipcard(data){
+	return requestvipcard({
+		url:'memberCar/edit',
+		method:'post',
+		data:data
+	})
+}
+export function memberCarlist(data){
+	return requestvipcard({
+		url:'memberCar/list',
+		method:'post',
+		data:data
+	})
+}
+
+
+
+
 

@@ -1,0 +1,117 @@
+
+.searchBox {
+	width: 100%;
+	background-color: rgb(242, 242, 242);
+	padding: 7.5px 2.5%;
+	display: flex;
+	justify-content: space-between;
+}
+.searchBox .inputBox {
+	width: 100%;
+	flex-shrink: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.searchBox .inputBox>input {
+	width: 100%;
+	height: 30px;
+	font-size: 14px;
+	border: 0;
+	border-radius: 30px;
+	-webkit-appearance: none;
+	appearance: none;
+	padding: 0 3%;
+	margin: 0;
+	background-color: #ffffff;
+}
+.placeholder-class {
+	color: #9e9e9e;
+}
+.search-keyword {
+	width: 100%;
+	background-color: rgb(242, 242, 242);
+}
+.keywordListBox {
+	height: calc(100vh - 55px);
+	padding-top: 5px;
+	border-radius: 10px 10px 0 0;
+	background-color: #fff;
+}
+.keywordEntryTap {
+	background-color: #eee;
+}
+.keywordEntry {
+	width: 94%;
+	height: 40px;
+	margin: 0 3%;
+	font-size: 15px;
+	color: #333;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: solid 1px #e7e7e7;
+}
+.keywordEntry image {
+	width: 30px;
+	height: 30px;
+}
+.keywordEntry .keywordText,
+.keywordEntry .keywordImg {
+	height: 40px;
+	display: flex;
+	align-items: center;
+}
+.keywordEntry .keywordText {
+	width: 90%;
+}
+.keywordEntry .keywordImg {
+	width: 10%;
+	justify-content: center;
+}
+.keywordBox {
+	height: calc(100vh - 55px);
+	border-radius: 10px 10px 0 0;
+	background-color: #fff;
+}
+.keywordBox .keyword-block {
+	padding: 5px 0;
+}
+.keywordBox .keyword-block .keyword-list-header {
+	width: 94%;
+	padding: 5px 3%;
+	font-size: 13.5px;
+	color: #333;
+	display: flex;
+	justify-content: space-between;
+}
+.keywordBox .keyword-block .keyword-list-header image {
+	width: 20px;
+	height: 20px;
+}
+.keywordBox .keyword-block .keyword {
+	width: 94%;
+	padding: 3px 3%;
+	display: flex;
+	flex-flow: wrap;
+	justify-content: flex-start;
+}
+.keywordBox .keyword-block .hideHotTis {
+	display: flex;
+	justify-content: center;
+	font-size: 14px;
+	color: #6b6b6b;
+}
+.keywordBox .keyword-block .keyword>view {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 30px;
+	padding: 0 10px;
+	margin: 5px 10px 5px 0;
+	height: 30px;
+	font-size: 14px;
+	background-color: rgb(242, 242, 242);
+	color: #6b6b6b;
+}
+
